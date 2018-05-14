@@ -1,4 +1,2 @@
-# OSU Final Project
-
-## Butterfly Logo
-### Theme is Purple/Dark Grey White
+# Learning Curve
+## CS 290 Final Project
