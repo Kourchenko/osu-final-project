@@ -125,3 +125,18 @@ footer a {
 	color: #455A64;
 	margin-left: 30px;
 }
+
+.hidden {
+	display: none;
+}
+
+#LoadScreenBackground {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #ffffff;
+}
+
