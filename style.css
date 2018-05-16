@@ -101,8 +101,8 @@ button a {
 	color: #000;
 }
 .canvas {
-	height: 450px;
-	width: 450px;
+	height: 200px;
+	width: 200px;
 }
 /* Diego's Div #2 - DrawPic1 */
 
@@ -127,7 +127,7 @@ footer {
 	bottom: 0;
 	width: 100%;
 	background-color: #455A64;
-	position:fixed;
+	position:absolute;
 }
 
 
