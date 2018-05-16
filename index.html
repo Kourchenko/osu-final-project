@@ -23,7 +23,7 @@
 
 		<main>
 
-			<div class="main">
+			<div class="main hidden">
 				<center>
 					<div class="info">
 						<p>
@@ -44,9 +44,8 @@
 					</div>
 				</center>
 			</div>
-		</main>
 
-			<div class="loadingScreen">
+			<div class="loading_screen hidden">
 				<center>
 					<div class="loadBar">
 						<h1>
@@ -56,15 +55,15 @@
 				</center>
 			</div>
 
-			<div class="draw_pic1 hidden">
-					<div class="draw_pic1_text">Draw another picture!</div>
-					<div class="draw_pic1_canvas"><img src="#" width="200px" height="200px"></div>
-					<div class="draw_pic1_timer">Time left: 60 seconds</div>
+			<div class="draw_pic hidden">
+					<div class="draw_pic_text">Draw another picture!</div>
+					<div class="draw_pic_canvas"><img src="#" width="200px" height="200px"></div>
+					<div class="draw_pic_timer">Time left: 60 seconds</div>
 			</div>
 
 		<!-- Match Found message -->
 
-			<div class= "matchFound hidden">
+			<div class= "match_found hidden">
 
 						<strong	id ="message">
 								You got the match.Whooo!!!!!!.
@@ -80,20 +79,22 @@
 
 
 		<!-- Diego's Div #2 - DrawPic1 -->
-		<div>
+		<div class="draw_pic">
 			<center>
 				<h2 class="modal-heading">Be creative</h2>
 				<div class="canvas">
 					<img src="https://images.pexels.com/photos/733475/pexels-photo-733475.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="canvas">
 				</div>
+				<div>
 				<button><a href="#">Share</a></button>
+				</div>
 			</center>
 		</div>
 		<!-- Diego's Div #2 - DrawPic1 -->
 
-		<div  class="askchatmodal hidden">
+		<div class="askchatmodal hidden">
 			<center>
-				<div class="sharepic2"><img src="#" width=200px height=200px>
+				<div class="share_pic_btn"><img src="#" width=200px height=200px>
 
 				</div>
 
@@ -103,7 +104,7 @@
 					</h2>
 				</div>
 
-				<div class="yesnobox">
+				<div class="yes_no_box">
 					<div class="yesbutton info">
 						<button><a href="#">Yes</button>
 					</div>
@@ -117,8 +118,11 @@
 			</center>
 		</div>
 
+		<!-- ALL CODE GOES ABOVE THIS INSIDE MAIN -->
+		</main>
 
-		<footer class="hidden">
+		<!-- FOOTER CODE -->
+		<footer class="">
 			<a href="#">
 				ToS
 			</a>

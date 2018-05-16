@@ -20,6 +20,8 @@ h3 {
 }
 
 main {
+	padding-top: 40px;
+	padding-bottom: 40px;
 	margin: auto;
 }
 
@@ -48,7 +50,7 @@ main {
 
 .main {
 	margin: auto;
-	padding-top: 150px;
+	padding-top: 100px;
 	float: center;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -127,7 +129,9 @@ footer {
 	bottom: 0;
 	width: 100%;
 	background-color: #455A64;
-	position:absolute;
+	position:fixed;
+	bottom: 0;
+	left: 0;
 }
 
 
@@ -151,44 +155,44 @@ footer a {
   background-color: #ffffff;
 }
 
-.draw_pic1 {
+.draw_pic {
 	padding-top: 50px;
 }
 
-.draw_pic1_text {
+.draw_pic_text {
 	font-size: 30px;
 	text-align: center;
 }
 
-.draw_pic1_canvas {
+.draw_canvas {
 	padding-top: 30px;
 	margin-right: 7%;
 	text-align: center;
 }
 
-.draw_pic1_timer {
+.draw_timer {
 	padding-top: 24px;
 	font-size: 20px;
 	text-align: center;
 }
 
-.sharepic2 {
+.share_pic_btn {
 	padding-top: 35px;
 	margin-right: 7%;
 	text-align: center;
 }
 
-.yesnobox {
+.yes_no_box {
 	padding-left: 39.5%;
 	display: flex;
 	flex-wrap: wrap;
 }
 
-.loadBar {
+.load_bar {
 	padding-top: 15%;
 }
 
-.matchFound{
+.match_found{
 
 	height: 100px;
 	width: 40%;
