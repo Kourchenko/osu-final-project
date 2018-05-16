@@ -1,0 +1,200 @@
+body {
+	padding: 0;
+	margin: 0;
+	background-color: #fff;
+}
+
+/* Link Decoration */
+a {
+	text-decoration: none;
+	color: #fff;
+}
+
+a:hover {
+	color: #a5a9af;
+}
+
+
+h3 {
+	display: inline-flex;
+}
+
+main {
+	margin: auto;
+}
+
+/* Navigation Bar */
+.navbar {
+	padding: 5px;
+	background-color: #455A64;
+	height: 45px;
+}
+
+.navlist {
+	margin: 0 0 0 20px;
+	padding: 0;
+}
+
+.navitem {
+	font-weight: bold;
+	width: 0 auto;
+	padding: 2px;
+	font-size: 30px;
+	color: #fff;
+	display: inline-block;
+	border-radius: 4px;
+}
+
+
+.main {
+	margin: auto;
+	padding-top: 150px;
+	float: center;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.info {
+	font-size: 22px;
+	font-weight: 500;
+}
+
+#main-username-input {
+
+}
+
+#main-username-input:active,
+#main-username-input:focus {
+	placeholder: none;
+}
+
+.username {
+	padding: 10px;
+}
+
+input {
+	height: 35px;
+	width: 350px;
+	background-color: #fff;
+	color: #000;
+	font-weight: 600;
+	border: solid 1px #aaa;
+	border-radius: 4px;
+	font-size: 20px;
+	text-align: center;
+}
+
+button {
+	font-size: 18px;
+	font-weight: bold;
+	border: 0;
+	height: 40px;
+	width: 100px;
+	border-radius: 8px;
+	text-align: center;
+	background-color: #fff;
+	border: 1px solid #eee;
+	box-shadow: 0 0 4px #aaa;
+}
+/* Diego's Div #2 - DrawPic1 */
+button a {
+	color: #000;
+}
+.canvas {
+	height: 450px;
+	width: 450px;
+}
+/* Diego's Div #2 - DrawPic1 */
+
+button:hover {
+	color: #a5a9af;
+	height: 42px;
+	width: 105px;
+	cursor: pointer;
+}
+
+
+.modal-heading {
+	font-size: 24px;
+	font-weight: 500;
+}
+
+footer {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: #fff;
+	font-size: 30px;
+	bottom: 0;
+	width: 100%;
+	background-color: #455A64;
+	position:fixed;
+}
+
+
+footer a {
+	color: #fff;
+	margin-left: 30px;
+}
+
+
+.hidden {
+	display: none;
+}
+
+#LoadScreenBackground {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #ffffff;
+}
+
+.draw_pic1 {
+	padding-top: 50px;
+}
+
+.draw_pic1_text {
+	font-size: 30px;
+	text-align: center;
+}
+
+.draw_pic1_canvas {
+	padding-top: 30px;
+	margin-right: 7%;
+	text-align: center;
+}
+
+.draw_pic1_timer {
+	padding-top: 24px;
+	font-size: 20px;
+	text-align: center;
+}
+
+.sharepic2 {
+	padding-top: 35px;
+	margin-right: 7%;
+	text-align: center;
+}
+
+.yesnobox {
+	padding-left: 39.5%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.loadBar {
+	padding-top: 15%;
+}
+
+.matchFound{
+
+	height: 100px;
+	width: 40%;
+	border: solid 2px;
+	border-radius: 3px;
+	margin: 40px;
+	margin-left:300px
+
+}
