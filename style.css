@@ -189,3 +189,19 @@ footer a {
 .loadBar {
 	padding-top: 15%;
 }
+/*
+
+Match found css code
+*/
+
+.matchFound{
+
+	height: 100px;
+	width: 40%;
+	border: solid 2px;
+	border-radius: 3px;
+	margin: 40px;
+	margin-left:300px
+
+}
+
