@@ -181,3 +181,7 @@ footer a {
 	display: flex;
 	flex-wrap: wrap;
 }
+
+.loadBar {
+	padding-top: 40%;
+}
