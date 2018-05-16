@@ -1,6 +1,3 @@
-
-
-
 body {
 	padding: 0;
 	margin: 0;
@@ -12,12 +9,8 @@ a {
 	text-decoration: none;
 }
 
-a:hover {
-	font-size: 35px;
-}
-
 a:visited {
-	color: #455A64;
+	color: #fff;
 }
 
 h3 {
@@ -52,13 +45,13 @@ main {
 
 .main {
 	margin: auto;
-	padding-top: 250px;
+	padding-top: 150px;
 	float: center;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 .info {
-	padding-left: 20px;
-	padding-right: 20px;
 	font-size: 22px;
 	font-weight: 500;
 }
@@ -96,18 +89,34 @@ button {
 	width: 100px;
 	border-radius: 8px;
 	text-align: center;
-	background-color: #eee;
+	color: #fff;
+	background-color: #fff;
+	border: 1px solid #eee;
 	box-shadow: 0 0 4px #aaa;
 }
+/* Diego's Div #2 - DrawPic1 */
+button a {
+	color: #000;
+}
+.canvas {
+	height: 450px;
+	width: 450px;
+}
 
+/* Diego's Div #2 - DrawPic1 */
 
 button:hover,
 button:visited {
 	color: #fff;
 	height: 42px;
 	width: 105px;
-	font-size: 20px;
 	cursor: pointer;
+}
+
+
+.modal-heading {
+	font-size: 24px;
+	font-weight: 500;
 }
 
 footer {
@@ -139,4 +148,3 @@ footer a {
   z-index: 1000;
   background-color: #ffffff;
 }
-
