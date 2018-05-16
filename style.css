@@ -148,3 +148,27 @@ footer a {
   z-index: 1000;
   background-color: #ffffff;
 }
+<<<<<<< HEAD
+=======
+
+.draw_pic1 {	
+	padding-top: 50px;	
+}
+
+.draw_pic1_text {
+	font-size: 30px;
+	text-align: center;
+}
+
+.draw_pic1_canvas {
+	padding-top: 30px;
+	margin-right: 7%;	
+	text-align: center;
+}
+
+.draw_pic1_timer {
+	padding-top: 24px;
+	font-size: 20px;
+	text-align: center;
+}
+>>>>>>> 4e32472824aa95d0f91e7c94caa2fe501284964d
