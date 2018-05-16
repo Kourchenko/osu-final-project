@@ -38,10 +38,7 @@ main {
 	width: 0 auto;
 	padding: 2px;
 	font-size: 30px;
-<<<<<<< HEAD
-=======
 	color: #fff;
->>>>>>> ed2f3148b62904f030e10c7e7a79b1c6dfd84725
 	display: inline-block;
 	border-radius: 4px;
 }
@@ -107,9 +104,8 @@ button a {
 }
 /* Diego's Div #2 - DrawPic1 */
 
-button:hover,
-button:visited {
-	color: #fff;
+button:hover {
+	color: #a5a9af;
 	height: 42px;
 	width: 105px;
 	cursor: pointer;
@@ -132,13 +128,12 @@ footer {
 	position:fixed;
 }
 
-<<<<<<< HEAD
-=======
+
 footer a {
 	color: #fff;
 	margin-left: 30px;
 }
->>>>>>> ed2f3148b62904f030e10c7e7a79b1c6dfd84725
+
 
 .hidden {
 	display: none;
@@ -188,5 +183,5 @@ footer a {
 }
 
 .loadBar {
-	padding-top: 15%;
+	padding-top: 40%;
 }
