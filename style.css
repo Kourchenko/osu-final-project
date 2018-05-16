@@ -127,6 +127,7 @@ footer {
 	bottom: 0;
 	width: 100%;
 	background-color: #fff;
+	position:fixed;
 }
 
 footer a {
