@@ -25,8 +25,8 @@ main {
 /* Navigation Bar */
 .navbar {
 	padding: 5px;
-	background-color: #264a84;
-	height: 35px;
+	background-color: #455A64;
+	height: 45px;
 }
 
 .navlist {
@@ -39,7 +39,7 @@ main {
 	width: 0 auto;
 	padding: 2px;
 	font-size: 30px;
-	color: #455A64;
+	color: #fff;
 	display: inline-block;
 	border-radius: 4px;
 }
@@ -122,16 +122,16 @@ button:visited {
 footer {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	color: #264a84;
+	color: #fff;
 	font-size: 30px;
 	bottom: 0;
 	width: 100%;
-	background-color: #fff;
+	background-color: #455A64;
 	position:fixed;
 }
 
 footer a {
-	color: #455A64;
+	color: #fff;
 	margin-left: 30px;
 }
 
@@ -168,16 +168,4 @@ footer a {
 	padding-top: 24px;
 	font-size: 20px;
 	text-align: center;
-}
-
-.sharepic2 {
-	padding-top: 35px;
-	margin-right: 7%;
-	text-align: center;
-}
-
-.yesnobox {
-	padding-left: 39.5%;
-	display: flex;
-	flex-wrap: wrap;
 }
