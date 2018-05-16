@@ -169,3 +169,15 @@ footer a {
 	font-size: 20px;
 	text-align: center;
 }
+
+.sharepic2 {
+	padding-top: 35px;
+	margin-right: 7%;
+	text-align: center;
+}
+
+.yesnobox {
+	padding-left: 39.5%;
+	display: flex;
+	flex-wrap: wrap;
+}
