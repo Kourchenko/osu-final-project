@@ -13,9 +13,7 @@ a {
 a:hover {
 	color: #a5a9af;
 }
-a:visited {
-	color: #000;
-}
+
 
 h3 {
 	display: inline-flex;
@@ -100,7 +98,7 @@ button {
 }
 /* Diego's Div #2 - DrawPic1 */
 button a {
-	color: #fff;
+	color: #000;
 }
 .canvas {
 	height: 450px;
@@ -189,10 +187,6 @@ footer a {
 .loadBar {
 	padding-top: 15%;
 }
-/*
-
-Match found css code
-*/
 
 .matchFound{
 
@@ -204,4 +198,3 @@ Match found css code
 	margin-left:300px
 
 }
-
