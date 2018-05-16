@@ -24,7 +24,7 @@ main {
 /* Navigation Bar */
 .navbar {
 	padding: 5px;
-	background-color: #fff;
+	background-color: #264a84;
 	height: 35px;
 }
 
@@ -122,7 +122,7 @@ button:visited {
 footer {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	color: #fff;
+	color: #264a84;
 	font-size: 30px;
 	bottom: 0;
 	width: 100%;
