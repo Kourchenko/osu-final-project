@@ -7,6 +7,7 @@ body {
 /* Link Decoration */
 a {
 	text-decoration: none;
+	color: #fff;
 }
 
 a:visited {
@@ -85,7 +86,6 @@ button {
 	font-size: 18px;
 	font-weight: bold;
 	border: 0;
-	height: 40px;
 	width: 100px;
 	border-radius: 8px;
 	text-align: center;
