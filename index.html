@@ -1,18 +1,29 @@
 <!DOCTYPE HTML>
 <html>
+
+	<!---------------------------------->
+	<!---------------HEAD--------------->    <!--- AUTHOR: TEAM -->
+	<!---------------------------------->
 	<head>
 		<meta charset="UTF-8">
 		<title>Picture Me</title>
 
 		<!-- Stylesheet -->
 		<link rel="stylesheet" href="style.css" media="screen">
+		
+		<script src="index.js" charset="utf-8" defer></script>
 
 		<!-- This script incorporates SVG icons from Font Awesome: http://fontawesome.com/ -->
 		<script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" defer></script>
 
 	</head>
 
+	
+	
 	<body>
+	<!---------------------------------->
+	<!---------------HEADER------------->    <!--- AUTHOR: TEAM -->
+	<!---------------------------------->
 		<header>
 			<nav class="navbar">
 				<center>
@@ -20,10 +31,13 @@
 				</center>
 			</nav>
 		</header>
-
-		<main>
-
-			<div class="main hidden">
+		
+		
+		<main>	
+	<!---------------------------------->
+	<!---------------MAIN--------------->    <!--- AUTHOR: TEAM -->
+	<!---------------------------------->
+			<div class="main">
 				<center>
 					<div class="info">
 						<p>
@@ -45,6 +59,10 @@
 				</center>
 			</div>
 
+	
+	<!---------------------------------->
+	<!---------------LOADING------------>    <!--- AUTHOR: Aaron -->
+	<!---------------------------------->		
 			<div class="loading_screen hidden">
 				<center>
 					<div class="loadBar">
@@ -55,77 +73,97 @@
 				</center>
 			</div>
 
-			<div class="draw_pic hidden">
+			
+	<!---------------------------------->
+	<!-------------DRAWPIC1------------->    <!--- AUTHOR: Darius -->
+	<!---------------------------------->		
+			<div class="draw_pic1 hidden">
+				<center>
 					<div class="draw_pic_text">Draw another picture!</div>
+					<br>
+					<br>
 					<div class="draw_pic_canvas"><img src="#" width="200px" height="200px"></div>
+					<br>
 					<div class="draw_pic_timer">Time left: 60 seconds</div>
+				</center>
 			</div>
 
-		<!-- Match Found message -->
 
+	<!---------------------------------->
+	<!-----------MATCH_FOUND------------>    <!--- AUTHOR: TEAM -->
+	<!---------------------------------->
 			<div class= "match_found hidden">
-
-						<strong	id ="message">
-								You got the match.Whooo!!!!!!.
-
-						</strong>
-
-	<p> <img src="img.jpg" width= "200" height= "200"> </p>
+				<center>
+					<div class="draw_pic_text">You have a match!</div>
+						<br>
+						<br>
+						<div class="draw_pic_canvas"><img src="#" width="200px" height="200px"></div>
+						<br>
+						<div class="draw_pic_timer">Would you like to continue?</div>
+						<br>
+					<div class="yes_no_box">					
+						<div class="matchfound_yes">
+							<button><a href="#">Yes</button>
+						</div>
+						<div class="matchfound_no">
+							<button><a href="#">No</button>
+						</div>						
+					</div>					
+				</center>
 			</div>
 
 
-		<!-- Match found end -->
-
-
-
-		<!-- Diego's Div #2 - DrawPic1 -->
-		<div class="draw_pic">
-			<center>
-				<h2 class="modal-heading">Be creative</h2>
-				<div class="canvas">
-					<img src="https://images.pexels.com/photos/733475/pexels-photo-733475.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="canvas">
-				</div>
-				<div>
-				<button><a href="#">Share</a></button>
-				</div>
-			</center>
-		</div>
-		<!-- Diego's Div #2 - DrawPic1 -->
-
-		<div class="askchatmodal hidden">
-			<center>
-				<div class="share_pic_btn"><img src="#" width=200px height=200px>
-
-				</div>
-
-				<div class="asktochat info">
-					<h2>
-						Would you like to chat with this person?
-					</h2>
-				</div>
-
-				<div class="yes_no_box">
-					<div class="yesbutton info">
-						<button><a href="#">Yes</button>
+	<!---------------------------------->
+	<!-------------DRAWPIC2------------->    <!--- AUTHOR: Diego -->
+	<!---------------------------------->
+			<div class="draw_pic2 hidden">
+				<center>
+					<h2 class="modal-heading">Be creative</h2>
+					<div class="canvas">
+						<img src="#" class="canvas">
 					</div>
-
-					<div class="nobutton info">
-						<button><a href="#">No</button>
+					<div>
+					<button><a href="#">Share</a></button>
 					</div>
-				</div>
+				</center>
+			</div>
 
 
-			</center>
-		</div>
-
-		<!-- ALL CODE GOES ABOVE THIS INSIDE MAIN -->
+	<!---------------------------------->
+	<!-----------ASKCHATMODAL----------->    <!--- AUTHOR: Aaron -->
+	<!---------------------------------->	
+			<div class="askchatmodal hidden">
+				<center>
+					<div class="share_pic_btn">
+						<img src="#" width="200px" height="200px">
+					</div>
+					<div class="asktochat info">
+						<h2>
+							Would you like to chat with this person?
+						</h2>
+					</div>
+					<div class="yes_no_box">
+						<div class="askchatmodal_yes info">
+							<button><a href="#">Yes</button>
+						</div>	
+						<div class="askchatmodal_no info">
+							<button><a href="#">No</button>
+						</div>
+					</div>
+				</center>
+			</div>
 		</main>
 
-		<!-- FOOTER CODE -->
+		
+	<!---------------------------------->
+	<!--------------FOOTER-------------->    <!--- AUTHOR: TEAM -->
+	<!---------------------------------->
 		<footer class="">
 			<a href="#">
 				ToS
 			</a>
 		</footer>
+		
+		
 	</body>
 </html>

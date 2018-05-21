@@ -191,14 +191,3 @@ footer a {
 .load_bar {
 	padding-top: 15%;
 }
-
-.match_found{
-
-	height: 100px;
-	width: 40%;
-	border: solid 2px;
-	border-radius: 3px;
-	margin: 40px;
-	margin-left:300px
-
-}
