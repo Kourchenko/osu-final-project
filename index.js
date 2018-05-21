@@ -13,7 +13,7 @@ var DIV_MATCH_HIDDEN = true; // 4th
 
 /*
 			ELEMENT CONNECTORS          
-								AUTHOR: Team			*/
+								AUTHOR: TEAM			*/
 var main = document.getElementsByClassName('main')[0];
 var drawpic1 = document.getElementsByClassName('draw_pic1')[0];
 var drawpic2 = document.getElementsByClassName('draw_pic2')[0];
@@ -81,7 +81,7 @@ function askchatmodal_to_chat() {
 
 /*
 			EVENT LISTENERS          
-								AUTHOR: Team			*/
+								AUTHOR: TEAM			*/
 main_connect.addEventListener('click', main_to_drawpic1);
 askchatmodal_yes.addEventListener('click', askchatmodal_to_chat);
 askchatmodal_no.addEventListener('click', askchatmodal_to_loading);
