@@ -24,7 +24,7 @@ var times_up = document.getElementsByClassName('times_up')[0];
 
 var timer_count1 = document.getElementsByClassName('timer1')[0];
 var timer_count2 = document.getElementsByClassName('timer2')[0];
-var load_count = document.getElementsByClassName('load_bar')[0];
+
 
 
 
@@ -39,14 +39,14 @@ var matchfound_no = document.getElementsByClassName('matchfound_no')[0];
 			TIMER FUNCTIONS          
 								AUTHOR: Darius			*/	
 function startTimer1() {
-	
+	timer_count1.innerHTML = 5;
 	function updateText(input) {
 		var current_count = timer_count1.innerHTML;
 		timer_count1.innerHTML = current_count - 1;
 	}
 	
 	setInterval(updateText, 1000);
-	setTimeout(endTimer1, 15000);
+	setTimeout(endTimer1, 5000);
 }
 
 function endTimer1() {
@@ -56,14 +56,14 @@ function endTimer1() {
 }
 
 function startTimer2() {
-	
+	timer_count2.innerHTML = 3;
 	function updateText(input) {
 		var current_count = timer_count2.innerHTML;
 		timer_count2.innerHTML = current_count - 1;
 	}
 	
 	setInterval(updateText, 1000);
-	setTimeout(endTimer2, 10000);
+	setTimeout(endTimer2, 3000);
 }
 
 function endTimer2() {
@@ -121,16 +121,16 @@ function drawpic2_to_askchatmodal() {
 	askchatmodal.classList.remove('hidden');
 }
 
-function askchatmodal_no() {
+function askchatmodal_no_f() {
 	askchatmodal.classList.add('hidden');
 	loading.classList.remove('hidden');
-	loading_screen_control1();
+	window.location.href = "./index.html";
 }
 
-function askchatmodal_yes() {
+function askchatmodal_yes_f() {
 	askchatmodal.classList.add('hidden');
 	loading.classList.remove('hidden');
-	loading_screen_control2();
+	loading_screen_control3();
 }
 
 function timesup_to_loading1() {
@@ -145,39 +145,25 @@ function timesup_to_loading2() {
 	loading_screen_control2();
 }
 
+function loading_to_askmodal() {
+	loading.classList.add('hidden');
+	askchatmodal.classList.remove('hidden');
+}
+
 
 
 function loading_screen_control1() {
 	setTimeout(loading_to_matchfound, 5000);
-	function updateText(input) {
-		if (load_count.innerHTML == "Loading...") {
-			load_count.innerHTML = "Loading.";
-		}
-		else if (load_count.innerHTML == "Loading.") {
-			load_count.innerHTML = "Loading..";
-		}
-		else if (load_count.innerHTML == "Loading..") {
-			load_count.innerHTML = "Loading...";
-		}
-	}
-	setInterval(updateText, 300);
+
 }
 
 function loading_screen_control2() {
+	setTimeout(loading_to_askmodal, 5000);	
+
+}
+
+function loading_screen_control3() {
 	setTimeout(loading_to_chat, 5000);
-	function updateText2(input) {
-		if (load_count.innerHTML == "Loading...") {
-			load_count.innerHTML = "Loading.";
-		}
-		else if (load_count.innerHTML == "Loading.") {
-			load_count.innerHTML = "Loading..";
-		}
-		else if (load_count.innerHTML == "Loading..") {
-			load_count.innerHTML = "Loading...";
-		}
-	}
-	
-	setInterval(updateText2, 300);
 }
 
 
@@ -191,7 +177,7 @@ function loading_screen_control2() {
 			EVENT LISTENERS          
 								AUTHOR: TEAM			*/
 main_connect.addEventListener('click', main_to_drawpic1);
-askchatmodal_yes.addEventListener('click', askchatmodal_yes);
-askchatmodal_no.addEventListener('click', askchatmodal_no);
+askchatmodal_yes.addEventListener('click', askchatmodal_yes_f);
+askchatmodal_no.addEventListener('click', askchatmodal_no_f);
 matchfound_yes.addEventListener('click', matchfound_to_drawpic2);
 matchfound_no.addEventListener('click', matchfound_to_loading);
