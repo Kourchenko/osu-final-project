@@ -21,6 +21,9 @@ var loading = document.getElementsByClassName('loading_screen')[0];
 var match_found = document.getElementsByClassName('match_found')[0];
 var askchatmodal = document.getElementsByClassName('askchatmodal')[0];
 var times_up = document.getElementsByClassName('times_up')[0];
+//var username_box = document.querySelector('main-username-input');
+var username_box = document.getElementsByClassName('username')[0];
+var username_error_text = document.getElementsByClassName('username_error')[0];
 
 var timer_count1 = document.getElementsByClassName('timer1')[0];
 var timer_count2 = document.getElementsByClassName('timer2')[0];
@@ -36,10 +39,6 @@ var matchfound_no = document.getElementsByClassName('matchfound_no')[0];
 
 
 /*
-			TIMER FUNCTIONS
-								AUTHOR: Darius			*/
-function startTimer() {
-/*
 			TIMER FUNCTIONS          
 								AUTHOR: Darius			*/	
 function startTimer1() {
@@ -48,7 +47,7 @@ function startTimer1() {
 		var current_count = timer_count1.innerHTML;
 		timer_count1.innerHTML = current_count - 1;
 	}
-
+	
 	setInterval(updateText, 1000);
 	setTimeout(endTimer1, 5000);
 }
@@ -87,9 +86,14 @@ function endTimer2() {
 			FLOW FUNCTIONS          
 								AUTHOR: Darius			*/											
 function main_to_drawpic1() {
-    main.classList.add('hidden');
-    drawpic1.classList.remove('hidden');
-	startTimer1();
+	if (username_box.value != "") {		
+		main.classList.add('hidden');
+		drawpic1.classList.remove('hidden');
+		startTimer1();
+	}
+	else {
+		username_error_text.classList.remove('hidden');
+	}
 }
 
 function drawpic1_to_loading() {
@@ -156,6 +160,9 @@ function loading_to_askmodal() {
 
 
 
+/*
+			LOADING SCREEN FUNCTIONS          
+								AUTHOR: Darius			*/	
 function loading_screen_control1() {
 	setTimeout(loading_to_matchfound, 5000);
 
@@ -180,11 +187,6 @@ function loading_screen_control3() {
 /*
 			EVENT LISTENERS          
 								AUTHOR: TEAM			*/
-//main_connect.addEventListener('click', main_to_drawpic1);
-//askchatmodal_yes.addEventListener('click', askchatmodal_chat);
-//askchatmodal_no.addEventListener('click', askchatmodal_loading);
-//matchfound_yes.addEventListener('click', matchfound_to_drawpic2);
-//matchfound_no.addEventListener('click', matchfound_to_loading);
 main_connect.addEventListener('click', main_to_drawpic1);
 askchatmodal_yes.addEventListener('click', askchatmodal_yes_f);
 askchatmodal_no.addEventListener('click', askchatmodal_no_f);
