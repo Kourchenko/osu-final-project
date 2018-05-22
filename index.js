@@ -21,14 +21,14 @@ var loading = document.getElementsByClassName('loading_screen')[0];
 var match_found = document.getElementsByClassName('match_found')[0];
 var askchatmodal = document.getElementsByClassName('askchatmodal')[0];
 var times_up = document.getElementsByClassName('times_up')[0];
-//var username_box = document.querySelector('main-username-input');
-var username_box = document.getElementsByClassName('username')[0];
-var username_error_text = document.getElementsByClassName('username_error')[0];
+var chat_page = document.getElementsByClassName('chatbox')[0];
 
+
+
+var username_box = document.getElementById('main-username-input');
+var username_error_text = document.getElementsByClassName('username_error')[0];
 var timer_count1 = document.getElementsByClassName('timer1')[0];
 var timer_count2 = document.getElementsByClassName('timer2')[0];
-
-
 
 
 var main_connect = document.getElementById('clickconnect');
@@ -86,7 +86,7 @@ function endTimer2() {
 			FLOW FUNCTIONS          
 								AUTHOR: Darius			*/											
 function main_to_drawpic1() {
-	if (username_box.value != "") {		
+	if (username_box.value != "") {
 		main.classList.add('hidden');
 		drawpic1.classList.remove('hidden');
 		startTimer1();
@@ -109,7 +109,7 @@ function loading_to_matchfound() {
 
 function loading_to_chat() {
 	loading.classList.add('hidden');
-	//UNHIDE CHAT PAGE HERE
+	chat_page.classList.remove('hidden');
 }
 
 function matchfound_to_loading() {
@@ -164,17 +164,17 @@ function loading_to_askmodal() {
 			LOADING SCREEN FUNCTIONS          
 								AUTHOR: Darius			*/	
 function loading_screen_control1() {
-	setTimeout(loading_to_matchfound, 5000);
+	setTimeout(loading_to_matchfound, 2000);
 
 }
 
 function loading_screen_control2() {
-	setTimeout(loading_to_askmodal, 5000);	
+	setTimeout(loading_to_askmodal, 2000);	
 
 }
 
 function loading_screen_control3() {
-	setTimeout(loading_to_chat, 5000);
+	setTimeout(loading_to_chat, 2000);
 }
 
 
