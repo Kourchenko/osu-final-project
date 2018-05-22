@@ -79,7 +79,21 @@ function endTimer2() {
 	setTimeout(timesup_to_loading2, 1500);
 }
 
-$(document).ready(($('.home_screen').fadeIn(5000)));
+
+
+
+
+/*
+			START-UP CODE          
+								AUTHOR: Darius			*/	
+function enableConnect_button() {
+	$('.button_connect').prop("disabled", false)
+}
+
+$(document).ready(($('.home_screen').fadeIn(5000, enableConnect_button)));
+
+
+
 
 
 
@@ -88,7 +102,7 @@ $(document).ready(($('.home_screen').fadeIn(5000)));
 								AUTHOR: Darius			*/											
 function main_to_drawpic1() {
 	if (username_box.value != "") {
-		
+		$('.button_connect').prop("disabled", true);
 		function continueF() {
 			$('.draw_pic1').fadeIn(1000, startTimer1);
 		}
