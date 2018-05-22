@@ -4,7 +4,7 @@
 var DIV_USERNAME_HIDDEN = false; // 1st to load
 var DIV_DRAW_HIDDEN = true; // 2nd
 var DIV_LOADING_HIDDEN = true; // 3rd
-var DIV_MATCH_HIDDEN = true; // 4th
+var DIV_MATCH_HIDDEN = true; // 4th 
 
 
 
@@ -12,7 +12,7 @@ var DIV_MATCH_HIDDEN = true; // 4th
 
 
 /*
-			ELEMENT CONNECTORS
+			ELEMENT CONNECTORS          
 								AUTHOR: TEAM			*/
 var main = document.getElementsByClassName('main')[0];
 var drawpic1 = document.getElementsByClassName('draw_pic1')[0];
@@ -23,6 +23,9 @@ var askchatmodal = document.getElementsByClassName('askchatmodal')[0];
 var times_up = document.getElementsByClassName('times_up')[0];
 
 var timer_count1 = document.getElementsByClassName('timer1')[0];
+var timer_count2 = document.getElementsByClassName('timer2')[0];
+
+
 
 
 var main_connect = document.getElementById('clickconnect');
@@ -33,41 +36,69 @@ var matchfound_no = document.getElementsByClassName('matchfound_no')[0];
 
 
 /*
+<<<<<<< HEAD
 			TIMER FUNCTIONS
 								AUTHOR: Darius			*/
 function startTimer() {
 
+=======
+			TIMER FUNCTIONS          
+								AUTHOR: Darius			*/	
+function startTimer1() {
+	timer_count1.innerHTML = 5;
+>>>>>>> f29d010ccdbfe482233bda566cff12a07e92b3b1
 	function updateText(input) {
 		var current_count = timer_count1.innerHTML;
 		timer_count1.innerHTML = current_count - 1;
 	}
 
 	setInterval(updateText, 1000);
-	setTimeout(endTimer, 10000);
+	setTimeout(endTimer1, 5000);
 }
 
-function endTimer() {
+function endTimer1() {
 	drawpic1.classList.add('hidden');
 	times_up.classList.remove('hidden');
-	setTimeout(timesup_to_loading, 2000);
+	setTimeout(timesup_to_loading1, 2000);
 }
+
+function startTimer2() {
+	timer_count2.innerHTML = 3;
+	function updateText(input) {
+		var current_count = timer_count2.innerHTML;
+		timer_count2.innerHTML = current_count - 1;
+	}
+	
+	setInterval(updateText, 1000);
+	setTimeout(endTimer2, 3000);
+}
+
+function endTimer2() {
+	drawpic2.classList.add('hidden');
+	times_up.classList.remove('hidden');
+	setTimeout(timesup_to_loading2, 2000);
+}
+
+
+
 
 
 
 
 
 /*
-			FLOW FUNCTIONS
-								AUTHOR: Darius			*/
+			FLOW FUNCTIONS          
+								AUTHOR: Darius			*/											
 function main_to_drawpic1() {
     main.classList.add('hidden');
     drawpic1.classList.remove('hidden');
-	startTimer();
+	startTimer1();
 }
 
 function drawpic1_to_loading() {
 	drawpic1.classList.add('hidden');
 	loading.classList.remove('hidden');
+	loading_screen_control();
 }
 
 function loading_to_matchfound() {
@@ -75,14 +106,21 @@ function loading_to_matchfound() {
 	match_found.classList.remove('hidden');
 }
 
+function loading_to_chat() {
+	loading.classList.add('hidden');
+	//UNHIDE CHAT PAGE HERE
+}
+
 function matchfound_to_loading() {
 	match_found.classList.add('hidden');
 	loading.classList.remove('hidden');
+	loading_screen_control1();
 }
 
 function matchfound_to_drawpic2() {
 	match_found.classList.add('hidden');
 	drawpic2.classList.remove('hidden');
+	startTimer2();
 }
 
 function drawpic2_to_askchatmodal() {
@@ -90,21 +128,50 @@ function drawpic2_to_askchatmodal() {
 	askchatmodal.classList.remove('hidden');
 }
 
-function askchatmodal_to_loading() {
+function askchatmodal_no_f() {
 	askchatmodal.classList.add('hidden');
 	loading.classList.remove('hidden');
+	window.location.href = "./index.html";
 }
 
-function askchatmodal_to_chat() {
+function askchatmodal_yes_f() {
 	askchatmodal.classList.add('hidden');
-	// REMOVE HIDDEN FROM CHAT PAGE HERE //
+	loading.classList.remove('hidden');
+	loading_screen_control3();
 }
 
-function timesup_to_loading() {
+function timesup_to_loading1() {
 	times_up.classList.add('hidden');
 	loading.classList.remove('hidden');
+	loading_screen_control1();
 }
 
+function timesup_to_loading2() {
+	times_up.classList.add('hidden');
+	loading.classList.remove('hidden');
+	loading_screen_control2();
+}
+
+function loading_to_askmodal() {
+	loading.classList.add('hidden');
+	askchatmodal.classList.remove('hidden');
+}
+
+
+
+function loading_screen_control1() {
+	setTimeout(loading_to_matchfound, 5000);
+
+}
+
+function loading_screen_control2() {
+	setTimeout(loading_to_askmodal, 5000);	
+
+}
+
+function loading_screen_control3() {
+	setTimeout(loading_to_chat, 5000);
+}
 
 
 
@@ -114,10 +181,18 @@ function timesup_to_loading() {
 
 
 /*
-			EVENT LISTENERS
+			EVENT LISTENERS          
 								AUTHOR: TEAM			*/
+<<<<<<< HEAD
 //main_connect.addEventListener('click', main_to_drawpic1);
 //askchatmodal_yes.addEventListener('click', askchatmodal_chat);
 //askchatmodal_no.addEventListener('click', askchatmodal_loading);
 //matchfound_yes.addEventListener('click', matchfound_to_drawpic2);
 //matchfound_no.addEventListener('click', matchfound_to_loading);
+=======
+main_connect.addEventListener('click', main_to_drawpic1);
+askchatmodal_yes.addEventListener('click', askchatmodal_yes_f);
+askchatmodal_no.addEventListener('click', askchatmodal_no_f);
+matchfound_yes.addEventListener('click', matchfound_to_drawpic2);
+matchfound_no.addEventListener('click', matchfound_to_loading);
+>>>>>>> f29d010ccdbfe482233bda566cff12a07e92b3b1
