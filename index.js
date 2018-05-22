@@ -14,7 +14,7 @@ var DIV_MATCH_HIDDEN = true; // 4th
 /*
 			ELEMENT CONNECTORS          
 								AUTHOR: TEAM			*/
-var main = document.getElementsByClassName('main')[0];
+var main = document.getElementsByClassName('home_screen')[0];
 var drawpic1 = document.getElementsByClassName('draw_pic1')[0];
 var drawpic2 = document.getElementsByClassName('draw_pic2')[0];
 var loading = document.getElementsByClassName('loading_screen')[0];
@@ -31,7 +31,7 @@ var timer_count1 = document.getElementsByClassName('timer1')[0];
 var timer_count2 = document.getElementsByClassName('timer2')[0];
 
 
-var main_connect = document.getElementById('clickconnect');
+var main_connect = document.getElementsByClassName('button_connect')[0];
 var askchatmodal_yes = document.getElementsByClassName('askchatmodal_yes')[0];
 var askchatmodal_no = document.getElementsByClassName('askchatmodal_no')[0];
 var matchfound_yes = document.getElementsByClassName('matchfound_yes')[0];
@@ -42,37 +42,37 @@ var matchfound_no = document.getElementsByClassName('matchfound_no')[0];
 			TIMER FUNCTIONS          
 								AUTHOR: Darius			*/	
 function startTimer1() {
-	timer_count1.innerHTML = 5;
+	timer_count1.innerHTML = 1;
 	function updateText(input) {
 		var current_count = timer_count1.innerHTML;
 		timer_count1.innerHTML = current_count - 1;
 	}
 	
 	setInterval(updateText, 1000);
-	setTimeout(endTimer1, 5000);
+	setTimeout(endTimer1, 1000);
 }
 
 function endTimer1() {
 	drawpic1.classList.add('hidden');
 	times_up.classList.remove('hidden');
-	setTimeout(timesup_to_loading1, 2000);
+	setTimeout(timesup_to_loading1, 1000);
 }
 
 function startTimer2() {
-	timer_count2.innerHTML = 3;
+	timer_count2.innerHTML = 1;
 	function updateText(input) {
 		var current_count = timer_count2.innerHTML;
 		timer_count2.innerHTML = current_count - 1;
 	}
 	
 	setInterval(updateText, 1000);
-	setTimeout(endTimer2, 3000);
+	setTimeout(endTimer2, 1000);
 }
 
 function endTimer2() {
 	drawpic2.classList.add('hidden');
 	times_up.classList.remove('hidden');
-	setTimeout(timesup_to_loading2, 2000);
+	setTimeout(timesup_to_loading2, 1000);
 }
 
 
@@ -164,18 +164,22 @@ function loading_to_askmodal() {
 			LOADING SCREEN FUNCTIONS          
 								AUTHOR: Darius			*/	
 function loading_screen_control1() {
-	setTimeout(loading_to_matchfound, 2000);
+	setTimeout(loading_to_matchfound, 1000);
 
 }
 
 function loading_screen_control2() {
-	setTimeout(loading_to_askmodal, 2000);	
+	setTimeout(loading_to_askmodal, 1000);	
 
 }
 
 function loading_screen_control3() {
-	setTimeout(loading_to_chat, 2000);
+	setTimeout(loading_to_chat, 1000);
 }
+
+
+
+
 
 
 
