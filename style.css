@@ -31,8 +31,14 @@ h3 {
 	padding-bottom: 3%;
 }
 
+#logo_white {
+	margin-right: 5px;
+	margin-bottom: 10px;
+}
+
+
 .navbar {
-	padding: 5px;
+	padding: 7px;
 	background-color: #455A64;
 	height: 45px;
 }
@@ -44,12 +50,12 @@ h3 {
 
 .navitem {
 	font-weight: bold;
-	width: 0 auto;
+	
 	padding: 2px;
 	font-size: 30px;
 	color: #fff;
 	display: inline-block;
-	border-radius: 4px;
+	
 	white-space: pre;
 }
 
