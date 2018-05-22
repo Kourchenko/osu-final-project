@@ -10,7 +10,7 @@
 
 		<!-- Stylesheet -->
 		<link rel="stylesheet" href="style.css" media="screen">
-
+		
 		<script src="index.js" charset="utf-8" defer></script>
 
 		<!-- This script incorporates SVG icons from Font Awesome: http://fontawesome.com/ -->
@@ -18,8 +18,8 @@
 
 	</head>
 
-
-
+	
+	
 	<body>
 	<!---------------------------------->
 	<!---------------HEADER------------->    <!--- AUTHOR: TEAM -->
@@ -31,13 +31,13 @@
 				</center>
 			</nav>
 		</header>
-
-
-		<main>
+		
+		
+		<main>	
 	<!---------------------------------->
 	<!---------------MAIN--------------->    <!--- AUTHOR: TEAM -->
 	<!---------------------------------->
-			<div class="main">
+			<div class="main hidden">
 				<center>
 					<div class="info">
 						<p>
@@ -59,10 +59,10 @@
 				</center>
 			</div>
 
-
+	
 	<!---------------------------------->
 	<!---------------LOADING------------>    <!--- AUTHOR: Aaron -->
-	<!---------------------------------->
+	<!---------------------------------->		
 			<div class="loading_screen hidden">
 				<center>
 					<div class="loadBar">
@@ -73,21 +73,32 @@
 				</center>
 			</div>
 
-
+			
 	<!---------------------------------->
 	<!-------------DRAWPIC1------------->    <!--- AUTHOR: Darius -->
-	<!---------------------------------->
+	<!---------------------------------->		
 			<div class="draw_pic1 hidden">
 				<center>
-					<div class="draw_pic_text">Draw another picture!</div>
-					<br>
-					<br>
-					<div class="draw_pic_canvas"><img src="#" width="200px" height="200px"></div>
+					<div class="draw_pic_text">Draw a picture!</div>
+					<div class="share_pic_btn"><img src="#" width="200px" height="200px"></div>
 					<br>
 					<div class="draw_pic_timer">Time left: <div class="timer1">10</div> seconds</div>
 				</center>
 			</div>
 
+			
+			
+	<!---------------------------------->
+	<!-------------DRAWPIC2------------->    <!--- AUTHOR: Darius -->
+	<!---------------------------------->				
+			<div class="draw_pic2">
+				<center>
+					<div class="draw_pic_text">Draw another picture!</div>
+					<div class="share_pic_btn"><img src="#" width="200px" height="200px"></div>
+					<br>
+					<div class="draw_pic_timer">Time left: <div class="timer2">10</div> seconds</div>
+				</center>
+			</div>
 			
 	<!---------------------------------->
 	<!-------------TIME'S_UP------------>    <!--- AUTHOR: Darius -->
@@ -111,37 +122,21 @@
 						<br>
 						<div class="draw_pic_timer">Would you like to continue?</div>
 						<br>
-					<div class="yes_no_box">
+					<div class="yes_no_box">					
 						<div class="matchfound_yes">
-							<button><a href="#">Yes</button>
+							<button><a href="#">Yes</a></button>
 						</div>
 						<div class="matchfound_no">
-							<button><a href="#">No</button>
-						</div>
-					</div>
-				</center>
-			</div>
-
-
-	<!---------------------------------->
-	<!-------------DRAWPIC2------------->    <!--- AUTHOR: Diego -->
-	<!---------------------------------->
-			<div class="draw_pic2 hidden">
-				<center>
-					<h2 class="modal-heading">Be creative</h2>
-					<div class="canvas">
-						<img src="#" class="canvas">
-					</div>
-					<div>
-					<button><a href="#">Share</a></button>
-					</div>
+							<button><a href="#">No</a></button>
+						</div>						
+					</div>					
 				</center>
 			</div>
 
 
 	<!---------------------------------->
 	<!-----------ASKCHATMODAL----------->    <!--- AUTHOR: Aaron -->
-	<!---------------------------------->
+	<!---------------------------------->	
 			<div class="askchatmodal hidden">
 				<center>
 					<div class="share_pic_btn">
@@ -155,7 +150,7 @@
 					<div class="yes_no_box">
 						<div class="askchatmodal_yes info">
 							<button><a href="#">Yes</button>
-						</div>
+						</div>	
 						<div class="askchatmodal_no info">
 							<button><a href="#">No</button>
 						</div>
@@ -164,16 +159,16 @@
 			</div>		
 		</main>
 
-
+		
 	<!---------------------------------->
 	<!--------------FOOTER-------------->    <!--- AUTHOR: TEAM -->
 	<!---------------------------------->
 		<footer class="">
-			<a id="footer-tos" href="#">
+			<a href="#">
 				ToS
 			</a>
 		</footer>
-
-
+		
+		
 	</body>
 </html>
