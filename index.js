@@ -42,43 +42,44 @@ var matchfound_no = document.getElementsByClassName('matchfound_no')[0];
 			TIMER FUNCTIONS          
 								AUTHOR: Darius			*/	
 function startTimer1() {
-	timer_count1.innerHTML = 1;
+	timer_count1.innerHTML = 5;
 	function updateText(input) {
 		var current_count = timer_count1.innerHTML;
 		timer_count1.innerHTML = current_count - 1;
 	}
 	
 	setInterval(updateText, 1000);
-	setTimeout(endTimer1, 1000);
+	setTimeout(endTimer1, 5000);
 }
 
 function endTimer1() {
-	drawpic1.classList.add('hidden');
-	times_up.classList.remove('hidden');
-	setTimeout(timesup_to_loading1, 1000);
+		function continueF() {
+			$('.times_up').fadeIn(1000);
+		}
+		$('.draw_pic1').fadeOut(1000, continueF);
+	setTimeout(timesup_to_loading1, 1500);
 }
 
 function startTimer2() {
-	timer_count2.innerHTML = 1;
+	timer_count2.innerHTML = 3;
 	function updateText(input) {
 		var current_count = timer_count2.innerHTML;
 		timer_count2.innerHTML = current_count - 1;
 	}
 	
 	setInterval(updateText, 1000);
-	setTimeout(endTimer2, 1000);
+	setTimeout(endTimer2, 3000);
 }
 
 function endTimer2() {
-	drawpic2.classList.add('hidden');
-	times_up.classList.remove('hidden');
-	setTimeout(timesup_to_loading2, 1000);
+		function continueF() {
+			$('.times_up').fadeIn(1000);
+		}
+		$('.draw_pic2').fadeOut(1000);
+	setTimeout(timesup_to_loading2, 1500);
 }
 
-
-
-
-
+$(document).ready(($('.home_screen').fadeIn(5000)));
 
 
 
@@ -87,9 +88,12 @@ function endTimer2() {
 								AUTHOR: Darius			*/											
 function main_to_drawpic1() {
 	if (username_box.value != "") {
-		main.classList.add('hidden');
-		drawpic1.classList.remove('hidden');
-		startTimer1();
+		
+		function continueF() {
+			$('.draw_pic1').fadeIn(1000, startTimer1);
+		}
+		$('.home_screen').fadeOut(1000, continueF);
+		
 	}
 	else {
 		username_error_text.classList.remove('hidden');
@@ -97,66 +101,83 @@ function main_to_drawpic1() {
 }
 
 function drawpic1_to_loading() {
-	drawpic1.classList.add('hidden');
-	loading.classList.remove('hidden');
-	loading_screen_control();
+	function continueF() {
+			$('.loading_screen').fadeIn(1000, loading_screen_control);
+		}
+		$('.draw_pic1').fadeOut(1000, continueF);
 }
 
 function loading_to_matchfound() {
-	loading.classList.add('hidden');
-	match_found.classList.remove('hidden');
+	function continueF() {
+			$('.match_found').fadeIn(1000);
+		}
+		$('.loading_screen').fadeOut(1000, continueF);
 }
 
 function loading_to_chat() {
-	loading.classList.add('hidden');
-	chat_page.classList.remove('hidden');
+	function continueF() {
+			$('.chatbox').fadeIn(1000);
+		}
+		$('.loading_screen').fadeOut(1000, continueF);
 }
 
 function matchfound_to_loading() {
-	match_found.classList.add('hidden');
-	loading.classList.remove('hidden');
-	loading_screen_control1();
+	function continueF() {
+			$('.loading_screen').fadeIn(1000, loading_screen_control1);
+		}
+		$('.match_found').fadeOut(1000, continueF);
 }
 
 function matchfound_to_drawpic2() {
-	match_found.classList.add('hidden');
-	drawpic2.classList.remove('hidden');
+	function continueF() {
+			$('.draw_pic2').fadeIn(1000);
+		}
+		$('.match_found').fadeOut(1000, continueF);
 	startTimer2();
 }
 
 function drawpic2_to_askchatmodal() {
-	drawpic2.classList.add('hidden');
-	askchatmodal.classList.remove('hidden');
+	function continueF() {
+			$('.askchatmodal').fadeIn(1000);
+		}
+		$('.draw_pic2').fadeOut(1000, continueF);
 }
 
 function askchatmodal_no_f() {
-	askchatmodal.classList.add('hidden');
-	loading.classList.remove('hidden');
 	window.location.href = "./index.html";
 }
 
 function askchatmodal_yes_f() {
-	askchatmodal.classList.add('hidden');
-	loading.classList.remove('hidden');
-	loading_screen_control3();
+	function continueF() {
+			$('.loading_screen').fadeIn(1000, loading_screen_control3);
+		}
+		$('.askchatmodal').fadeOut(1000, continueF);
 }
 
 function timesup_to_loading1() {
-	times_up.classList.add('hidden');
-	loading.classList.remove('hidden');
-	loading_screen_control1();
+		function continueF() {
+			$('.loading_screen').fadeIn(1000, loading_screen_control1);
+		}
+		$('.times_up').fadeOut(1000, continueF);
 }
 
 function timesup_to_loading2() {
-	times_up.classList.add('hidden');
-	loading.classList.remove('hidden');
-	loading_screen_control2();
+		function continueF() {
+			$('.loading_screen').fadeIn(1000, loading_screen_control2);
+		}
+		$('.times_up').fadeOut(1000, continueF);
 }
 
 function loading_to_askmodal() {
-	loading.classList.add('hidden');
-	askchatmodal.classList.remove('hidden');
+		function continueF() {
+			$('.askchatmodal').fadeIn(1000);
+		}
+		$('.loading_screen').fadeOut(1000, continueF);
 }
+
+
+
+
 
 
 
@@ -164,17 +185,17 @@ function loading_to_askmodal() {
 			LOADING SCREEN FUNCTIONS          
 								AUTHOR: Darius			*/	
 function loading_screen_control1() {
-	setTimeout(loading_to_matchfound, 1000);
+	setTimeout(loading_to_matchfound, 3000);
 
 }
 
 function loading_screen_control2() {
-	setTimeout(loading_to_askmodal, 1000);	
+	setTimeout(loading_to_askmodal, 3000);	
 
 }
 
 function loading_screen_control3() {
-	setTimeout(loading_to_chat, 1000);
+	setTimeout(loading_to_chat, 3000);
 }
 
 
