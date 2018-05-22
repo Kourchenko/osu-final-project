@@ -36,17 +36,14 @@ var matchfound_no = document.getElementsByClassName('matchfound_no')[0];
 
 
 /*
-<<<<<<< HEAD
 			TIMER FUNCTIONS
 								AUTHOR: Darius			*/
 function startTimer() {
-
-=======
+/*
 			TIMER FUNCTIONS          
 								AUTHOR: Darius			*/	
 function startTimer1() {
 	timer_count1.innerHTML = 5;
->>>>>>> f29d010ccdbfe482233bda566cff12a07e92b3b1
 	function updateText(input) {
 		var current_count = timer_count1.innerHTML;
 		timer_count1.innerHTML = current_count - 1;
@@ -183,16 +180,13 @@ function loading_screen_control3() {
 /*
 			EVENT LISTENERS          
 								AUTHOR: TEAM			*/
-<<<<<<< HEAD
 //main_connect.addEventListener('click', main_to_drawpic1);
 //askchatmodal_yes.addEventListener('click', askchatmodal_chat);
 //askchatmodal_no.addEventListener('click', askchatmodal_loading);
 //matchfound_yes.addEventListener('click', matchfound_to_drawpic2);
 //matchfound_no.addEventListener('click', matchfound_to_loading);
-=======
 main_connect.addEventListener('click', main_to_drawpic1);
 askchatmodal_yes.addEventListener('click', askchatmodal_yes_f);
 askchatmodal_no.addEventListener('click', askchatmodal_no_f);
 matchfound_yes.addEventListener('click', matchfound_to_drawpic2);
 matchfound_no.addEventListener('click', matchfound_to_loading);
->>>>>>> f29d010ccdbfe482233bda566cff12a07e92b3b1
