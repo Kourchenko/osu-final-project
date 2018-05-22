@@ -148,7 +148,31 @@
 					</div>
 				</center>
 			</div>		
+			
+			
+		<!---------------------------------->
+		<!--------------CHATMODAL----------->    <!--- AUTHOR: Diego -->
+		<!---------------------------------->
+			<!--<div class="chatbox">
+				<center>
+					script type="text/javascript" src="/../socket.io/socket.io.js"></script>
+					<script>
+						var socket = io.connect('http://localhost:8080');
+						var username = prompt('Enter a username:');
+
+						// Send the username with the signal 'new_username' (can be anything)
+						socket.emit('new_username', username);
+
+						socket.on('message', function(message) {
+							alert('The server has a message from: ' + message);
+						});
+					</script>
+				</center>
+			</div>-->
 		</main>
+		
+		
+		
 
 		
 	<!---------------------------------->
