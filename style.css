@@ -2,6 +2,7 @@ body {
 	padding: 0;
 	margin: 0;
 	background-color: #fff;
+	font-family: 'Dosis', sans-serif;
 }
 
 
@@ -49,6 +50,7 @@ h3 {
 	color: #fff;
 	display: inline-block;
 	border-radius: 4px;
+	white-space: pre;
 }
 
 
@@ -184,10 +186,13 @@ footer a {
 	text-align: center;
 }
 
+.draw_pic_timer {
+	margin-top: 2%;
+}
+
 .share_pic_btn {
-	padding-top: 35px;
-	margin-right: 7%;
-	text-align: center;
+	width: 100%;
+	padding-top: 2%;
 }
 
 .yes_no_box {
