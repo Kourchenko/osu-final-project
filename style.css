@@ -11,9 +11,9 @@ a {
 	color: #fff;
 }
 
-a:hover {
+/*a:hover {
 	color: #a5a9af;
-}
+}*/
 
 
 h3 {
@@ -64,34 +64,42 @@ h3 {
 	padding-top: 5%;
 	float: center;
 	display: none;
+	width: 100%;
 }
 
 .loading_screen {
 	display: none;
+	width: 100%;
 }
 
 .draw_pic1 {
 	display: none;
+	width: 100%;
 }
 
 .draw_pic2 {
 	display: none;
+	width: 100%;
 }
 
 .times_up {
 	display: none;
+	width: 100%;
 }
 
 .match_found {
 	display: none;
+	width: 100%;
 }
 
 .askchatmodal {
 	display: none;
+	width: 100%;
 }
 
 .chatbox {
 	display: none;
+	width: 100%;
 }
 
 .info {
@@ -140,7 +148,7 @@ footer {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	color: #fff;
-	font-size: 30px;
+	font-size: 18px;
 	bottom: 0;
 	margin: 0;
 	width: 100%;
@@ -150,10 +158,13 @@ footer {
 
 }
 
+footer a:hover {
+	color: #a5a9af;
+}
 
-footer a {
-	color: #fff;
-	margin-left: 30px;
+.footer_item {
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 
