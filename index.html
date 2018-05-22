@@ -11,7 +11,7 @@
 		<!-- Stylesheet -->
 		<link rel="stylesheet" href="style.css" media="screen">
 
-		<script src="index.js" charset="utf-8" defer></script>
+		<script src="index.js" charset="utf-8"></script>
 
 		<!-- This script incorporates SVG icons from Font Awesome: http://fontawesome.com/ -->
 		<script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" defer></script>
@@ -79,7 +79,7 @@
 	<!---------------------------------->
 			<div class="draw_pic1 hidden">
 				<center>
-					<div class="draw_pic_text">Draw another picture!</div>
+					<div class="draw_pic_text">Draw picture!</div>
 					<br>
 					<br>
 					<div class="draw_pic_canvas"><img src="#" width="200px" height="200px"></div>
@@ -88,16 +88,16 @@
 				</center>
 			</div>
 
-			
+
 	<!---------------------------------->
 	<!-------------TIME'S_UP------------>    <!--- AUTHOR: Darius -->
-	<!---------------------------------->				
+	<!---------------------------------->
 			<div class="times_up hidden">
 				<center>
 						<h1>Time's up!</h1>
 				</center>
 			</div>
-			
+
 
 	<!---------------------------------->
 	<!-----------MATCH_FOUND------------>    <!--- AUTHOR: TEAM -->
@@ -116,7 +116,7 @@
 							<button><a href="#">Yes</button>
 						</div>
 						<div class="matchfound_no">
-							<button><a href="#">No</button>
+							<button><a href="#">No</a></button>
 						</div>
 					</div>
 				</center>
@@ -126,18 +126,16 @@
 	<!---------------------------------->
 	<!-------------DRAWPIC2------------->    <!--- AUTHOR: Diego -->
 	<!---------------------------------->
-			<div class="draw_pic2 hidden">
-				<center>
-					<h2 class="modal-heading">Be creative</h2>
-					<div class="canvas">
-						<img src="#" class="canvas">
-					</div>
-					<div>
-					<button><a href="#">Share</a></button>
-					</div>
-				</center>
-			</div>
-
+		<div class="draw_pic2 hidden">
+			<center>
+				<div class="draw_pic_text">Draw another picture!</div>
+				<br>
+				<br>
+				<div class="draw_pic_canvas"><img src="#" width="200px" height="200px"></div>
+				<br>
+				<div class="draw_pic_timer">Time left: <div class="timer1">10</div> seconds</div>
+			</center>
+		</div>
 
 	<!---------------------------------->
 	<!-----------ASKCHATMODAL----------->    <!--- AUTHOR: Aaron -->
@@ -161,7 +159,27 @@
 						</div>
 					</div>
 				</center>
-			</div>		
+			</div>
+		<!---------------------------------->
+		<!--------------CHATMODAL----------->    <!--- AUTHOR: Diego -->
+		<!---------------------------------->
+			<div class="chatbox">
+				<center>
+					<script type="text/javascript" src="/../socket.io/socket.io.js"></script>
+					<script>
+						var socket = io.connect('http://localhost:8080');
+						var username = prompt('Enter a username:');
+
+						// Send the username with the signal 'new_username' (can be anything)
+						socket.emit('new_username', username);
+
+						socket.on('message', function(message) {
+							alert('The server has a message from: ' + message);
+						});
+					</script>
+				</center>
+			</div>
+
 		</main>
 
 

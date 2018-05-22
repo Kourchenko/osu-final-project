@@ -33,15 +33,15 @@ var matchfound_no = document.getElementsByClassName('matchfound_no')[0];
 
 
 /*
-			TIMER FUNCTIONS          
-								AUTHOR: Darius			*/	
+			TIMER FUNCTIONS
+								AUTHOR: Darius			*/
 function startTimer() {
-	
+
 	function updateText(input) {
 		var current_count = timer_count1.innerHTML;
 		timer_count1.innerHTML = current_count - 1;
 	}
-	
+
 	setInterval(updateText, 1000);
 	setTimeout(endTimer, 10000);
 }
@@ -116,8 +116,8 @@ function timesup_to_loading() {
 /*
 			EVENT LISTENERS
 								AUTHOR: TEAM			*/
-main_connect.addEventListener('click', main_to_drawpic1);
-askchatmodal_yes.addEventListener('click', askchatmodal_chat);
-askchatmodal_no.addEventListener('click', askchatmodal_loading);
-matchfound_yes.addEventListener('click', matchfound_to_drawpic2);
-matchfound_no.addEventListener('click', matchfound_to_loading);
+//main_connect.addEventListener('click', main_to_drawpic1);
+//askchatmodal_yes.addEventListener('click', askchatmodal_chat);
+//askchatmodal_no.addEventListener('click', askchatmodal_loading);
+//matchfound_yes.addEventListener('click', matchfound_to_drawpic2);
+//matchfound_no.addEventListener('click', matchfound_to_loading);
