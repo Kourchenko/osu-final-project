@@ -20,6 +20,9 @@ var drawpic2 = document.getElementsByClassName('draw_pic2')[0];
 var loading = document.getElementsByClassName('loading_screen')[0];
 var match_found = document.getElementsByClassName('match_found')[0];
 var askchatmodal = document.getElementsByClassName('askchatmodal')[0];
+var times_up = document.getElementsByClassName('times_up')[0];
+
+var timer_count1 = document.getElementsByClassName('timer1')[0];
 
 
 var main_connect = document.getElementById('clickconnect');
@@ -27,6 +30,28 @@ var askchatmodal_yes = document.getElementsByClassName('askchatmodal_yes')[0];
 var askchatmodal_no = document.getElementsByClassName('askchatmodal_no')[0];
 var matchfound_yes = document.getElementsByClassName('matchfound_yes')[0];
 var matchfound_no = document.getElementsByClassName('matchfound_no')[0];
+
+
+/*
+			TIMER FUNCTIONS          
+								AUTHOR: Darius			*/	
+function startTimer() {
+	
+	function updateText(input) {
+		var current_count = timer_count1.innerHTML;
+		timer_count1.innerHTML = current_count - 1;
+	}
+	
+	setInterval(updateText, 1000);
+	setTimeout(endTimer, 10000);
+}
+
+function endTimer() {
+	drawpic1.classList.add('hidden');
+	times_up.classList.remove('hidden');
+	setTimeout(timesup_to_loading, 2000);
+}
+
 
 
 
@@ -37,6 +62,7 @@ var matchfound_no = document.getElementsByClassName('matchfound_no')[0];
 function main_to_drawpic1() {
     main.classList.add('hidden');
     drawpic1.classList.remove('hidden');
+	startTimer();
 }
 
 function drawpic1_to_loading() {
@@ -73,6 +99,14 @@ function askchatmodal_to_chat() {
 	askchatmodal.classList.add('hidden');
 	// REMOVE HIDDEN FROM CHAT PAGE HERE //
 }
+
+function timesup_to_loading() {
+	times_up.classList.add('hidden');
+	loading.classList.remove('hidden');
+}
+
+
+
 
 
 
