@@ -1,187 +1,219 @@
-<!DOCTYPE HTML>
-<html>
+/* JS */
 
-	<!---------------------------------->
-	<!---------------HEAD--------------->    <!--- AUTHOR: TEAM -->
-	<!---------------------------------->
-	<head>
-		<meta charset="UTF-8">
-		<title>Picture Me</title>
+// Modal hidden flags
+var DIV_USERNAME_HIDDEN = false; // 1st to load
+var DIV_DRAW_HIDDEN = true; // 2nd
+var DIV_LOADING_HIDDEN = true; // 3rd
+var DIV_MATCH_HIDDEN = true; // 4th 
 
-		<!-- Stylesheet -->
-		<link rel="stylesheet" href="style.css" media="screen">
-		
-		<script src="index.js" charset="utf-8" defer></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<!-- This script incorporates SVG icons from Font Awesome: http://fontawesome.com/ -->
-		<script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" defer></script>
-		
 
-	</head>
 
+
+
+
+/*
+			ELEMENT CONNECTORS          
+								AUTHOR: TEAM			*/
+var main = document.getElementsByClassName('home_screen')[0];
+var drawpic1 = document.getElementsByClassName('draw_pic1')[0];
+var drawpic2 = document.getElementsByClassName('draw_pic2')[0];
+var loading = document.getElementsByClassName('loading_screen')[0];
+var match_found = document.getElementsByClassName('match_found')[0];
+var askchatmodal = document.getElementsByClassName('askchatmodal')[0];
+var times_up = document.getElementsByClassName('times_up')[0];
+var chat_page = document.getElementsByClassName('chatbox')[0];
+
+
+
+var username_box = document.getElementById('main-username-input');
+var username_error_text = document.getElementsByClassName('username_error')[0];
+var timer_count1 = document.getElementsByClassName('timer1')[0];
+var timer_count2 = document.getElementsByClassName('timer2')[0];
+
+
+var main_connect = document.getElementsByClassName('button_connect')[0];
+var askchatmodal_yes = document.getElementsByClassName('askchatmodal_yes')[0];
+var askchatmodal_no = document.getElementsByClassName('askchatmodal_no')[0];
+var matchfound_yes = document.getElementsByClassName('matchfound_yes')[0];
+var matchfound_no = document.getElementsByClassName('matchfound_no')[0];
+
+
+/*
+			TIMER FUNCTIONS          
+								AUTHOR: Darius			*/	
+function startTimer1() {
+	timer_count1.innerHTML = 5;
+	function updateText(input) {
+		var current_count = timer_count1.innerHTML;
+		timer_count1.innerHTML = current_count - 1;
+	}
 	
+	setInterval(updateText, 1000);
+	setTimeout(endTimer1, 5000);
+}
+
+function endTimer1() {
+		function continueF() {
+			$('.times_up').fadeIn(1000);
+		}
+		$('.draw_pic1').fadeOut(1000, continueF);
+	setTimeout(timesup_to_loading1, 1500);
+}
+
+function startTimer2() {
+	timer_count2.innerHTML = 3;
+	function updateText(input) {
+		var current_count = timer_count2.innerHTML;
+		timer_count2.innerHTML = current_count - 1;
+	}
 	
-	<body>
-	<!---------------------------------->
-	<!---------------HEADER------------->    <!--- AUTHOR: TEAM -->
-	<!---------------------------------->
-		<header>
-			<nav class="navbar">
-				<center>
-					<a href='#' class="navitem">picture me</a>
-				</center>
-			</nav>
-		</header>
+	setInterval(updateText, 1000);
+	setTimeout(endTimer2, 3000);
+}
+
+function endTimer2() {
+		function continueF() {
+			$('.times_up').fadeIn(1000);
+		}
+		$('.draw_pic2').fadeOut(1000);
+	setTimeout(timesup_to_loading2, 1500);
+}
+
+$(document).ready(($('.home_screen').fadeIn(5000)));
+
+
+
+/*
+			FLOW FUNCTIONS          
+								AUTHOR: Darius			*/											
+function main_to_drawpic1() {
+	if (username_box.value != "") {
 		
+		function continueF() {
+			$('.draw_pic1').fadeIn(1000, startTimer1);
+		}
+		$('.home_screen').fadeOut(1000, continueF);
 		
-		<main id="container">	
-	<!---------------------------------->
-	<!---------------MAIN--------------->    <!--- AUTHOR: TEAM -->
-	<!---------------------------------->
-			<div class="home_screen">
-				<center>
-					<div class="info">
-						<p>
-							Picture me is a way to connect through your creative drawing.
-							Connect with someone and draw to appeal.
-						</p>
-					</div>
-					<div class ="username_error hidden"> Please enter a username. </div>
-					<div class="username">
-						<input id="main-username-input" placeholder="Enter a username..."
-						onfocus="this.placeholder=''" onblur="this.placeholder='Enter a username...'">
-					</div>
-					
-						<button class="button_connect" style="vertical-align:middle"><span>Connect </span></button>
-					
-				</center>
-			</div>
+	}
+	else {
+		username_error_text.classList.remove('hidden');
+	}
+}
 
-	
-	<!---------------------------------->
-	<!---------------LOADING------------>    <!--- AUTHOR: Aaron -->
-	<!---------------------------------->		
-			<div class="loading_screen hidden">
-				<center>
-					<div class="loader"></div>
-				</center>
-			</div>
+function drawpic1_to_loading() {
+	function continueF() {
+			$('.loading_screen').fadeIn(1000, loading_screen_control);
+		}
+		$('.draw_pic1').fadeOut(1000, continueF);
+}
 
-			
-	<!---------------------------------->
-	<!-------------DRAWPIC1------------->    <!--- AUTHOR: Darius -->
-	<!---------------------------------->		
-			<div class="draw_pic1 hidden">
-				<center>
-					<div class="draw_pic_text">Draw a picture!</div>
-					<div class="share_pic_btn"><img src="#" width="200px" height="200px"></div>
-					<div class="draw_pic_timer">Time left: <div class="timer1">5</div> seconds</div>
-				</center>
-			</div>
+function loading_to_matchfound() {
+	function continueF() {
+			$('.match_found').fadeIn(1000);
+		}
+		$('.loading_screen').fadeOut(1000, continueF);
+}
 
-			
-			
-	<!---------------------------------->
-	<!-------------DRAWPIC2------------->    <!--- AUTHOR: Darius -->
-	<!---------------------------------->				
-			<div class="draw_pic2 hidden">
-				<center>
-					<div class="draw_pic_text">Draw another picture!</div>
-					<div class="share_pic_btn"><img src="#" width="200px" height="200px"></div>
-					<div class="draw_pic_timer">Time left: <div class="timer2">3</div> seconds</div>
-				</center>
-			</div>
-			
-	<!---------------------------------->
-	<!-------------TIME'S_UP------------>    <!--- AUTHOR: Darius -->
-	<!---------------------------------->				
-			<div class="times_up page hidden">
-				<center>
-						<h1>Time's up!</h1>
-				</center>
-			</div>
-			
+function loading_to_chat() {
+	function continueF() {
+			$('.chatbox').fadeIn(1000);
+		}
+		$('.loading_screen').fadeOut(1000, continueF);
+}
 
-	<!---------------------------------->
-	<!-----------MATCH_FOUND------------>    <!--- AUTHOR: TEAM -->
-	<!---------------------------------->
-			<div class= "match_found hidden">
-				<center>
-					<div class="draw_pic_text">You have a match!</div>
-						<div class="share_pic_btn"><img src="#" width="200px" height="200px"></div>
-						<div class="description_text">Would you like to continue?</div>
-					<div class="yes_no_box">					
-						<div class="matchfound_yes">
-							<button class="button_answer">Yes</button>
-						</div>
-						<div class="matchfound_no">
-							<button class="button_answer">No</button>
-						</div>						
-					</div>					
-				</center>
-			</div>
+function matchfound_to_loading() {
+	function continueF() {
+			$('.loading_screen').fadeIn(1000, loading_screen_control1);
+		}
+		$('.match_found').fadeOut(1000, continueF);
+}
+
+function matchfound_to_drawpic2() {
+	function continueF() {
+			$('.draw_pic2').fadeIn(1000);
+		}
+		$('.match_found').fadeOut(1000, continueF);
+	startTimer2();
+}
+
+function drawpic2_to_askchatmodal() {
+	function continueF() {
+			$('.askchatmodal').fadeIn(1000);
+		}
+		$('.draw_pic2').fadeOut(1000, continueF);
+}
+
+function askchatmodal_no_f() {
+	window.location.href = "./index.html";
+}
+
+function askchatmodal_yes_f() {
+	function continueF() {
+			$('.loading_screen').fadeIn(1000, loading_screen_control3);
+		}
+		$('.askchatmodal').fadeOut(1000, continueF);
+}
+
+function timesup_to_loading1() {
+		function continueF() {
+			$('.loading_screen').fadeIn(1000, loading_screen_control1);
+		}
+		$('.times_up').fadeOut(1000, continueF);
+}
+
+function timesup_to_loading2() {
+		function continueF() {
+			$('.loading_screen').fadeIn(1000, loading_screen_control2);
+		}
+		$('.times_up').fadeOut(1000, continueF);
+}
+
+function loading_to_askmodal() {
+		function continueF() {
+			$('.askchatmodal').fadeIn(1000);
+		}
+		$('.loading_screen').fadeOut(1000, continueF);
+}
 
 
-	<!---------------------------------->
-	<!-----------ASKCHATMODAL----------->    <!--- AUTHOR: Aaron -->
-	<!---------------------------------->	
-			<div class="askchatmodal hidden">
-				<center>
-				<div class="draw_pic_text">Their second creation!</div>
-					<div class="share_pic_btn">
-						<img src="#" width="200px" height="200px">
-					</div>
-					<div class="description_text">Would you like to chat with this person?</div>
-					<div class="yes_no_box">
-						<div class="askchatmodal_yes info">
-							<button class="button_answer">Yes</button>
-						</div>	
-						<div class="askchatmodal_no info">
-							<button class="button_answer">No</button>
-						</div>
-					</div>
-				</center>
-			</div>		
-			
-			
-		<!---------------------------------->
-		<!--------------CHATMODAL----------->    <!--- AUTHOR: Diego -->
-		<!---------------------------------->
-			<div class="chatbox hidden">
-				<center> <h2>Chat page placeholder.</h2>
-				<!--
-				
-				<script type="text/javascript" src="/../socket.io/socket.io.js"></script>
-					<script>
-						var socket = io.connect('http://localhost:8080');
-						var username = prompt('Enter a username:');
 
-						// Send the username with the signal 'new_username' (can be anything)
-						socket.emit('new_username', username);
 
-						socket.on('message', function(message) {
-							alert('The server has a message from: ' + message);
-						});
-					</script>
-					
-				-->	
-				</center>
-			</div>
-		</main>
-		
-		
-		
 
-		
-	<!---------------------------------->
-	<!--------------FOOTER-------------->    <!--- AUTHOR: TEAM -->
-	<!---------------------------------->
-		<footer>
-			<a href="#">
-				ToS
-			</a>
-		</footer>
-		
-		
-	</body>
-</html>
+
+
+/*
+			LOADING SCREEN FUNCTIONS          
+								AUTHOR: Darius			*/	
+function loading_screen_control1() {
+	setTimeout(loading_to_matchfound, 3000);
+
+}
+
+function loading_screen_control2() {
+	setTimeout(loading_to_askmodal, 3000);	
+
+}
+
+function loading_screen_control3() {
+	setTimeout(loading_to_chat, 3000);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+			EVENT LISTENERS          
+								AUTHOR: TEAM			*/
+main_connect.addEventListener('click', main_to_drawpic1);
+askchatmodal_yes.addEventListener('click', askchatmodal_yes_f);
+askchatmodal_no.addEventListener('click', askchatmodal_no_f);
+matchfound_yes.addEventListener('click', matchfound_to_drawpic2);
+matchfound_no.addEventListener('click', matchfound_to_loading);
