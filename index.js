@@ -252,7 +252,7 @@ function getPosition1(mouseEvent, sigCanvas1) {
             y = mouseEvent.clientY + document.body.scrollTop + document.documentElement.scrollTop;
          }
  
-         return { X: x - sigCanvas1.offsetLeft, Y: y - sigCanvas1.offsetTop };
+         return { X: x - sigCanvas1.offsetLeft, Y: y - sigCanvas1.offsetTop};
 }
 
 function getPosition2(mouseEvent, sigCanvas2) {
@@ -425,7 +425,7 @@ function drawLine1(mouseEvent, sigCanvas1, context1) {
  
          var position = getPosition1(mouseEvent, sigCanvas1);
  
-         context1.lineTo(position.X, position.Y - 60);
+         context1.lineTo(position.X, position.Y);
          context1.stroke();
       }
 
@@ -443,7 +443,7 @@ function drawLine2(mouseEvent, sigCanvas2, context2) {
  
          var position = getPosition2(mouseEvent, sigCanvas2);
  
-         context2.lineTo(position.X, position.Y - 60);
+         context2.lineTo(position.X, position.Y);
          context2.stroke();
       }
 
