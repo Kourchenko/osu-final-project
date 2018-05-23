@@ -10,7 +10,6 @@ var DIV_MATCH_HIDDEN = true; // 4th
 
 
 
-
 /*
 			ELEMENT CONNECTORS          
 								AUTHOR: TEAM			*/
@@ -39,20 +38,25 @@ var askchatmodal_no = document.getElementsByClassName('askchatmodal_no')[0];
 var matchfound_yes = document.getElementsByClassName('matchfound_yes')[0];
 var matchfound_no = document.getElementsByClassName('matchfound_no')[0];
 
+var sigCanvas1 = document.getElementsByClassName('canvas1')[0];
+var sigCanvas2 = document.getElementsByClassName('canvas2')[0];
+var context1 = sigCanvas1.getContext("2d");
+var context2 = sigCanvas2.getContext("2d");
+var colorToUse = 000000;
+
 
 /*
 			TIMER FUNCTIONS          
 								AUTHOR: Darius			*/	
 function startTimer1() {
-	timer_count1.textContent = 90;
+	timer_count1.textContent = 30;
 	function updateText(input) {
 		var current_count = timer_count1.textContent;
 		timer_count1.textContent = current_count - 1;
 	}
 	
 	setInterval(updateText, 1000);
-	console.log('Timer 1 started');
-	setTimeout(endTimer1, 90000);
+	setTimeout(endTimer1, 30000);
 }
 
 function endTimer1() {
@@ -65,15 +69,14 @@ function endTimer1() {
 }
 
 function startTimer2() {
-	timer_count2.textContent = 90;
+	timer_count2.textContent = 30;
 	function updateText(input) {
 		var current_count = timer_count2.textContent;
 		timer_count2.textContent = current_count - 1;
 	}
 	
 	setInterval(updateText, 1000);
-	console.log('Timer 2 started');
-	setTimeout(endTimer2, 90000);
+	setTimeout(endTimer2, 30000);
 }
 
 function endTimer2() {
@@ -95,7 +98,11 @@ function enableConnect_button() {
 	$('.button_connect').prop("disabled", false)
 }
 
-$(document).ready(($('.home_screen').fadeIn(5000, enableConnect_button)));
+$(document).ready(function() {
+	$('.home_screen').fadeIn(5000, enableConnect_button)
+	initialize1();
+	initialize2();
+});
 
 
 
@@ -200,6 +207,8 @@ function loading_to_askmodal() {
 
 
 
+
+
 /*
 			LOADING SCREEN FUNCTIONS          
 								AUTHOR: Darius			*/	
@@ -216,6 +225,269 @@ function loading_screen_control2() {
 function loading_screen_control3() {
 	setTimeout(loading_to_chat, 3000);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+			CANVAS FUNCTIONS          
+								AUTHOR: Darius			*/	
+function getPosition1(mouseEvent, sigCanvas1) {
+         var x, y;
+         if (mouseEvent.pageX != undefined && mouseEvent.pageY != undefined) {
+            x = mouseEvent.pageX;
+            y = mouseEvent.pageY;
+         } else {
+            x = mouseEvent.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+            y = mouseEvent.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+         }
+ 
+         return { X: x - sigCanvas1.offsetLeft, Y: y - sigCanvas1.offsetTop };
+}
+
+function getPosition2(mouseEvent, sigCanvas2) {
+         var x, y;
+         if (mouseEvent.pageX != undefined && mouseEvent.pageY != undefined) {
+            x = mouseEvent.pageX;
+            y = mouseEvent.pageY;
+         } else {
+            x = mouseEvent.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+            y = mouseEvent.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+         }
+ 
+         return { X: x - sigCanvas2.offsetLeft, Y: y - sigCanvas2.offsetTop };
+}
+
+function updateColor() {
+		context1.strokeStyle = colorToUse;
+		context2.strokeStyle = colorToUse;
+}
+
+function initialize1() {
+                   
+         var is_touch_device = 'ontouchstart' in document.documentElement;
+ 
+         if (is_touch_device) {
+            var drawer = {
+               isDrawing: false,
+               touchstart: function (coors) {
+                  context1.beginPath();
+                  context1.moveTo(coors.x, coors.y);
+                  this.isDrawing = true;
+               },
+               touchmove: function (coors) {
+                  if (this.isDrawing) {
+                     context1.lineTo(coors.x, coors.y);
+                     context1.stroke();
+                  }
+               },
+               touchend: function (coors) {
+                  if (this.isDrawing) {
+                     this.touchmove(coors);
+                     this.isDrawing = false;
+                  }
+               }
+            };
+ 
+            function draw(event) {
+ 
+               var coors = {
+                  x: event.targetTouches[0].pageX,
+                  y: event.targetTouches[0].pageY
+               };
+ 
+               var obj = sigCanvas1;
+ 
+               if (obj.offsetParent) {
+                  do {
+                     coors.x -= obj.offsetLeft;
+                     coors.y -= obj.offsetTop;
+                  }
+                  while ((obj = obj.offsetParent) != null);
+               }
+
+               drawer[event.type](coors);
+            }
+ 
+            sigCanvas1.addEventListener('touchstart', draw, false);
+            sigCanvas1.addEventListener('touchmove', draw, false);
+            sigCanvas1.addEventListener('touchend', draw, false);
+ 
+            sigCanvas1.addEventListener('touchmove', function (event) {
+               event.preventDefault();
+            }, false); 
+         }
+         else {
+
+            $(".canvas1").mousedown(function (mouseEvent) {
+               var position = getPosition1(mouseEvent, sigCanvas1);
+ 
+               context1.moveTo(position.X, position.Y);
+               context1.beginPath();
+
+               $(this).mousemove(function (mouseEvent) {
+                  drawLine1(mouseEvent, sigCanvas1, context1);
+               }).mouseup(function (mouseEvent) {
+                  finishDrawing(mouseEvent, sigCanvas1, context1);
+               }).mouseout(function (mouseEvent) {
+                  finishDrawing(mouseEvent, sigCanvas1, context1);
+               });
+            });
+ 
+         }
+}
+
+function initialize2() {
+                   
+         var is_touch_device = 'ontouchstart' in document.documentElement;
+ 
+         if (is_touch_device) {
+            var drawer = {
+               isDrawing: false,
+               touchstart: function (coors) {
+                  context2.beginPath();
+                  context2.moveTo(coors.x, coors.y);
+                  this.isDrawing = true;
+               },
+               touchmove: function (coors) {
+                  if (this.isDrawing) {
+                     context2.lineTo(coors.x, coors.y);
+                     context2.stroke();
+                  }
+               },
+               touchend: function (coors) {
+                  if (this.isDrawing) {
+                     this.touchmove(coors);
+                     this.isDrawing = false;
+                  }
+               }
+            };
+ 
+            function draw(event) {
+ 
+               var coors = {
+                  x: event.targetTouches[0].pageX,
+                  y: event.targetTouches[0].pageY
+               };
+ 
+               var obj = sigCanvas2;
+ 
+               if (obj.offsetParent) {
+                  do {
+                     coors.x -= obj.offsetLeft;
+                     coors.y -= obj.offsetTop;
+                  }
+                  while ((obj = obj.offsetParent) != null);
+               }
+
+               drawer[event.type](coors);
+            }
+ 
+            sigCanvas2.addEventListener('touchstart', draw, false);
+            sigCanvas2.addEventListener('touchmove', draw, false);
+            sigCanvas2.addEventListener('touchend', draw, false);
+ 
+            sigCanvas2.addEventListener('touchmove', function (event) {
+               event.preventDefault();
+            }, false); 
+         }
+         else {
+
+            $(".canvas2").mousedown(function (mouseEvent) {
+               var position = getPosition2(mouseEvent, sigCanvas1);
+ 
+               context2.moveTo(position.X, position.Y);
+               context2.beginPath();
+
+               $(this).mousemove(function (mouseEvent) {
+                  drawLine2(mouseEvent, sigCanvas2, context2);
+               }).mouseup(function (mouseEvent) {
+                  finishDrawing(mouseEvent, sigCanvas2, context2);
+               }).mouseout(function (mouseEvent) {
+                  finishDrawing(mouseEvent, sigCanvas2, context2);
+               });
+            });
+ 
+         }
+}
+
+function drawLine1(mouseEvent, sigCanvas1, context1) {
+ 
+         var position = getPosition1(mouseEvent, sigCanvas1);
+ 
+         context1.lineTo(position.X, position.Y - 60);
+         context1.stroke();
+      }
+
+      function finishDrawing(mouseEvent, sigCanvas1, context1) {
+         drawLine1(mouseEvent, sigCanvas1, context1);
+ 
+         context1.closePath();
+ 
+         $(sigCanvas1).unbind("mousemove")
+                     .unbind("mouseup")
+                     .unbind("mouseout");
+}
+
+function drawLine2(mouseEvent, sigCanvas2, context2) {
+ 
+         var position = getPosition2(mouseEvent, sigCanvas2);
+ 
+         context2.lineTo(position.X, position.Y - 60);
+         context2.stroke();
+      }
+
+      function finishDrawing(mouseEvent, sigCanvas2, context2) {
+         drawLine2(mouseEvent, sigCanvas2, context2);
+ 
+         context2.closePath();
+ 
+         $(sigCanvas2).unbind("mousemove")
+                     .unbind("mouseup")
+                     .unbind("mouseout");
+}
+
+/*
+			SLIDER FUNCTIONS          
+								AUTHOR: Darius			*/	
+$(function() {	
+	$("#slider-vertical1").slider({
+		orientation: "vertical",
+		min: 0,
+		max: 360,
+		value: 0,
+		slide: function(event, ui) {		
+			$(".topcoat-range-input1").css("background", 'hsl(' + ui.value + ', 100%, 50%)');
+			colorToUse = 'hsl(' + ui.value + ', 100%, 50%)';
+			updateColor();
+		}
+	});
+});
+
+$(function() {	
+	$("#slider-vertical2").slider({
+		orientation: "vertical",
+		min: 0,
+		max: 360,
+		value: 0,
+		slide: function(event, ui) {		
+			$(".topcoat-range-input2").css("background", 'hsl(' + ui.value + ', 100%, 50%)');
+			colorToUse = 'hsl(' + ui.value + ', 100%, 50%)';
+			updateColor();
+		}
+	});
+});
+
 
 
 
