@@ -27,8 +27,10 @@ var chat_page = document.getElementsByClassName('chatbox')[0];
 
 var username_box = document.getElementById('main-username-input');
 var username_error_text = document.getElementsByClassName('username_error')[0];
-var timer_count1 = document.getElementsByClassName('timer1')[0];
-var timer_count2 = document.getElementsByClassName('timer2')[0];
+var timer_count1 = document.getElementById('countdown-number1');
+var timer_count2 = document.getElementById('countdown-number2');
+var timer1_circle = document.getElementsByClassName('first_timer')[0];
+var timer2_circle = document.getElementsByClassName('second_timer')[0];
 
 
 var main_connect = document.getElementsByClassName('button_connect')[0];
@@ -42,10 +44,10 @@ var matchfound_no = document.getElementsByClassName('matchfound_no')[0];
 			TIMER FUNCTIONS          
 								AUTHOR: Darius			*/	
 function startTimer1() {
-	timer_count1.innerHTML = 5;
+	timer_count1.textContent = 5;
 	function updateText(input) {
-		var current_count = timer_count1.innerHTML;
-		timer_count1.innerHTML = current_count - 1;
+		var current_count = timer_count1.textContent;
+		timer_count1.textContent = current_count - 1;
 	}
 	
 	setInterval(updateText, 1000);
@@ -53,6 +55,7 @@ function startTimer1() {
 }
 
 function endTimer1() {
+		$('.first_timer').css("display", "none");
 		function continueF() {
 			$('.times_up').fadeIn(1000);
 		}
@@ -61,24 +64,24 @@ function endTimer1() {
 }
 
 function startTimer2() {
-	timer_count2.innerHTML = 3;
+	timer_count2.textContent = 5;
 	function updateText(input) {
-		var current_count = timer_count2.innerHTML;
-		timer_count2.innerHTML = current_count - 1;
+		var current_count = timer_count2.textContent;
+		timer_count2.textContent = current_count - 1;
 	}
 	
 	setInterval(updateText, 1000);
-	setTimeout(endTimer2, 3000);
+	setTimeout(endTimer2, 5000);
 }
 
 function endTimer2() {
+		$('.second_timer').css("display", "none");
 		function continueF() {
 			$('.times_up').fadeIn(1000);
 		}
-		$('.draw_pic2').fadeOut(1000);
+		$('.draw_pic2').fadeOut(1000, continueF);
 	setTimeout(timesup_to_loading2, 1500);
 }
-
 
 
 
@@ -145,10 +148,9 @@ function matchfound_to_loading() {
 function matchfound_to_drawpic2() {
 	$('.matchfound_yes').prop("disabled", true);
 	function continueF() {
-			$('.draw_pic2').fadeIn(1000);
+			$('.draw_pic2').fadeIn(1000, startTimer2());
 		}
 		$('.match_found').fadeOut(1000, continueF);
-	startTimer2();
 }
 
 function drawpic2_to_askchatmodal() {
