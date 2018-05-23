@@ -12,6 +12,7 @@ body {
 
 html {
 	height: 100%;
+	
 }
 
 a {
@@ -27,7 +28,8 @@ h3 {
     width: 100%;   
 	padding-top: 3%;
 	padding-bottom: 3%;
-	margin:0;	
+	margin:0;
+	
 }
 
 #logo_white {
