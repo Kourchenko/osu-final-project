@@ -22,6 +22,8 @@ var timer_count1 = document.getElementById('countdown-number1');
 var timer_count2 = document.getElementById('countdown-number2');
 var timer1_circle = document.getElementsByClassName('first_timer')[0];
 var timer2_circle = document.getElementsByClassName('second_timer')[0];
+var loader_text1 = document.getElementsByClassName('loader_text1')[0];
+var loader_text2 = document.getElementsByClassName('loader_text2')[0];
 
 
 var main_connect = document.getElementsByClassName('button_connect')[0];
@@ -41,14 +43,14 @@ var colorToUse = 000000;
 			TIMER FUNCTIONS          
 								AUTHOR: Darius			*/	
 function startTimer1() {
-	timer_count1.textContent = 30;
+	timer_count1.textContent = 10;
 	function updateText(input) {
 		var current_count = timer_count1.textContent;
 		timer_count1.textContent = current_count - 1;
 	}
 	
 	setInterval(updateText, 1000);
-	setTimeout(endTimer1, 30000);
+	setTimeout(endTimer1, 10000);
 }
 
 function endTimer1() {
@@ -61,14 +63,14 @@ function endTimer1() {
 }
 
 function startTimer2() {
-	timer_count2.textContent = 30;
+	timer_count2.textContent = 10;
 	function updateText(input) {
 		var current_count = timer_count2.textContent;
 		timer_count2.textContent = current_count - 1;
 	}
 	
 	setInterval(updateText, 1000);
-	setTimeout(endTimer2, 30000);
+	setTimeout(endTimer2, 10000);
 }
 
 function endTimer2() {
@@ -118,14 +120,9 @@ function main_to_drawpic1() {
 	}
 }
 
-function drawpic1_to_loading() {
-	function continueF() {
-			$('.loading_screen').fadeIn(1000, loading_screen_control);
-		}
-		$('.draw_pic1').fadeOut(1000, continueF);
-}
 
 function loading_to_matchfound() {
+	$('.loader_text1').fadeOut(1000);
 	function continueF() {
 			$('.match_found').fadeIn(1000);
 		}
@@ -133,25 +130,36 @@ function loading_to_matchfound() {
 }
 
 function loading_to_chat() {
+	$('.loader_text2').fadeOut(1000);
 	function continueF() {
 			$('.chatbox').fadeIn(1000);
 		}
 		$('.loading_screen').fadeOut(1000, continueF);
 }
 
-function matchfound_to_loading() {
+function matchfound_to_loading1() {
+	$('.loader_text1').fadeIn(1000);
 	function continueF() {
 			$('.loading_screen').fadeIn(1000, loading_screen_control1);
 		}
 		$('.match_found').fadeOut(1000, continueF);
 }
 
-function matchfound_to_drawpic2() {
+function matchfound_to_loading2() {
 	$('.matchfound_yes').prop("disabled", true);
+	$('.loader_text2').fadeIn(1000);
+	function continueF() {
+			$('.loading_screen').fadeIn(1000, loading_screen_control4);
+		}
+		$('.match_found').fadeOut(1000, continueF);
+}
+
+function loading_to_drawpic2() {
+	$('.loader_text2').fadeOut(1000);
 	function continueF() {
 			$('.draw_pic2').fadeIn(1000, startTimer2());
 		}
-		$('.match_found').fadeOut(1000, continueF);
+		$('.loading_screen').fadeOut(1000, continueF);
 }
 
 function drawpic2_to_askchatmodal() {
@@ -166,6 +174,7 @@ function askchatmodal_no_f() {
 }
 
 function askchatmodal_yes_f() {
+	$('.loader_text2').fadeIn(1000);
 	function continueF() {
 			$('.loading_screen').fadeIn(1000, loading_screen_control3);
 		}
@@ -173,6 +182,7 @@ function askchatmodal_yes_f() {
 }
 
 function timesup_to_loading1() {
+		$('.loader_text1').fadeIn(1000);
 		function continueF() {
 			$('.loading_screen').fadeIn(1000, loading_screen_control1);
 		}
@@ -206,7 +216,6 @@ function loading_to_askmodal() {
 								AUTHOR: Darius			*/	
 function loading_screen_control1() {
 	setTimeout(loading_to_matchfound, 3000);
-
 }
 
 function loading_screen_control2() {
@@ -218,15 +227,38 @@ function loading_screen_control3() {
 	setTimeout(loading_to_chat, 3000);
 }
 
+function loading_screen_control4() {
+	setTimeout(loading_to_drawpic2, 3000);
+}
 
+setInterval(function() {
+		if (loader_text1.textContent == "Looking for match . . .") {
+			loader_text1.textContent = "Looking for match";
+		}
+		else if (loader_text1.textContent == "Looking for match") {
+			loader_text1.textContent = "Looking for match .";
+		}
+		else if (loader_text1.textContent == "Looking for match .") {
+			loader_text1.textContent = "Looking for match . .";
+		}
+		else if (loader_text1.textContent == "Looking for match . .") {
+			loader_text1.textContent = "Looking for match . . .";
+	}}, 200);
 
-
-
-
-
-
-
-
+setInterval(function() {
+		if (loader_text2.textContent == "Waiting for match's response . . .") {
+			loader_text2.textContent = "Waiting for match's response";
+		}
+		else if (loader_text2.textContent == "Waiting for match's response") {
+			loader_text2.textContent = "Waiting for match's response .";
+		}
+		else if (loader_text2.textContent == "Waiting for match's response .") {
+			loader_text2.textContent = "Waiting for match's response . .";
+		}
+		else if (loader_text2.textContent == "Waiting for match's response . .") {
+			loader_text2.textContent = "Waiting for match's response . . .";
+	}}, 200);
+	
 
 
 
@@ -330,9 +362,9 @@ function initialize1() {
                $(this).mousemove(function (mouseEvent) {
                   drawLine1(mouseEvent, sigCanvas1, context1);
                }).mouseup(function (mouseEvent) {
-                  finishDrawing(mouseEvent, sigCanvas1, context1);
+                  finishDrawing1(mouseEvent, sigCanvas1, context1);
                }).mouseout(function (mouseEvent) {
-                  finishDrawing(mouseEvent, sigCanvas1, context1);
+                  finishDrawing1(mouseEvent, sigCanvas1, context1);
                });
             });
  
@@ -404,9 +436,9 @@ function initialize2() {
                $(this).mousemove(function (mouseEvent) {
                   drawLine2(mouseEvent, sigCanvas2, context2);
                }).mouseup(function (mouseEvent) {
-                  finishDrawing(mouseEvent, sigCanvas2, context2);
+                  finishDrawing2(mouseEvent, sigCanvas2, context2);
                }).mouseout(function (mouseEvent) {
-                  finishDrawing(mouseEvent, sigCanvas2, context2);
+                  finishDrawing2(mouseEvent, sigCanvas2, context2);
                });
             });
  
@@ -421,7 +453,7 @@ function drawLine1(mouseEvent, sigCanvas1, context1) {
          context1.stroke();
       }
 
-      function finishDrawing(mouseEvent, sigCanvas1, context1) {
+function finishDrawing1(mouseEvent, sigCanvas1, context1) {
          drawLine1(mouseEvent, sigCanvas1, context1);
  
          context1.closePath();
@@ -439,7 +471,7 @@ function drawLine2(mouseEvent, sigCanvas2, context2) {
          context2.stroke();
       }
 
-      function finishDrawing(mouseEvent, sigCanvas2, context2) {
+function finishDrawing2(mouseEvent, sigCanvas2, context2) {
          drawLine2(mouseEvent, sigCanvas2, context2);
  
          context2.closePath();
@@ -448,6 +480,8 @@ function drawLine2(mouseEvent, sigCanvas2, context2) {
                      .unbind("mouseup")
                      .unbind("mouseout");
 }
+
+
 
 /*
 			SLIDER FUNCTIONS          
@@ -498,5 +532,5 @@ $(function() {
 main_connect.addEventListener('click', main_to_drawpic1);
 askchatmodal_yes.addEventListener('click', askchatmodal_yes_f);
 askchatmodal_no.addEventListener('click', askchatmodal_no_f);
-matchfound_yes.addEventListener('click', matchfound_to_drawpic2);
-matchfound_no.addEventListener('click', matchfound_to_loading);
+matchfound_yes.addEventListener('click', matchfound_to_loading2);
+matchfound_no.addEventListener('click', matchfound_to_loading1);
