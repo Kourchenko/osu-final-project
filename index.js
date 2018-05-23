@@ -1,18 +1,10 @@
 /* JS */
 
-// Modal hidden flags
-var DIV_USERNAME_HIDDEN = false; // 1st to load
-var DIV_DRAW_HIDDEN = true; // 2nd
-var DIV_LOADING_HIDDEN = true; // 3rd
-var DIV_MATCH_HIDDEN = true; // 4th 
-
-
-
 
 
 /*
 			ELEMENT CONNECTORS          
-								AUTHOR: TEAM			*/
+								AUTHOR: DARIUS			*/
 var main = document.getElementsByClassName('home_screen')[0];
 var drawpic1 = document.getElementsByClassName('draw_pic1')[0];
 var drawpic2 = document.getElementsByClassName('draw_pic2')[0];
@@ -502,7 +494,7 @@ $(function() {
 
 /*
 			EVENT LISTENERS          
-								AUTHOR: TEAM			*/
+								AUTHOR: DARIUS			*/
 main_connect.addEventListener('click', main_to_drawpic1);
 askchatmodal_yes.addEventListener('click', askchatmodal_yes_f);
 askchatmodal_no.addEventListener('click', askchatmodal_no_f);
