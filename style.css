@@ -73,6 +73,20 @@ h3 {
 	width: 100%;
 }
 
+.loader_text1 {
+	font-size: 32px;
+	margin-top: 2%;
+	font-weight: bold;
+	display: none;
+}
+
+.loader_text2 {
+	font-size: 32px;
+	margin-top: 2%;
+	font-weight: bold;
+	display: none;
+}
+
 .draw_pic1 {
 	display: none;
 	width: 100%;
@@ -193,6 +207,7 @@ button:hover {
 .draw_pic_text {
 	font-size: 30px;
 	text-align: center;
+	font-weight: bold;
 }
 
 .draw_canvas {
@@ -351,7 +366,7 @@ svg circle {
   stroke-width: 8px;
   stroke: #455A64;
   fill: none;
-  animation: countdown 31s linear infinite forwards;
+  animation: countdown 11s linear infinite forwards;
 }
 
 @keyframes countdown {
