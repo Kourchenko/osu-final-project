@@ -44,14 +44,15 @@ var matchfound_no = document.getElementsByClassName('matchfound_no')[0];
 			TIMER FUNCTIONS          
 								AUTHOR: Darius			*/	
 function startTimer1() {
-	timer_count1.textContent = 5;
+	timer_count1.textContent = 90;
 	function updateText(input) {
 		var current_count = timer_count1.textContent;
 		timer_count1.textContent = current_count - 1;
 	}
 	
 	setInterval(updateText, 1000);
-	setTimeout(endTimer1, 5000);
+	console.log('Timer 1 started');
+	setTimeout(endTimer1, 90000);
 }
 
 function endTimer1() {
@@ -64,14 +65,15 @@ function endTimer1() {
 }
 
 function startTimer2() {
-	timer_count2.textContent = 5;
+	timer_count2.textContent = 90;
 	function updateText(input) {
 		var current_count = timer_count2.textContent;
 		timer_count2.textContent = current_count - 1;
 	}
 	
 	setInterval(updateText, 1000);
-	setTimeout(endTimer2, 5000);
+	console.log('Timer 2 started');
+	setTimeout(endTimer2, 90000);
 }
 
 function endTimer2() {
