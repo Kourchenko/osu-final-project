@@ -342,7 +342,7 @@ svg circle {
   stroke-width: 8px;
   stroke: #455A64;
   fill: none;
-  animation: countdown 91s linear infinite forwards;
+  animation: countdown 31s linear infinite forwards;
 }
 
 @keyframes countdown {
@@ -353,6 +353,24 @@ svg circle {
     stroke-dashoffset: 226px;
   }
 }
+
+.slider-css {
+	display: inline-block;
+	margin-left: 1%;
+	margin-bottom: 10%;
+}
+
+#canvasSignature {
+	margin-top: 2%;
+}
+
+.canvas-css {
+	margin-top: 2%;
+}
+
+
+
+
 
 
 
