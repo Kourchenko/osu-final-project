@@ -143,6 +143,7 @@ function matchfound_to_loading() {
 }
 
 function matchfound_to_drawpic2() {
+	$('.matchfound_yes').prop("disabled", true);
 	function continueF() {
 			$('.draw_pic2').fadeIn(1000);
 		}
