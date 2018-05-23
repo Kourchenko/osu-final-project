@@ -6,14 +6,18 @@
 	<!---------------------------------->
 	<head>
 		<meta charset="UTF-8">
-		<title>Picture.me - Connect through drawing</title>
+		<title>Picture.me - Connect through creativity.</title>
 
 		<!-- Stylesheet -->
 		<link rel="stylesheet" href="style.css" media="screen">
 		
 		<script src="index.js" charset="utf-8" defer></script>
 		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>			
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+		
 		
 		<!-- This script incorporates SVG icons from Font Awesome: http://fontawesome.com/ -->
 		<script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" defer></script>
@@ -79,9 +83,12 @@
 			<div class="draw_pic1">
 				<center>
 					<div class="draw_pic_text">Draw a picture!</div>
-					<div class="share_pic_btn"><img src="#" width="200px" height="200px"></div>					
+					<div id="canvasDiv">
+						<canvas class="canvas1 canvas-css" width="500px" height="500px" style="border:3px solid #455A64;"></canvas>
+						<div id="slider-vertical1" class="topcoat-range-input1 slider-css" style="height: 200px;"></div>
+					</div>
 					<div id="countdown">
-						<div id="countdown-number1">90</div>
+						<div id="countdown-number1">30</div>
 							<svg class="first_timer">
 								<circle r="36" cx="40" cy="40"></circle>
 							</svg>
@@ -89,7 +96,7 @@
 				</center>
 			</div>
 
-			
+
 			
 	<!---------------------------------->
 	<!-------------DRAWPIC2------------->    <!--- AUTHOR: Darius -->
@@ -97,9 +104,12 @@
 			<div class="draw_pic2">
 				<center>
 					<div class="draw_pic_text">Draw another picture!</div>
-					<div class="share_pic_btn"><img src="#" width="200px" height="200px"></div>
+					<div id="canvasDiv">
+						<canvas class="canvas2 canvas-css" width="500px" height="500px" style="border:3px solid #455A64;"></canvas>
+						<div id="slider-vertical2" class="topcoat-range-input2 slider-css" style="height: 200px;"></div>
+					</div>
 					<div id="countdown">
-						<div id="countdown-number2">90</div>
+						<div id="countdown-number2">30</div>
 							<svg class="second_timer">
 								<circle r="36" cx="40" cy="40"></circle>
 							</svg>
