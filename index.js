@@ -1,7 +1,14 @@
 /* JS */
 
 
-
+/** NOTE (DIEGO -> DARIUS): Consider adding comments to each function, describing briefly what it does.
+ * 		- Consider renaming the functions without numbers, we won't always agree on
+ * 		- a standard coding standard, but lets get close. 
+ * 		- asktochat_yes_f() initializes a JS ajax query?
+ * 		- any of us who need to call upon those functions, for example when Aaron is
+ * 		- searching the database for a match, needs to call the timer functions.
+ * 		- Just the same, I'm writing my server.js functions to be simple, for
+ * 		- anyone else to call when we create a chat session (createSession()).
 /*
 			ELEMENT CONNECTORS          
 								AUTHOR: DARIUS			*/
