@@ -21,26 +21,124 @@ var usersInSession;
 var http = require('http');
 var app = require('express')();
 var fs = require('fs');
-var syncIndex = fs.readFileSync(__dirname+"/../index.html", "utf-8");
-var syncCSS = fs.readFileSync(__dirname+"/../style.css", "utf-8");
-var syncIndexJS = fs.readFileSync(__dirname+"/../index.js", "utf-8");
+var express = require('express');
+var path = require('path');
+var bodyparser = require('body-parser');
 
-var server = http.createServer(function(req, res) {
-	if (req.url === "/index.html") {
-		res.end(syncIndex);
-	} else if (req.url == "/style.css") {
-		res.end(syncCSS);
-	} else if (req.url == "/index.js") {
-		res.end(syncIndexJS)
-	} else {
-		// send content of file -- '/socket.io/socket.io.js'
-		fs.readFile("/../index.html", "utf-8", function(err, content) {
-			res.end(content);
-		});
-	}
+
+app.use(bodyparser.json());        
+app.use(bodyparser.urlencoded({ extended: true })); 
+
+
+
+
+
+
+/*
+			GET FUNCTIONS          
+								AUTHOR: Darius			*/
+app.get('/', function(req, res) {
+	res.sendFile(path.join(__dirname + '/../index.html'));
 });
 
+app.get('/index.html', function(req, res) {
+	res.sendFile(path.join(__dirname + '/../index.html'));
+});
+
+app.get('/style.css', function(req, res) {
+	res.sendFile(path.join(__dirname + '/../style.css'));
+});
+
+app.get('/index.js', function(req, res) {
+	res.sendFile(path.join(__dirname + '/../index.js'));
+});
+
+app.get('/logo_white.png', function(req, res) {
+	res.sendFile(path.join(__dirname + '/../images/logo_white.png'));
+});
+
+app.get('/logo.png', function(req, res) {
+	res.sendFile(path.join(__dirname + '/../images/logo.png'));
+});
+
+app.get('*', function(req, res) {
+	res.sendFile(path.join(__dirname + '/../404.html'));
+});
+
+
+
+
+
+/*
+			POST FUNCTIONS         
+								AUTHOR: Darius			*/
+app.post('/username', function(req, res) {
+	console.log('');
+	console.log('=============== NEW USER ===================');
+	console.log('=== USERNAME: ' + req.body.username);
+	console.log('=== ID: ' + req.body.ID);
+	console.log('============================================');
+	console.log('');
+});
+
+app.post('/match_found', function(req, res) {
+	console.log('');
+	console.log('======== NEW MATCH FOUND RESPONSE ==========');
+	console.log('=== USERNAME: ' + req.body.username);
+	console.log('=== ID: ' + req.body.ID);
+	console.log('=== RESPONSE: ' + req.body.response);
+	console.log('============================================');
+	console.log('');
+});
+
+app.post('/ask_chat', function(req, res) {
+	console.log('');
+	console.log('========== NEW ASK CHAT RESPONSE ===========');
+	console.log('=== USERNAME: ' + req.body.username);
+	console.log('=== ID: ' + req.body.ID);
+	console.log('=== RESPONSE: ' + req.body.response);
+	console.log('============================================');
+	console.log('');
+});
+
+
+
+
+
+
+app.listen(8080, function() {
+	console.log('');
+	console.log('============================================');
+	console.log('=== Server running at http://127.0.0.1:8080/');
+	console.log('============================================');
+	console.log('');
+});
+
+<<<<<<< HEAD
 // socket.io
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+>>>>>>> 74017f1b266a844b2bb7f58f3eac4de9803eab56
 var io = require('socket.io').listen(server);
 
 
@@ -54,9 +152,9 @@ io.sockets.on('connection', function(socket) {
 	socket.on('message', function(message) {
 		console.log("new message from: " + socket.username);
 	});
-});
+});*/
 
-server.listen(8080);
+//server.listen(8080);
 
 /**
  * addUsers

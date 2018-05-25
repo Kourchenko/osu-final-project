@@ -6,14 +6,18 @@
 	<!---------------------------------->
 	<head>
 		<meta charset="UTF-8">
-		<title>Picture.me - Connect through drawing</title>
+		<title>Picture.me - Connect through creativity.</title>
 
 		<!-- Stylesheet -->
 		<link rel="stylesheet" href="style.css" media="screen">
 		
 		<script src="index.js" charset="utf-8" defer></script>
 		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>			
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+		
 		
 		<!-- This script incorporates SVG icons from Font Awesome: http://fontawesome.com/ -->
 		<script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" defer></script>
@@ -29,7 +33,7 @@
 	
 	<body>
 	<!---------------------------------->
-	<!---------------HEADER------------->    <!--- AUTHOR: TEAM -->
+	<!---------------HEADER------------->    <!--- AUTHOR: Darius -->
 	<!---------------------------------->
 		<header>
 			<nav class="navbar">
@@ -54,14 +58,28 @@
 						</p>
 					</div>
 					<div class ="username_error hidden"> Please enter a username. </div>
-					<div class="username">
-						<input id="main-username-input" placeholder="Enter a username..."
-						onfocus="this.placeholder=''" onblur="this.placeholder='Enter a username...'">
-					</div>					
-						<button class="button_connect" disabled="true" style="vertical-align:middle"><span>Connect </span></button>					
+					
+					
+					
+					<div class="username">						
+						<input type="text" name="username_text" id="main-username-input" placeholder="Enter a username..." onfocus="this.placeholder=''" onblur="this.placeholder='Enter a username...'">																				
+						</div>
+						<button type="submit" class="button_connect" disabled="true" style="vertical-align:middle"><span>Connect </span></button>													
 				</center>
 			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 
+			
+					
 	
 	<!---------------------------------->
 	<!---------------LOADING------------>    <!--- AUTHOR: Aaron -->
@@ -69,6 +87,8 @@
 			<div class="loading_screen">
 				<center>
 					<div class="loader"></div>
+					<div class="loader_text1">Looking for match . . .</div>
+					<div class="loader_text2">Waiting for match's response . . .</div>
 				</center>
 			</div>
 
@@ -79,9 +99,12 @@
 			<div class="draw_pic1">
 				<center>
 					<div class="draw_pic_text">Draw a picture!</div>
-					<div class="share_pic_btn"><img src="#" width="200px" height="200px"></div>					
+					<div id="canvasDiv">
+						<canvas class="canvas1 canvas-css" width="500px" height="500px" style="border:3px solid #455A64;"></canvas>
+						<div id="slider-vertical1" class="topcoat-range-input1 slider-css" style="height: 200px;"></div>
+					</div>
 					<div id="countdown">
-						<div id="countdown-number1">90</div>
+						<div id="countdown-number1">10</div>
 							<svg class="first_timer">
 								<circle r="36" cx="40" cy="40"></circle>
 							</svg>
@@ -89,7 +112,7 @@
 				</center>
 			</div>
 
-			
+
 			
 	<!---------------------------------->
 	<!-------------DRAWPIC2------------->    <!--- AUTHOR: Darius -->
@@ -97,9 +120,12 @@
 			<div class="draw_pic2">
 				<center>
 					<div class="draw_pic_text">Draw another picture!</div>
-					<div class="share_pic_btn"><img src="#" width="200px" height="200px"></div>
+					<div id="canvasDiv">
+						<canvas class="canvas2 canvas-css" width="500px" height="500px" style="border:3px solid #455A64;"></canvas>
+						<div id="slider-vertical2" class="topcoat-range-input2 slider-css" style="height: 200px;"></div>
+					</div>
 					<div id="countdown">
-						<div id="countdown-number2">90</div>
+						<div id="countdown-number2">10</div>
 							<svg class="second_timer">
 								<circle r="36" cx="40" cy="40"></circle>
 							</svg>
@@ -118,12 +144,12 @@
 			
 
 	<!---------------------------------->
-	<!-----------MATCH_FOUND------------>    <!--- AUTHOR: TEAM -->
+	<!-----------MATCH_FOUND------------>    <!--- AUTHOR: Darius -->
 	<!---------------------------------->
 			<div class= "match_found">
 				<center>
 					<div class="draw_pic_text">You have a match!</div>
-						<div class="share_pic_btn"><img src="#" width="200px" height="200px"></div>
+						<div class="share_pic_btn"><img src="#" width="500px" height="500px"></div>
 						<div class="description_text">Would you like to continue?</div>
 					<div class="yes_no_box">											
 							<button class="button_answer matchfound_yes">Yes</button>											
@@ -140,7 +166,7 @@
 				<center>
 				<div class="draw_pic_text">Their second creation!</div>
 					<div class="share_pic_btn">
-						<img src="#" width="200px" height="200px">
+						<img src="#" width="500px" height="500px">
 					</div>
 					<div class="description_text">Would you like to chat with this person?</div>
 					<div class="yes_no_box">
@@ -181,21 +207,21 @@
 
 		
 	<!---------------------------------->
-	<!--------------FOOTER-------------->    <!--- AUTHOR: TEAM -->
+	<!--------------FOOTER-------------->    <!--- AUTHOR: Darius -->
 	<!---------------------------------->
-		<footer>
+		<div class="footer">
 			<center>
-			<a class="footer_item" href="#">
+			<a class="footer_item" target="_blank" href="./terms.html">
 				Terms
 			</a>
-			<a class="footer_item" href="#">
+			<a class="footer_item" target="_blank" href="./about.html">
 				About
 			</a>
-			<a class="footer_item" href="#">
+			<a class="footer_item" target="_blank" href="./contact.html">
 				Contact
 			</a>
 			</center>
-		</footer>
+		</div>
 		
 		
 	</body>
