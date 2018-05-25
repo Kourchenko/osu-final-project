@@ -114,10 +114,6 @@ app.listen(8080, function() {
 	console.log('');
 });
 
-<<<<<<< HEAD
-// socket.io
-=======
-
 
 
 
@@ -138,7 +134,6 @@ app.listen(8080, function() {
 
 
 /*
->>>>>>> 74017f1b266a844b2bb7f58f3eac4de9803eab56
 var io = require('socket.io').listen(server);
 
 
