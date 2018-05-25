@@ -8,13 +8,15 @@
 
 
 // Error Codes
-var HTTP_CODE_OK = 200;
-var HTTP_CODE_CREATED = 201;
-var HTTP_CODE_NO_CONTENT = 204;
-var HTTP_CODE_CLIENT_ERR = 400;
-var HTTP_CODE_NOT_FOUND = 404;
-var HTTP_CODE_SERVER_ERR = 500;
-var users = 0;
+const HTTP_CODE_OK = 200;
+const HTTP_CODE_CREATED = 201;
+const HTTP_CODE_NO_CONTENT = 204;
+const HTTP_CODE_CLIENT_ERR = 400;
+const HTTP_CODE_NOT_FOUND = 404;
+const HTTP_CODE_SERVER_ERR = 500;
+const MAX_USERS = 2;
+// connected users <= MAX_USERS
+var usersInSession;
 
 var http = require('http');
 var app = require('express')();
@@ -38,7 +40,9 @@ var server = http.createServer(function(req, res) {
 	}
 });
 
+// socket.io
 var io = require('socket.io').listen(server);
+
 
 io.sockets.on('connection', function(socket) {
 	socket.emit('message', "You are connected");
@@ -54,7 +58,49 @@ io.sockets.on('connection', function(socket) {
 
 server.listen(8080);
 
+/**
+ * addUsers
+ * Two users interacting in one 'session'.
+ */
+function addUser(user) {
+	usersInSession+=1;
+}
 
-function addUsers() {
-	users+=1;
+/**
+ * Get the username,
+ * sanitize/security check.
+ */
+function getUserName() {
+	var input = document.getElementById("main-username-input").value;
+	var user;
+	// Check empty input
+	if (input) {
+  	user = username.replace(/[!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~]/g, '')
+		console.log("Registering USER:", user);
+		return user;
+	} else {
+		console.log('User Err: Empty input');
+		// throw err;
+	}
+}
+
+/**
+ * createSession
+ * creates a new session for the username.
+ * socket.on('connect') will connect two users with sessions.
+ */
+function createSession() {
+	var user = getUserName();
+	console.log("Creating session for USER:", user);
+	io.sockets.on('connection', function(socket) {
+		socket.emit('message', "You are connected");
+		addUser(user);
+		socket.on('new_user', function(user) {
+			socket.username = username;
+		});
+		// display number of users, should be unique users
+		socket.on('message', function(message) {
+			console.log("new message from: " + socket.username);
+		});
+	});
 }
