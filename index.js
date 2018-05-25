@@ -36,7 +36,21 @@ var sigCanvas1 = document.getElementsByClassName('canvas1')[0];
 var sigCanvas2 = document.getElementsByClassName('canvas2')[0];
 var context1 = sigCanvas1.getContext("2d");
 var context2 = sigCanvas2.getContext("2d");
+
+
 var colorToUse = 000000;
+
+var sessionID = "";
+
+
+/*
+			UNIQUE ID GENERATOR          
+								AUTHOR: Darius			*/	
+var uniqueKey = function () {
+  return '_' + Math.random().toString(36).substr(2, 9);
+};
+
+
 
 
 /*
@@ -96,8 +110,9 @@ $(document).ready(function() {
 	$('.home_screen').fadeIn(5000, enableConnect_button)
 	initialize1();
 	initialize2();
+	sessionID = uniqueKey();
+	console.log(sessionID);
 });
-
 
 
 
@@ -109,6 +124,13 @@ $(document).ready(function() {
 function main_to_drawpic1() {
 	if (username_box.value != "") {
 		$('.button_connect').prop("disabled", true);
+		$.ajax({
+			type: 'POST',
+			url: '/username',
+			data: { 
+				username : username_box.value,
+				ID : sessionID}
+		});
 		function continueF() {
 			$('.draw_pic1').fadeIn(1000, startTimer1);
 		}
@@ -143,6 +165,14 @@ function matchfound_to_loading1() {
 			$('.loading_screen').fadeIn(1000, loading_screen_control1);
 		}
 		$('.match_found').fadeOut(1000, continueF);
+		$.ajax({
+			type: 'POST',
+			url: '/match_found',
+			data: { 
+				username : username_box.value,
+				ID : sessionID,
+				response : "NO"}
+		});
 }
 
 function matchfound_to_loading2() {
@@ -152,6 +182,14 @@ function matchfound_to_loading2() {
 			$('.loading_screen').fadeIn(1000, loading_screen_control4);
 		}
 		$('.match_found').fadeOut(1000, continueF);
+		$.ajax({
+			type: 'POST',
+			url: '/match_found',
+			data: { 
+				username : username_box.value,
+				ID : sessionID,
+				response : "YES"}
+		});
 }
 
 function loading_to_drawpic2() {
@@ -170,15 +208,31 @@ function drawpic2_to_askchatmodal() {
 }
 
 function askchatmodal_no_f() {
+	$.ajax({
+			type: 'POST',
+			url: '/ask_chat',
+			data: { 
+				username : username_box.value,
+				ID : sessionID,
+				response : "NO"}
+		});
 	window.location.href = "./index.html";
 }
 
 function askchatmodal_yes_f() {
-	$('.loader_text2').fadeIn(1000);
+	$('.loader_text2').fadeIn(1000);	
 	function continueF() {
 			$('.loading_screen').fadeIn(1000, loading_screen_control3);
 		}
 		$('.askchatmodal').fadeOut(1000, continueF);
+		$.ajax({
+			type: 'POST',
+			url: '/ask_chat',
+			data: { 
+				username : username_box.value,
+				ID : sessionID,
+				response : "YES"}
+		});
 }
 
 function timesup_to_loading1() {
@@ -428,7 +482,7 @@ function initialize2() {
          else {
 
             $(".canvas2").mousedown(function (mouseEvent) {
-               var position = getPosition2(mouseEvent, sigCanvas1);
+               var position = getPosition2(mouseEvent, sigCanvas2);
  
                context2.moveTo(position.X, position.Y);
                context2.beginPath();
