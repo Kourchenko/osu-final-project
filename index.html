@@ -38,7 +38,7 @@
 		<header>
 			<nav class="navbar">
 				<center>
-					<a href='./index.html'><img src="./images/logo_white.png" style="vertical-align:middle" id="logo_white" height="40px" width="40px"></a>
+					<a href='./index.html'><img src="./logo_white.png" style="vertical-align:middle" id="logo_white" height="40px" width="40px"></a>
 					<a href='./index.html' class="navitem">p i c t u r e . m e</a>
 				</center>
 			</nav>
@@ -62,7 +62,7 @@
 					
 					
 					<div class="username">						
-						<input type="text" name="username_text" id="main-username-input" placeholder="Enter a username..." onfocus="this.placeholder=''" onblur="this.placeholder='Enter a username...'">																				
+						<input type="text" name="username_text" id="main-username-input" placeholder="Enter a username..." onfocus="this.placeholder=''" maxlength="10" onblur="this.placeholder='Enter a username...'">																				
 						</div>
 						<button type="submit" class="button_connect" disabled="true" style="vertical-align:middle"><span>Connect </span></button>													
 				</center>
@@ -149,7 +149,7 @@
 			<div class= "match_found">
 				<center>
 					<div class="draw_pic_text">You have a match!</div>
-						<div class="share_pic_btn"><img src="#" width="500px" height="500px"></div>
+						<div class="share_pic_btn"><img class="pic1" src="#" width="500px" height="500px"></div>
 						<div class="description_text">Would you like to continue?</div>
 					<div class="yes_no_box">											
 							<button class="button_answer matchfound_yes">Yes</button>											
@@ -165,9 +165,7 @@
 			<div class="askchatmodal">
 				<center>
 				<div class="draw_pic_text">Their second creation!</div>
-					<div class="share_pic_btn">
-						<img src="#" width="500px" height="500px">
-					</div>
+					<div class="share_pic_btn"><img class="pic2" src="#" width="500px" height="500px"></div>
 					<div class="description_text">Would you like to chat with this person?</div>
 					<div class="yes_no_box">
 							<button class="button_answer askchatmodal_yes">Yes</button>											
