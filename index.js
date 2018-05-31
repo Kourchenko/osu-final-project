@@ -37,6 +37,9 @@ var sigCanvas2 = document.getElementsByClassName('canvas2')[0];
 var context1 = sigCanvas1.getContext("2d");
 var context2 = sigCanvas2.getContext("2d");
 
+var pic1 = document.getElementsByClassName('pic1')[0];
+var pic2 = document.getElementsByClassName('pic2')[0];
+
 
 var colorToUse = 000000;
 
@@ -72,6 +75,16 @@ function endTimer1() {
 		function continueF() {
 			$('.times_up').fadeIn(1000);
 		}
+		var imageToSend = sigCanvas1.toDataURL();
+		$.ajax({
+			type: 'POST',
+			url: '/api/post_pic',
+			data: { 
+				username : username_box.value,
+				ID : sessionID,
+				image_data: imageToSend,
+				image_status: 'first'}
+		});		
 		$('.draw_pic1').fadeOut(1000, continueF);
 	setTimeout(timesup_to_loading1, 1500);
 }
@@ -92,6 +105,16 @@ function endTimer2() {
 		function continueF() {
 			$('.times_up').fadeIn(1000);
 		}
+		var imageToSend = sigCanvas2.toDataURL();
+		$.ajax({
+			type: 'POST',
+			url: '/api/post_pic',
+			data: { 
+				username : username_box.value,
+				ID : sessionID,
+				image_data: imageToSend,
+				image_status: 'second'}
+		});	
 		$('.draw_pic2').fadeOut(1000, continueF);
 	setTimeout(timesup_to_loading2, 1500);
 }
@@ -304,6 +327,25 @@ function loading_screen_control1() {
 			statusCode: {
 				200:	function(data) {			
 							clearInterval(startPing);
+							
+								$.ajax({
+									type: 'POST',
+									url: '/api/get_pic',
+									data: { 
+										username : username_box.value,
+										ID : sessionID,
+										image_status: 'first'
+										},
+									statusCode: {
+										200:	function(data) {
+													$('.pic1').attr('src', data);
+												},
+										404:
+												function(data) {
+													window.location.href = "./index.html";
+												}
+									}
+								});
 							setTimeout(loading_to_matchfound, 3000);
 						},
 				404:	function(data) {
@@ -313,11 +355,29 @@ function loading_screen_control1() {
 		});
 		
 	}
-	var startPing = setInterval(pingServer, 3000);
+	var startPing = setInterval(pingServer, 1000);
 }
 
 function loading_screen_control2() {
-	setTimeout(loading_to_askmodal, 3000);	
+		$.ajax({
+			type: 'POST',
+			url: '/api/get_pic',
+			data: { 
+				username : username_box.value,
+				ID : sessionID,
+				image_status: 'second'
+				},
+				statusCode: {
+					200:	function(data) {
+								$('.pic2').attr('src', data);
+							},
+							404:
+							function(data) {
+								window.location.href = "./index.html";
+							}
+				}
+		});
+	setTimeout(loading_to_askmodal, 4000);	
 }
 
 function loading_screen_control3() {
@@ -345,7 +405,7 @@ function loading_screen_control3() {
 		});
 		
 	}
-	var startPing = setInterval(pingServer, 3000);
+	var startPing = setInterval(pingServer, 1000);
 }
 
 function loading_screen_control4() {
@@ -375,7 +435,7 @@ function loading_screen_control4() {
 		});
 		
 	}
-	var startPing = setInterval(pingServer, 3000);
+	var startPing = setInterval(pingServer, 1000);
 }
 
 setInterval(function() {
