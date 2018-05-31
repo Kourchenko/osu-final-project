@@ -292,7 +292,23 @@ function loading_to_askmodal() {
 		$('.loading_screen').fadeOut(1000, continueF);
 }
 
-
+function updateClientData() {
+	$.ajax({
+			type: 'POST',
+			url: '/api/get_update_client',
+			data: { 
+				username : username_box.value,
+				ID : sessionID
+			},
+			statusCode: {
+				200:	function(data) {
+							$('.match_text').html('You matched with: ' + data + '!');
+							$('.ask_chat_text1').html(data + "'s second creation: ");
+							$('.ask_chat_text2').html('Would you like to chat with ' + data + '?');
+						}
+			}
+	});	
+}
 
 
 
@@ -327,7 +343,7 @@ function loading_screen_control1() {
 			statusCode: {
 				200:	function(data) {			
 							clearInterval(startPing);
-							
+								updateClientData();
 								$.ajax({
 									type: 'POST',
 									url: '/api/get_pic',
@@ -369,9 +385,10 @@ function loading_screen_control2() {
 				},
 				statusCode: {
 					200:	function(data) {
+								updateClientData();
 								$('.pic2').attr('src', data);
 							},
-							404:
+					404:
 							function(data) {
 								window.location.href = "./index.html";
 							}
@@ -421,7 +438,8 @@ function loading_screen_control4() {
 				ID: sessionID
 			},
 			statusCode: {
-				200:	function(data) {			
+				200:	function(data) {
+							updateClientData();
 							clearInterval(startPing);
 							setTimeout(loading_to_drawpic2, 3000);
 						},
