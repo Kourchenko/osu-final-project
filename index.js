@@ -305,7 +305,7 @@ function loading_screen_control1() {
 				200:	function(data) {			
 							clearInterval(startPing);
 							setTimeout(loading_to_matchfound, 3000);
-						}
+						},
 				404:	function(data) {
 							window.location.href = "./index.html";
 						}
