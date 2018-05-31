@@ -1,14 +1,7 @@
 /* JS */
 
 
-/** NOTE (DIEGO -> DARIUS): Consider adding comments to each function, describing briefly what it does.
- * 		- Consider renaming the functions without numbers, we won't always agree on
- * 		- a standard coding standard, but lets get close. 
- * 		- asktochat_yes_f() initializes a JS ajax query?
- * 		- any of us who need to call upon those functions, for example when Aaron is
- * 		- searching the database for a match, needs to call the timer functions.
- * 		- Just the same, I'm writing my server.js functions to be simple, for
- * 		- anyone else to call when we create a chat session (createSession()).
+
 /*
 			ELEMENT CONNECTORS          
 								AUTHOR: DARIUS			*/
@@ -54,7 +47,7 @@ var sessionID = "";
 			UNIQUE ID GENERATOR          
 								AUTHOR: Darius			*/	
 var uniqueKey = function () {
-  return '_' + Math.random().toString(36).substr(2, 9);
+  return '_' + Math.random().toString(36).substr(2, 12);
 };
 
 
@@ -118,10 +111,19 @@ $(document).ready(function() {
 	initialize1();
 	initialize2();
 	sessionID = uniqueKey();
-	console.log(sessionID);
 });
 
-
+$(window).on("unload", function() {
+    $.ajax({
+		type: 'POST',
+		url: '/api/browser_exit',
+		data: {
+			username: username_box.value,
+			ID: sessionID
+		},
+		async: false
+	});
+});
 
 
 
@@ -133,7 +135,7 @@ function main_to_drawpic1() {
 		$('.button_connect').prop("disabled", true);
 		$.ajax({
 			type: 'POST',
-			url: '/username',
+			url: '/api/username',
 			data: { 
 				username : username_box.value,
 				ID : sessionID}
@@ -174,7 +176,7 @@ function matchfound_to_loading1() {
 		$('.match_found').fadeOut(1000, continueF);
 		$.ajax({
 			type: 'POST',
-			url: '/match_found',
+			url: '/api/post_match_found',
 			data: { 
 				username : username_box.value,
 				ID : sessionID,
@@ -191,7 +193,7 @@ function matchfound_to_loading2() {
 		$('.match_found').fadeOut(1000, continueF);
 		$.ajax({
 			type: 'POST',
-			url: '/match_found',
+			url: '/api/post_match_found',
 			data: { 
 				username : username_box.value,
 				ID : sessionID,
@@ -215,15 +217,18 @@ function drawpic2_to_askchatmodal() {
 }
 
 function askchatmodal_no_f() {
-	$.ajax({
-			type: 'POST',
-			url: '/ask_chat',
-			data: { 
-				username : username_box.value,
-				ID : sessionID,
-				response : "NO"}
-		});
-	window.location.href = "./index.html";
+	function continueF() {
+			$('.loading_screen').fadeIn(1000, loading_screen_control3);
+		}
+		$('.askchatmodal').fadeOut(1000, continueF);
+		$.ajax({
+				type: 'POST',
+				url: '/api/post_ask_chat',
+				data: { 
+					username : username_box.value,
+					ID : sessionID,
+					response : "NO"}
+			});
 }
 
 function askchatmodal_yes_f() {
@@ -234,7 +239,7 @@ function askchatmodal_yes_f() {
 		$('.askchatmodal').fadeOut(1000, continueF);
 		$.ajax({
 			type: 'POST',
-			url: '/ask_chat',
+			url: '/api/post_ask_chat',
 			data: { 
 				username : username_box.value,
 				ID : sessionID,
@@ -276,20 +281,101 @@ function loading_to_askmodal() {
 			LOADING SCREEN FUNCTIONS          
 								AUTHOR: Darius			*/	
 function loading_screen_control1() {
-	setTimeout(loading_to_matchfound, 3000);
+	
+	$.ajax({
+		type: 'POST',
+		url: '/api/set_ready',
+		data: {
+			username: username_box.value,
+			ID: sessionID
+		}
+	});
+	
+	function pingServer() {
+		console.log('Pinging server...');
+		
+		$.ajax({
+			type: 'POST',
+			url: '/api/need_match',
+			data: {
+				username: username_box.value,
+				ID: sessionID
+			},
+			statusCode: {
+				200:	function(data) {			
+							clearInterval(startPing);
+							setTimeout(loading_to_matchfound, 3000);
+						}
+				404:	function(data) {
+							window.location.href = "./index.html";
+						}
+			}
+		});
+		
+	}
+	var startPing = setInterval(pingServer, 3000);
 }
 
 function loading_screen_control2() {
 	setTimeout(loading_to_askmodal, 3000);	
-
 }
 
 function loading_screen_control3() {
-	setTimeout(loading_to_chat, 3000);
+	
+	function pingServer() {
+		console.log('Pinging server...');
+		
+		$.ajax({
+			type: 'POST',
+			url: '/api/get_ask_chat',
+			data: {
+				username: username_box.value,
+				ID: sessionID
+			},
+			statusCode: {
+				200:	function(data) {			
+							clearInterval(startPing);
+							console.log("CHAT SUCCESS!");
+							//SEND USER TO NEW CHAT WINDOW
+						},
+				202:	function(data) {
+							window.location.href = "./index.html";
+						}
+			}
+		});
+		
+	}
+	var startPing = setInterval(pingServer, 3000);
 }
 
 function loading_screen_control4() {
-	setTimeout(loading_to_drawpic2, 3000);
+	$('.matchfound_yes').prop("disabled", false);
+	function pingServer() {
+		console.log('Pinging server...');
+		
+		$.ajax({
+			type: 'POST',
+			url: '/api/get_match_found',
+			data: {
+				username: username_box.value,
+				ID: sessionID
+			},
+			statusCode: {
+				200:	function(data) {			
+							clearInterval(startPing);
+							setTimeout(loading_to_drawpic2, 3000);
+						},
+				202: 	function(data) {
+							$('.loader_text2').fadeOut(1000);
+							$('.loader_text1').fadeIn(1000);							
+							clearInterval(startPing);
+							setTimeout(loading_screen_control1, 3000);
+						}
+			}
+		});
+		
+	}
+	var startPing = setInterval(pingServer, 3000);
 }
 
 setInterval(function() {
