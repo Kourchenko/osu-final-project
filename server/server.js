@@ -385,6 +385,60 @@ app.post('/api/browser_exit', async function(req, res) {
 	res.sendStatus(200).end();
 });
 
+app.post('/api/post_pic', function(req, res) {
+	
+	if (req.body.image_status == 'first') {
+			User.findOneAndUpdate({ID: req.body.ID}, {pic1: req.body.image_data}).then(item => {
+			console.log('');
+			console.log('============================================');
+			console.log('=== Updating ' + req.body.ID + "'s pic1...");
+			console.log('============================================');
+			console.log('');
+		})
+		.catch(err => {
+			console.log('');
+			console.log('============================================');
+			console.log('=== Error while updating ' + req.body.ID + "'s pic1...");
+			console.log('============================================');
+			console.log('');
+		});
+	}
+	else if (req.body.image_status == 'second') {
+		User.findOneAndUpdate({ID: req.body.ID}, {pic2: req.body.image_data}).then(item => {
+			console.log('');
+			console.log('============================================');
+			console.log('=== Updating ' + req.body.ID + "'s pic2...");
+			console.log('============================================');
+			console.log('');
+		})
+		.catch(err => {
+			console.log('');
+			console.log('============================================');
+			console.log('=== Error while updating ' + req.body.ID + "'s pic2...");
+			console.log('============================================');
+			console.log('');
+		});
+	}
+	
+});
+
+app.post('/api/get_pic', async function(req, res) {
+	
+	var thisUser = await User.find({ID: req.body.ID}).limit(1).lean().exec();
+	var otherUser = await User.find({ID: thisUser[0].partnerID}).limit(1).lean().exec();
+	
+	if (otherUser.length == 1) {
+		if (req.body.image_status == 'first') {
+			var imageToSend = otherUser[0].pic1;
+			res.status(200).send(imageToSend);
+		}
+		else if (req.body.image_status == 'second') {
+			var imageToSend = otherUser[0].pic2;
+			res.status(200).send(imageToSend);
+		}
+	}
+	
+});
 
 
 app.listen(8080, function() {
