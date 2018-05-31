@@ -440,6 +440,21 @@ app.post('/api/get_pic', async function(req, res) {
 	
 });
 
+app.post('/api/get_update_client', async function(req, res) {
+	
+	var thisUser = await User.find({ID: req.body.ID}).limit(1).lean().exec();
+	var otherUser = await User.find({ID: thisUser[0].partnerID}).limit(1).lean().exec();
+	if (otherUser.length == 1) {
+		var dataToSend = otherUser[0].username;
+		res.status(200).send(dataToSend);
+	}
+	else {
+		res.sendStatus(404).end();
+	}
+	
+});
+
+
 
 app.listen(8080, function() {
 	console.log('');
