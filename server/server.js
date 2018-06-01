@@ -85,6 +85,18 @@ app.get('/index.html', function(req, res) {
 	res.sendFile(path.join(__dirname + '/../index.html'));
 });
 
+app.get('/terms.html', function(req, res) {
+	res.sendFile(path.join(__dirname + '/../terms.html'));
+});
+
+app.get('/contact.html', function(req, res) {
+	res.sendFile(path.join(__dirname + '/../contact.html'));
+});
+
+app.get('/about.html', function(req, res) {
+	res.sendFile(path.join(__dirname + '/../about.html'));
+});
+
 app.get('/style.css', function(req, res) {
 	res.sendFile(path.join(__dirname + '/../style.css'));
 });
