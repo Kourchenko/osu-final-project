@@ -24,6 +24,7 @@ var timer1_circle = document.getElementsByClassName('first_timer')[0];
 var timer2_circle = document.getElementsByClassName('second_timer')[0];
 var loader_text1 = document.getElementsByClassName('loader_text1')[0];
 var loader_text2 = document.getElementsByClassName('loader_text2')[0];
+var loader_text3 = document.getElementsByClassName('loader_text3')[0];
 
 
 var main_connect = document.getElementsByClassName('button_connect')[0];
@@ -225,6 +226,7 @@ function matchfound_to_loading2() {
 }
 
 function loading_to_drawpic2() {
+	colorToUse = 000000;
 	$('.loader_text2').fadeOut(1000);
 	function continueF() {
 			$('.draw_pic2').fadeIn(1000, startTimer2());
@@ -240,7 +242,7 @@ function drawpic2_to_askchatmodal() {
 }
 
 function askchatmodal_no_f() {
-	function continueF() {
+		/*function continueF() {
 			$('.loading_screen').fadeIn(1000, loading_screen_control3);
 		}
 		$('.askchatmodal').fadeOut(1000, continueF);
@@ -251,7 +253,8 @@ function askchatmodal_no_f() {
 					username : username_box.value,
 					ID : sessionID,
 					response : "NO"}
-			});
+			});*/
+		window.location.href = "./index.html";
 }
 
 function askchatmodal_yes_f() {
@@ -302,9 +305,9 @@ function updateClientData() {
 			},
 			statusCode: {
 				200:	function(data) {
-							$('.match_text').html('You matched with: ' + data + '!');
-							$('.ask_chat_text1').html(data + "'s second creation: ");
-							$('.ask_chat_text2').html('Would you like to chat with ' + data + '?');
+							$('.match_text').html('You matched with: <font color="#455A64">' + data + '</font>');
+							$('.ask_chat_text1').html('New creation from <font color="#455A64">' + data + "</font>:");
+							$('.ask_chat_text2').html('Would you like to chat with <b><font color="#455A64">' + data + '</font></b>?');
 						}
 			}
 	});	
@@ -331,8 +334,6 @@ function loading_screen_control1() {
 	});
 	
 	function pingServer() {
-		console.log('Pinging server...');
-		
 		$.ajax({
 			type: 'POST',
 			url: '/api/need_match',
@@ -357,8 +358,8 @@ function loading_screen_control1() {
 													$('.pic1').attr('src', data);
 												},
 										404:
-												function(data) {
-													window.location.href = "./index.html";
+												function(data) {											
+														window.location.href = "./index.html";													
 												}
 									}
 								});
@@ -400,8 +401,6 @@ function loading_screen_control2() {
 function loading_screen_control3() {
 	
 	function pingServer() {
-		console.log('Pinging server...');
-		
 		$.ajax({
 			type: 'POST',
 			url: '/api/get_ask_chat',
@@ -416,7 +415,12 @@ function loading_screen_control3() {
 							//SEND USER TO NEW CHAT WINDOW
 						},
 				202:	function(data) {
-							window.location.href = "./index.html";
+							$('.loader_text2').fadeOut(100);
+							$('.loader_text3').fadeIn(1000);
+							function continueF() {
+								window.location.href = "./index.html";
+							}
+							setTimeout(continueF, 5000);
 						}
 			}
 		});
@@ -428,8 +432,6 @@ function loading_screen_control3() {
 function loading_screen_control4() {
 	$('.matchfound_yes').prop("disabled", false);
 	function pingServer() {
-		console.log('Pinging server...');
-		
 		$.ajax({
 			type: 'POST',
 			url: '/api/get_match_found',
@@ -444,7 +446,7 @@ function loading_screen_control4() {
 							setTimeout(loading_to_drawpic2, 3000);
 						},
 				202: 	function(data) {
-							$('.loader_text2').fadeOut(1000);
+							$('.loader_text2').css("display", "none");
 							$('.loader_text1').fadeIn(1000);							
 							clearInterval(startPing);
 							setTimeout(loading_screen_control1, 3000);
@@ -484,7 +486,19 @@ setInterval(function() {
 			loader_text2.textContent = "Waiting for match's response . . .";
 	}}, 200);
 	
-
+setInterval(function() {
+		if (loader_text3.textContent == "Match declined: Restarting . . .") {
+			loader_text3.textContent = "Match declined: Restarting";
+		}
+		else if (loader_text3.textContent == "Match declined: Restarting") {
+			loader_text3.textContent = "Match declined: Restarting .";
+		}
+		else if (loader_text3.textContent == "Match declined: Restarting .") {
+			loader_text3.textContent = "Match declined: Restarting . .";
+		}
+		else if (loader_text3.textContent == "Match declined: Restarting . .") {
+			loader_text3.textContent = "Match declined: Restarting . . .";
+	}}, 200);
 
 
 
