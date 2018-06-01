@@ -87,6 +87,13 @@ h3 {
 	display: none;
 }
 
+.loader_text3 {
+	font-size: 32px;
+	margin-top: 2%;
+	font-weight: bold;
+	display: none;
+}
+
 .draw_pic1 {
 	display: none;
 	width: 100%;
