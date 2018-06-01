@@ -244,7 +244,7 @@ button:hover {
 }
 
 .description_text {
-	margin-top: 1%;
+	margin-top: 2%;
 }
 
 .username_error {
@@ -387,8 +387,9 @@ svg circle {
 
 .slider-css {
 	display: inline-block;
-	margin-left: 1%;
+	margin-left: 2%;
 	margin-bottom: 10%;
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 #canvasSignature {
@@ -397,9 +398,18 @@ svg circle {
 
 .canvas-css {
 	margin-top: 2%;
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+.pic1 {
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+	border:3px solid #455A64;
+}
 
+.pic2 {
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+	border:3px solid #455A64;
+}
 
 
 
