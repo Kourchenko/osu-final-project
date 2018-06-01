@@ -420,6 +420,8 @@ app.post('/api/post_pic', function(req, res) {
 		});
 	}
 	
+	res.sendStatus(200).end();
+	
 });
 
 app.post('/api/get_pic', async function(req, res) {
