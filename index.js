@@ -1,6 +1,7 @@
 /* JS */
 
 
+<<<<<<< HEAD
 /** NOTE (DIEGO -> DARIUS): Consider adding comments to each function, describing briefly what it does.
  * 		- Consider renaming the functions without numbers, we won't always agree on
  * 		- a standard coding standard, but lets get close.
@@ -9,6 +10,9 @@
  * 		- searching the database for a match, needs to call the timer functions.
  * 		- Just the same, I'm writing my server.js functions to be simple, for
  * 		- anyone else to call when we create a chat session (createSession()).
+=======
+
+>>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 /*
 			ELEMENT CONNECTORS
 								AUTHOR: DARIUS			*/
@@ -31,6 +35,7 @@ var timer1_circle = document.getElementsByClassName('first_timer')[0];
 var timer2_circle = document.getElementsByClassName('second_timer')[0];
 var loader_text1 = document.getElementsByClassName('loader_text1')[0];
 var loader_text2 = document.getElementsByClassName('loader_text2')[0];
+var loader_text3 = document.getElementsByClassName('loader_text3')[0];
 
 
 var main_connect = document.getElementsByClassName('button_connect')[0];
@@ -44,6 +49,13 @@ var sigCanvas2 = document.getElementsByClassName('canvas2')[0];
 var context1 = sigCanvas1.getContext("2d");
 var context2 = sigCanvas2.getContext("2d");
 
+<<<<<<< HEAD
+=======
+var pic1 = document.getElementsByClassName('pic1')[0];
+var pic2 = document.getElementsByClassName('pic2')[0];
+
+
+>>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 var colorToUse = 000000;
 var sessionID = "";
 
@@ -51,7 +63,7 @@ var sessionID = "";
 			UNIQUE ID GENERATOR
 								AUTHOR: Darius			*/
 var uniqueKey = function () {
-  return '_' + Math.random().toString(36).substr(2, 9);
+  return '_' + Math.random().toString(36).substr(2, 12);
 };
 
 /** cleanInput
@@ -84,6 +96,16 @@ function endTimer1() {
 		function continueF() {
 			$('.times_up').fadeIn(1000);
 		}
+		var imageToSend = sigCanvas1.toDataURL();
+		$.ajax({
+			type: 'POST',
+			url: '/api/post_pic',
+			data: { 
+				username : username_box.value,
+				ID : sessionID,
+				image_data: imageToSend,
+				image_status: 'first'}
+		});		
 		$('.draw_pic1').fadeOut(1000, continueF);
 	setTimeout(timesup_to_loading1, 1500);
 }
@@ -104,6 +126,16 @@ function endTimer2() {
 		function continueF() {
 			$('.times_up').fadeIn(1000);
 		}
+		var imageToSend = sigCanvas2.toDataURL();
+		$.ajax({
+			type: 'POST',
+			url: '/api/post_pic',
+			data: { 
+				username : username_box.value,
+				ID : sessionID,
+				image_data: imageToSend,
+				image_status: 'second'}
+		});	
 		$('.draw_pic2').fadeOut(1000, continueF);
 	setTimeout(timesup_to_loading2, 1500);
 }
@@ -123,10 +155,19 @@ $(document).ready(function() {
 	initialize1();
 	initialize2();
 	sessionID = uniqueKey();
-	console.log(sessionID);
 });
 
-
+$(window).on("unload", function() {
+    $.ajax({
+		type: 'POST',
+		url: '/api/browser_exit',
+		data: {
+			username: username_box.value,
+			ID: sessionID
+		},
+		async: false
+	});
+});
 
 /*
 			FLOW FUNCTIONS
@@ -136,8 +177,13 @@ function main_to_drawpic1() {
 		$('.button_connect').prop("disabled", true);
 		$.ajax({
 			type: 'POST',
+<<<<<<< HEAD
 			url: '/username',
 			data: {
+=======
+			url: '/api/username',
+			data: { 
+>>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 				username : username_box.value,
 				ID : sessionID}
 		});
@@ -177,8 +223,13 @@ function matchfound_to_loading1() {
 		$('.match_found').fadeOut(1000, continueF);
 		$.ajax({
 			type: 'POST',
+<<<<<<< HEAD
 			url: '/match_found',
 			data: {
+=======
+			url: '/api/post_match_found',
+			data: { 
+>>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 				username : username_box.value,
 				ID : sessionID,
 				response : "NO"}
@@ -194,8 +245,13 @@ function matchfound_to_loading2() {
 		$('.match_found').fadeOut(1000, continueF);
 		$.ajax({
 			type: 'POST',
+<<<<<<< HEAD
 			url: '/match_found',
 			data: {
+=======
+			url: '/api/post_match_found',
+			data: { 
+>>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 				username : username_box.value,
 				ID : sessionID,
 				response : "YES"}
@@ -203,6 +259,7 @@ function matchfound_to_loading2() {
 }
 
 function loading_to_drawpic2() {
+	colorToUse = 000000;
 	$('.loader_text2').fadeOut(1000);
 	function continueF() {
 			$('.draw_pic2').fadeIn(1000, startTimer2());
@@ -218,6 +275,7 @@ function drawpic2_to_askchatmodal() {
 }
 
 function askchatmodal_no_f() {
+<<<<<<< HEAD
 	$.ajax({
 			type: 'POST',
 			url: '/ask_chat',
@@ -227,6 +285,21 @@ function askchatmodal_no_f() {
 				response : "NO"}
 		});
 	window.location.href = "./index.html";
+=======
+		/*function continueF() {
+			$('.loading_screen').fadeIn(1000, loading_screen_control3);
+		}
+		$('.askchatmodal').fadeOut(1000, continueF);
+		$.ajax({
+				type: 'POST',
+				url: '/api/post_ask_chat',
+				data: { 
+					username : username_box.value,
+					ID : sessionID,
+					response : "NO"}
+			});*/
+		window.location.href = "./index.html";
+>>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 }
 
 function askchatmodal_yes_f() {
@@ -237,8 +310,13 @@ function askchatmodal_yes_f() {
 		$('.askchatmodal').fadeOut(1000, continueF);
 		$.ajax({
 			type: 'POST',
+<<<<<<< HEAD
 			url: '/ask_chat',
 			data: {
+=======
+			url: '/api/post_ask_chat',
+			data: { 
+>>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 				username : username_box.value,
 				ID : sessionID,
 				response : "YES"}
@@ -267,6 +345,7 @@ function loading_to_askmodal() {
 		$('.loading_screen').fadeOut(1000, continueF);
 }
 
+<<<<<<< HEAD
 /***************************************************
 socket.io
 websocket connections to between server and client.
@@ -324,6 +403,25 @@ function addChatMessageHTML(data) {
   var $messageDiv = $('<li class="chatbox-message"/>')
     .data('username', data.username)
     .append($usernameDiv, $messageBodyDiv);
+=======
+function updateClientData() {
+	$.ajax({
+			type: 'POST',
+			url: '/api/get_update_client',
+			data: { 
+				username : username_box.value,
+				ID : sessionID
+			},
+			statusCode: {
+				200:	function(data) {
+							$('.match_text').html('You matched with: <font color="#455A64">' + data + '</font>');
+							$('.ask_chat_text1').html('New creation from <font color="#455A64">' + data + "</font>:");
+							$('.ask_chat_text2').html('Would you like to chat with <b><font color="#455A64">' + data + '</font></b>?');
+						}
+			}
+	});	
+}
+>>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 
 }
 
@@ -334,20 +432,144 @@ function addChatMessageHTML(data) {
 			LOADING SCREEN FUNCTIONS
 								AUTHOR: Darius			*/
 function loading_screen_control1() {
-	setTimeout(loading_to_matchfound, 3000);
+	
+	$.ajax({
+		type: 'POST',
+		url: '/api/set_ready',
+		data: {
+			username: username_box.value,
+			ID: sessionID
+		}
+	});
+	
+	function pingServer() {
+		$.ajax({
+			type: 'POST',
+			url: '/api/need_match',
+			data: {
+				username: username_box.value,
+				ID: sessionID
+			},
+			statusCode: {
+				200:	function(data) {			
+							clearInterval(startPing);
+								updateClientData();
+								$.ajax({
+									type: 'POST',
+									url: '/api/get_pic',
+									data: { 
+										username : username_box.value,
+										ID : sessionID,
+										image_status: 'first'
+										},
+									statusCode: {
+										200:	function(data) {
+													$('.pic1').attr('src', data);
+												},
+										404:
+												function(data) {											
+														window.location.href = "./index.html";													
+												}
+									}
+								});
+							setTimeout(loading_to_matchfound, 3000);
+						},
+				404:	function(data) {
+							window.location.href = "./index.html";
+						}
+			}
+		});
+		
+	}
+	var startPing = setInterval(pingServer, 1000);
 }
 
 function loading_screen_control2() {
+<<<<<<< HEAD
 	setTimeout(loading_to_askmodal, 3000);
 
+=======
+		$.ajax({
+			type: 'POST',
+			url: '/api/get_pic',
+			data: { 
+				username : username_box.value,
+				ID : sessionID,
+				image_status: 'second'
+				},
+				statusCode: {
+					200:	function(data) {
+								updateClientData();
+								$('.pic2').attr('src', data);
+							},
+					404:
+							function(data) {
+								window.location.href = "./index.html";
+							}
+				}
+		});
+	setTimeout(loading_to_askmodal, 4000);	
+>>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 }
 
 function loading_screen_control3() {
-	setTimeout(loading_to_chat, 3000);
+	
+	function pingServer() {
+		$.ajax({
+			type: 'POST',
+			url: '/api/get_ask_chat',
+			data: {
+				username: username_box.value,
+				ID: sessionID
+			},
+			statusCode: {
+				200:	function(data) {			
+							clearInterval(startPing);
+							console.log("CHAT SUCCESS!");
+							//SEND USER TO NEW CHAT WINDOW
+						},
+				202:	function(data) {
+							$('.loader_text2').fadeOut(100);
+							$('.loader_text3').fadeIn(1000);
+							function continueF() {
+								window.location.href = "./index.html";
+							}
+							setTimeout(continueF, 5000);
+						}
+			}
+		});
+		
+	}
+	var startPing = setInterval(pingServer, 1000);
 }
 
 function loading_screen_control4() {
-	setTimeout(loading_to_drawpic2, 3000);
+	$('.matchfound_yes').prop("disabled", false);
+	function pingServer() {
+		$.ajax({
+			type: 'POST',
+			url: '/api/get_match_found',
+			data: {
+				username: username_box.value,
+				ID: sessionID
+			},
+			statusCode: {
+				200:	function(data) {
+							updateClientData();
+							clearInterval(startPing);
+							setTimeout(loading_to_drawpic2, 3000);
+						},
+				202: 	function(data) {
+							$('.loader_text2').css("display", "none");
+							$('.loader_text1').fadeIn(1000);							
+							clearInterval(startPing);
+							setTimeout(loading_screen_control1, 3000);
+						}
+			}
+		});
+		
+	}
+	var startPing = setInterval(pingServer, 1000);
 }
 
 setInterval(function() {
@@ -377,8 +599,25 @@ setInterval(function() {
 		else if (loader_text2.textContent == "Waiting for match's response . .") {
 			loader_text2.textContent = "Waiting for match's response . . .";
 	}}, 200);
+<<<<<<< HEAD
 
 
+=======
+	
+setInterval(function() {
+		if (loader_text3.textContent == "Match declined: Restarting . . .") {
+			loader_text3.textContent = "Match declined: Restarting";
+		}
+		else if (loader_text3.textContent == "Match declined: Restarting") {
+			loader_text3.textContent = "Match declined: Restarting .";
+		}
+		else if (loader_text3.textContent == "Match declined: Restarting .") {
+			loader_text3.textContent = "Match declined: Restarting . .";
+		}
+		else if (loader_text3.textContent == "Match declined: Restarting . .") {
+			loader_text3.textContent = "Match declined: Restarting . . .";
+	}}, 200);
+>>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 
 
 
