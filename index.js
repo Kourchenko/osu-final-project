@@ -1,7 +1,6 @@
 /* JS */
 
 
-<<<<<<< HEAD
 /** NOTE (DIEGO -> DARIUS): Consider adding comments to each function, describing briefly what it does.
  * 		- Consider renaming the functions without numbers, we won't always agree on
  * 		- a standard coding standard, but lets get close.
@@ -10,9 +9,7 @@
  * 		- searching the database for a match, needs to call the timer functions.
  * 		- Just the same, I'm writing my server.js functions to be simple, for
  * 		- anyone else to call when we create a chat session (createSession()).
-=======
 
->>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 /*
 			ELEMENT CONNECTORS
 								AUTHOR: DARIUS			*/
@@ -49,13 +46,10 @@ var sigCanvas2 = document.getElementsByClassName('canvas2')[0];
 var context1 = sigCanvas1.getContext("2d");
 var context2 = sigCanvas2.getContext("2d");
 
-<<<<<<< HEAD
-=======
 var pic1 = document.getElementsByClassName('pic1')[0];
 var pic2 = document.getElementsByClassName('pic2')[0];
 
 
->>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 var colorToUse = 000000;
 var sessionID = "";
 
@@ -100,12 +94,12 @@ function endTimer1() {
 		$.ajax({
 			type: 'POST',
 			url: '/api/post_pic',
-			data: { 
+			data: {
 				username : username_box.value,
 				ID : sessionID,
 				image_data: imageToSend,
 				image_status: 'first'}
-		});		
+		});
 		$('.draw_pic1').fadeOut(1000, continueF);
 	setTimeout(timesup_to_loading1, 1500);
 }
@@ -130,12 +124,12 @@ function endTimer2() {
 		$.ajax({
 			type: 'POST',
 			url: '/api/post_pic',
-			data: { 
+			data: {
 				username : username_box.value,
 				ID : sessionID,
 				image_data: imageToSend,
 				image_status: 'second'}
-		});	
+		});
 		$('.draw_pic2').fadeOut(1000, continueF);
 	setTimeout(timesup_to_loading2, 1500);
 }
@@ -177,13 +171,10 @@ function main_to_drawpic1() {
 		$('.button_connect').prop("disabled", true);
 		$.ajax({
 			type: 'POST',
-<<<<<<< HEAD
 			url: '/username',
 			data: {
-=======
 			url: '/api/username',
-			data: { 
->>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
+			data: {
 				username : username_box.value,
 				ID : sessionID}
 		});
@@ -223,13 +214,10 @@ function matchfound_to_loading1() {
 		$('.match_found').fadeOut(1000, continueF);
 		$.ajax({
 			type: 'POST',
-<<<<<<< HEAD
 			url: '/match_found',
 			data: {
-=======
 			url: '/api/post_match_found',
-			data: { 
->>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
+			data: {
 				username : username_box.value,
 				ID : sessionID,
 				response : "NO"}
@@ -245,13 +233,10 @@ function matchfound_to_loading2() {
 		$('.match_found').fadeOut(1000, continueF);
 		$.ajax({
 			type: 'POST',
-<<<<<<< HEAD
 			url: '/match_found',
 			data: {
-=======
 			url: '/api/post_match_found',
-			data: { 
->>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
+			data: {
 				username : username_box.value,
 				ID : sessionID,
 				response : "YES"}
@@ -275,7 +260,6 @@ function drawpic2_to_askchatmodal() {
 }
 
 function askchatmodal_no_f() {
-<<<<<<< HEAD
 	$.ajax({
 			type: 'POST',
 			url: '/ask_chat',
@@ -285,7 +269,6 @@ function askchatmodal_no_f() {
 				response : "NO"}
 		});
 	window.location.href = "./index.html";
-=======
 		/*function continueF() {
 			$('.loading_screen').fadeIn(1000, loading_screen_control3);
 		}
@@ -293,13 +276,12 @@ function askchatmodal_no_f() {
 		$.ajax({
 				type: 'POST',
 				url: '/api/post_ask_chat',
-				data: { 
+				data: {
 					username : username_box.value,
 					ID : sessionID,
 					response : "NO"}
 			});*/
 		window.location.href = "./index.html";
->>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 }
 
 function askchatmodal_yes_f() {
@@ -310,13 +292,10 @@ function askchatmodal_yes_f() {
 		$('.askchatmodal').fadeOut(1000, continueF);
 		$.ajax({
 			type: 'POST',
-<<<<<<< HEAD
 			url: '/ask_chat',
 			data: {
-=======
 			url: '/api/post_ask_chat',
-			data: { 
->>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
+			data: {
 				username : username_box.value,
 				ID : sessionID,
 				response : "YES"}
@@ -345,7 +324,6 @@ function loading_to_askmodal() {
 		$('.loading_screen').fadeOut(1000, continueF);
 }
 
-<<<<<<< HEAD
 /***************************************************
 socket.io
 websocket connections to between server and client.
@@ -403,12 +381,12 @@ function addChatMessageHTML(data) {
   var $messageDiv = $('<li class="chatbox-message"/>')
     .data('username', data.username)
     .append($usernameDiv, $messageBodyDiv);
-=======
+
 function updateClientData() {
 	$.ajax({
 			type: 'POST',
 			url: '/api/get_update_client',
-			data: { 
+			data: {
 				username : username_box.value,
 				ID : sessionID
 			},
@@ -419,11 +397,9 @@ function updateClientData() {
 							$('.ask_chat_text2').html('Would you like to chat with <b><font color="#455A64">' + data + '</font></b>?');
 						}
 			}
-	});	
+	});
 }
->>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 
-}
 
 
 
@@ -432,7 +408,7 @@ function updateClientData() {
 			LOADING SCREEN FUNCTIONS
 								AUTHOR: Darius			*/
 function loading_screen_control1() {
-	
+
 	$.ajax({
 		type: 'POST',
 		url: '/api/set_ready',
@@ -441,7 +417,7 @@ function loading_screen_control1() {
 			ID: sessionID
 		}
 	});
-	
+
 	function pingServer() {
 		$.ajax({
 			type: 'POST',
@@ -451,13 +427,13 @@ function loading_screen_control1() {
 				ID: sessionID
 			},
 			statusCode: {
-				200:	function(data) {			
+				200:	function(data) {
 							clearInterval(startPing);
 								updateClientData();
 								$.ajax({
 									type: 'POST',
 									url: '/api/get_pic',
-									data: { 
+									data: {
 										username : username_box.value,
 										ID : sessionID,
 										image_status: 'first'
@@ -467,8 +443,8 @@ function loading_screen_control1() {
 													$('.pic1').attr('src', data);
 												},
 										404:
-												function(data) {											
-														window.location.href = "./index.html";													
+												function(data) {
+														window.location.href = "./index.html";
 												}
 									}
 								});
@@ -479,20 +455,18 @@ function loading_screen_control1() {
 						}
 			}
 		});
-		
+
 	}
 	var startPing = setInterval(pingServer, 1000);
 }
 
 function loading_screen_control2() {
-<<<<<<< HEAD
 	setTimeout(loading_to_askmodal, 3000);
 
-=======
 		$.ajax({
 			type: 'POST',
 			url: '/api/get_pic',
-			data: { 
+			data: {
 				username : username_box.value,
 				ID : sessionID,
 				image_status: 'second'
@@ -508,12 +482,11 @@ function loading_screen_control2() {
 							}
 				}
 		});
-	setTimeout(loading_to_askmodal, 4000);	
->>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
+	setTimeout(loading_to_askmodal, 4000);
 }
 
 function loading_screen_control3() {
-	
+
 	function pingServer() {
 		$.ajax({
 			type: 'POST',
@@ -523,7 +496,7 @@ function loading_screen_control3() {
 				ID: sessionID
 			},
 			statusCode: {
-				200:	function(data) {			
+				200:	function(data) {
 							clearInterval(startPing);
 							console.log("CHAT SUCCESS!");
 							//SEND USER TO NEW CHAT WINDOW
@@ -538,7 +511,7 @@ function loading_screen_control3() {
 						}
 			}
 		});
-		
+
 	}
 	var startPing = setInterval(pingServer, 1000);
 }
@@ -561,13 +534,13 @@ function loading_screen_control4() {
 						},
 				202: 	function(data) {
 							$('.loader_text2').css("display", "none");
-							$('.loader_text1').fadeIn(1000);							
+							$('.loader_text1').fadeIn(1000);
 							clearInterval(startPing);
 							setTimeout(loading_screen_control1, 3000);
 						}
 			}
 		});
-		
+
 	}
 	var startPing = setInterval(pingServer, 1000);
 }
@@ -599,11 +572,7 @@ setInterval(function() {
 		else if (loader_text2.textContent == "Waiting for match's response . .") {
 			loader_text2.textContent = "Waiting for match's response . . .";
 	}}, 200);
-<<<<<<< HEAD
 
-
-=======
-	
 setInterval(function() {
 		if (loader_text3.textContent == "Match declined: Restarting . . .") {
 			loader_text3.textContent = "Match declined: Restarting";
@@ -617,7 +586,6 @@ setInterval(function() {
 		else if (loader_text3.textContent == "Match declined: Restarting . .") {
 			loader_text3.textContent = "Match declined: Restarting . . .";
 	}}, 200);
->>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 
 
 

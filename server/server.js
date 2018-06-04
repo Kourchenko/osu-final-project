@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * server.js
  * Author: Diego Kourchenko
@@ -18,19 +17,14 @@ const HTTP_CODE_SERVER_ERR = 500;
 const MAX_USERS = 2;
 // connected users <= MAX_USERS
 var usersInSession;
-const mongoose = require('mongoose');
-=======
->>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 var http = require('http');
 var app = require('express')();
 var fs = require('fs');
 var express = require('express');
 var path = require('path');
-<<<<<<< HEAD
 var port = process.env.PORT || 3000;
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
-=======
 var bodyparser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
@@ -42,11 +36,11 @@ var uniqueKey = function () {
 };
 
 /*
-			START DB          
+			START DB
 								AUTHOR: Darius/Aaron			*/
 mongoose.connect('mongodb://localhost/users', function (err) {
 	if (err) {
-		
+
 		throw err;
 	}
 	else {
@@ -60,7 +54,7 @@ mongoose.connect('mongodb://localhost/users', function (err) {
 
 MongoClient.connect('mongodb://127.0.0.1:27017/', function (err, client) {
 	if (err) {
-		
+
 		throw err;
 	}
 	else {
@@ -69,15 +63,15 @@ MongoClient.connect('mongodb://127.0.0.1:27017/', function (err, client) {
 		console.log('=== MongoDB Connected');
 		console.log('============================================');
 		console.log('');
-		
+
 		var db = client.db('users');
-		
+
 	}
-	
+
 	client.close();
 });
 
-var userSchema = mongoose.Schema({ 
+var userSchema = mongoose.Schema({
 	username: String,
 	ID: String,
 	isReady: String,
@@ -88,20 +82,16 @@ var userSchema = mongoose.Schema({
 	hasPartner: String,
 	partnerID: String,
 	matchID: ""
-	
+
 });
 
 var User = mongoose.model('User', userSchema);
-
-
-app.use(bodyparser.json());        
-app.use(bodyparser.urlencoded({ extended: true })); 
-
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({ extended: true }));
 
 
 
 
->>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 
 /*
 			GET FUNCTIONS
@@ -145,13 +135,11 @@ app.get('/logo.png', function(req, res) {
 app.get('*', function(req, res) {
 	res.sendFile(path.join(__dirname + '/../404.html'));
 });
-<<<<<<< HEAD
-=======
 
 
 
 /*
-			CHECK/UNMATCH USER FUNCTIONS         
+			CHECK/UNMATCH USER FUNCTIONS
 								AUTHOR: Darius			*/
 function unMatchUsers(user1, user2) {
 	User.findOneAndUpdate({ID: user1}, {match_found: "", hasPartner: "NO", partnerID: ""}).then(item => {
@@ -185,26 +173,25 @@ function unMatchUsers(user1, user2) {
 async function checkMatch(user1, user2) {
 	var user1_a = await User.find({ID: user1}).limit(1).lean().exec();
 	var user2_a = await User.find({ID: user2}).limit(1).lean().exec();
-	
+
 	if ((user1_a.length == 1) && (user2_a.length == 1)) {
 		if (user1_a[0].matchID == user2_a[0].matchID) {
 			user1_id_x = user1_a[0].ID;
 			user1_id_y = user1_a[0].partnerID;
 			user2_id_x = user2_a[0].ID;
 			user2_id_y = user2_a[0].partnerID;
-		
+
 			if ((user1_id_x == user2_id_y) && (user2_id_x == user1_id_y)) {
 				return true;
 			}
 		}
-		
+
 	}
 	else {
 			return false;
 	}
 }
 
->>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 /*
 			POST FUNCTIONS
 								AUTHOR: Darius			*/
@@ -214,7 +201,7 @@ app.post('/api/username', function(req, res) {
 	console.log('=== USERNAME: ' + req.body.username);
 	console.log('=== ID: ' + req.body.ID);
 	console.log('============================================');
-	
+
 	var newUser = new User({
 		username: req.body.username,
 		ID: req.body.ID,
@@ -244,11 +231,11 @@ app.post('/api/get_match_found', async function(req, res) {
 	var thisUser = await User.find({ID: req.body.ID}).limit(1).lean().exec();
 	var otherID = thisUser[0].partnerID;
 	var otherUser = await User.find({ID: otherID}).limit(1).lean().exec();
-			
+
 	if (checkMatch(req.body.ID, otherID) && (otherUser.length == 1)) {
-		
+
 		var otherUser_response = otherUser[0].match_found;
-		
+
 				if ((otherUser_response == 'YES') && (thisUser[0].match_found == 'YES')) {
 					res.sendStatus(200).end();
 				}
@@ -259,7 +246,7 @@ app.post('/api/get_match_found', async function(req, res) {
 	else {
 		res.sendStatus(202).end();
 	}
-	
+
 });
 
 app.post('/api/post_match_found', async function(req, res) {
@@ -269,7 +256,7 @@ app.post('/api/post_match_found', async function(req, res) {
 	console.log('=== ID: ' + req.body.ID);
 	console.log('=== RESPONSE: ' + req.body.response);
 	console.log('============================================');
-	
+
 	User.findOneAndUpdate({ID: req.body.ID}, {match_found: req.body.response}).then(item => {
 		console.log('=== Match found response updated to: ' + req.body.response);
 		console.log('============================================');
@@ -280,26 +267,26 @@ app.post('/api/post_match_found', async function(req, res) {
 		console.log('============================================');
 		console.log('');
 	});
-	
+
 	if (req.body.response == 'NO') {
 		var thisUser = await User.find({ID: req.body.ID}).limit(1).lean().exec();
 		var otherID = thisUser[0].partnerID;
-		
-		await User.findOneAndUpdate({ID: req.body.ID}, {isReady: 'YES'}); 
-		
+
+		await User.findOneAndUpdate({ID: req.body.ID}, {isReady: 'YES'});
+
 		if (checkMatch(req.body.ID, otherID)) {
 			unMatchUsers(req.body.ID, otherID);
 		}
 	}
-	
-	
+
+
 	res.end();
-	
-	
+
+
 });
 
 app.post('/api/set_ready', function(req, res) {
-	
+
 	User.findOneAndUpdate({ID: req.body.ID}, {isReady: "YES"}).then(item => {
 		console.log('');
 		console.log('============================================');
@@ -321,11 +308,11 @@ app.post('/api/get_ask_chat', async function(req, res) {
 	var thisUser = await User.find({ID: req.body.ID}).limit(1).lean().exec();
 	var otherID = thisUser[0].partnerID;
 	var otherUser = await User.find({ID: otherID}).limit(1).lean().exec();
-	
+
 	if (checkMatch(req.body.ID, otherID) && (otherUser.length == 1)) {
-		
+
 		var otherUser_response = otherUser[0].ask_chat;
-		
+
 				if ((otherUser_response == 'YES') && (thisUser[0].ask_chat == 'YES')) {
 					res.sendStatus(200).end();
 				}
@@ -336,7 +323,7 @@ app.post('/api/get_ask_chat', async function(req, res) {
 	else {
 		res.sendStatus(202).end();
 	}
-	
+
 });
 
 app.post('/api/post_ask_chat', async function(req, res) {
@@ -346,7 +333,7 @@ app.post('/api/post_ask_chat', async function(req, res) {
 	console.log('=== ID: ' + req.body.ID);
 	console.log('=== RESPONSE: ' + req.body.response);
 	console.log('============================================');
-	
+
 	User.findOneAndUpdate({ID: req.body.ID}, {ask_chat: req.body.response}).then(item => {
 		console.log('=== Ask chat response updated to: ' + req.body.response);
 		console.log('============================================');
@@ -357,59 +344,59 @@ app.post('/api/post_ask_chat', async function(req, res) {
 		console.log('============================================');
 		console.log('');
 	});
-	
+
 	if (req.body.response == 'NO') {
 		var thisUser = await User.find({ID: req.body.ID}).limit(1).lean().exec();
 		var otherID = thisUser[0].partnerID;
-	
+
 		if (checkMatch(req.body.ID, otherID)) {
 			unMatchUsers(req.body.ID, otherID);
 		}
 	}
-	
+
 	res.end();
 });
 
 app.post('/api/need_match', async function(req, res) {
-	var checkUser = await User.find({ID: req.body.ID}).limit(1).lean().exec();	
+	var checkUser = await User.find({ID: req.body.ID}).limit(1).lean().exec();
 	if (checkUser.length == 1) {
 		if (checkUser[0].hasPartner == "YES") {
 			res.sendStatus(200).end();
 		}
-		else {									
+		else {
 				var otherUser = await User.find({$and: [{hasPartner: "NO"}, {ID: {$not: {$eq: req.body.ID}}}, {isReady: "YES"}]}).limit(1).lean().exec();
 				if ((otherUser.length == 1) && (otherUser[0].isReady == 'YES')) {
-					
+
 					var otherUserID = otherUser[0].ID;
 					const newMatchID = uniqueKey();
-					
+
 					await User.findOneAndUpdate({ID: req.body.ID}, {hasPartner: "YES"});
 					await User.findOneAndUpdate({ID: otherUserID}, {hasPartner: "YES"});
-					
+
 					await User.findOneAndUpdate({ID: req.body.ID}, {partnerID: otherUserID});
 					await User.findOneAndUpdate({ID: otherUserID}, {partnerID: req.body.ID});
-					
+
 					await User.findOneAndUpdate({ID: req.body.ID}, {match_found: ""});
 					await User.findOneAndUpdate({ID: otherUserID}, {match_found: ""});
-					
+
 					await User.findOneAndUpdate({ID: req.body.ID}, {matchID: newMatchID});
 					await User.findOneAndUpdate({ID: otherUserID}, {matchID: newMatchID});
-					
-					await User.findOneAndUpdate({ID: req.body.ID}, {isReady: 'NO'}); 
-					await User.findOneAndUpdate({ID: otherUserID}, {isReady: 'NO'}); 
-					
+
+					await User.findOneAndUpdate({ID: req.body.ID}, {isReady: 'NO'});
+					await User.findOneAndUpdate({ID: otherUserID}, {isReady: 'NO'});
+
 					console.log('');
 					console.log('============== MATCHING USERS ==============');
 					console.log('=== User 1: ' + req.body.ID);
 					console.log('=== User 2: ' + otherUserID);
 					console.log('============================================');
-					console.log('');		
+					console.log('');
 					res.sendStatus(200).end();
 				}
 				else {
 					res.sendStatus(204).end();
-				}								
-		}	
+				}
+		}
 	}
 	else {
 		res.sendStatus(404).end();
@@ -417,20 +404,20 @@ app.post('/api/need_match', async function(req, res) {
 });
 
 app.post('/api/browser_exit', async function(req, res) {
-	var checkUser = await User.find({ID: req.body.ID}).limit(1).lean().exec();	
+	var checkUser = await User.find({ID: req.body.ID}).limit(1).lean().exec();
 	if (checkUser.length == 1) {
 		await User.findOneAndRemove({ID: req.body.ID});
 			console.log('');
 			console.log('========== BROWSER EXIT DETECTED ===========');
 			console.log('=== Removing User: ' + req.body.ID);
 			console.log('============================================');
-			console.log('');	
+			console.log('');
 	}
 	res.sendStatus(200).end();
 });
 
 app.post('/api/post_pic', function(req, res) {
-	
+
 	if (req.body.image_status == 'first') {
 			User.findOneAndUpdate({ID: req.body.ID}, {pic1: req.body.image_data}).then(item => {
 			console.log('');
@@ -463,20 +450,18 @@ app.post('/api/post_pic', function(req, res) {
 			console.log('');
 		});
 	}
-	
+
 	res.sendStatus(200).end();
-	
+
 });
 
-<<<<<<< HEAD
 // Listen in on local server
 // should be web server
-=======
 app.post('/api/get_pic', async function(req, res) {
-	
+
 	var thisUser = await User.find({ID: req.body.ID}).limit(1).lean().exec();
 	var otherUser = await User.find({ID: thisUser[0].partnerID}).limit(1).lean().exec();
-	
+
 	if (otherUser.length == 1) {
 		if (req.body.image_status == 'first') {
 			var imageToSend = otherUser[0].pic1;
@@ -487,11 +472,11 @@ app.post('/api/get_pic', async function(req, res) {
 			res.status(200).send(imageToSend);
 		}
 	}
-	
+
 });
 
 app.post('/api/get_update_client', async function(req, res) {
-	
+
 	var thisUser = await User.find({ID: req.body.ID}).limit(1).lean().exec();
 	var otherUser = await User.find({ID: thisUser[0].partnerID}).limit(1).lean().exec();
 	if (otherUser.length == 1) {
@@ -501,12 +486,11 @@ app.post('/api/get_update_client', async function(req, res) {
 	else {
 		res.sendStatus(404).end();
 	}
-	
+
 });
 
 
 
->>>>>>> 712ff87f526fdd4021746b98158a638a006500ae
 app.listen(8080, function() {
 	console.log('');
 	console.log('============================================');
@@ -567,13 +551,11 @@ io.on('connection', function(socket) {
 		});
 	});
 
-<<<<<<< HEAD
 	// CLIENT STOPS TYPING
 	socket.on('stop typing', function() {
 		socket.broadcast.emit('stop typing', function() {
 			username: socket.username;
 		});
-=======
 
 
 
