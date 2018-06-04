@@ -3,14 +3,14 @@
 
 /** NOTE (DIEGO -> DARIUS): Consider adding comments to each function, describing briefly what it does.
  * 		- Consider renaming the functions without numbers, we won't always agree on
- * 		- a standard coding standard, but lets get close. 
+ * 		- a standard coding standard, but lets get close.
  * 		- asktochat_yes_f() initializes a JS ajax query?
  * 		- any of us who need to call upon those functions, for example when Aaron is
  * 		- searching the database for a match, needs to call the timer functions.
  * 		- Just the same, I'm writing my server.js functions to be simple, for
  * 		- anyone else to call when we create a chat session (createSession()).
 /*
-			ELEMENT CONNECTORS          
+			ELEMENT CONNECTORS
 								AUTHOR: DARIUS			*/
 var main = document.getElementsByClassName('home_screen')[0];
 var drawpic1 = document.getElementsByClassName('draw_pic1')[0];
@@ -44,32 +44,37 @@ var sigCanvas2 = document.getElementsByClassName('canvas2')[0];
 var context1 = sigCanvas1.getContext("2d");
 var context2 = sigCanvas2.getContext("2d");
 
-
 var colorToUse = 000000;
-
 var sessionID = "";
 
-
 /*
-			UNIQUE ID GENERATOR          
-								AUTHOR: Darius			*/	
+			UNIQUE ID GENERATOR
+								AUTHOR: Darius			*/
 var uniqueKey = function () {
   return '_' + Math.random().toString(36).substr(2, 9);
 };
 
-
-
-
+/** cleanInput
+ * Sanitize input,
+ * prevents injected markup
+ * return sanitized string message.
+ */
+function cleanInput(message) {
+  if (message) {
+    return $('<div/>').text(input).html();
+  }
+  return '';
+}
 /*
-			TIMER FUNCTIONS          
-								AUTHOR: Darius			*/	
+			TIMER FUNCTIONS
+								AUTHOR: Darius			*/
 function startTimer1() {
 	timer_count1.textContent = 10;
 	function updateText(input) {
 		var current_count = timer_count1.textContent;
 		timer_count1.textContent = current_count - 1;
 	}
-	
+
 	setInterval(updateText, 1000);
 	setTimeout(endTimer1, 10000);
 }
@@ -89,7 +94,7 @@ function startTimer2() {
 		var current_count = timer_count2.textContent;
 		timer_count2.textContent = current_count - 1;
 	}
-	
+
 	setInterval(updateText, 1000);
 	setTimeout(endTimer2, 10000);
 }
@@ -107,8 +112,8 @@ function endTimer2() {
 
 
 /*
-			START-UP CODE          
-								AUTHOR: Darius			*/	
+			START-UP CODE
+								AUTHOR: Darius			*/
 function enableConnect_button() {
 	$('.button_connect').prop("disabled", false)
 }
@@ -123,18 +128,16 @@ $(document).ready(function() {
 
 
 
-
-
 /*
-			FLOW FUNCTIONS          
-								AUTHOR: Darius			*/											
+			FLOW FUNCTIONS
+								AUTHOR: Darius			*/
 function main_to_drawpic1() {
 	if (username_box.value != "") {
 		$('.button_connect').prop("disabled", true);
 		$.ajax({
 			type: 'POST',
 			url: '/username',
-			data: { 
+			data: {
 				username : username_box.value,
 				ID : sessionID}
 		});
@@ -142,7 +145,7 @@ function main_to_drawpic1() {
 			$('.draw_pic1').fadeIn(1000, startTimer1);
 		}
 		$('.home_screen').fadeOut(1000, continueF);
-		
+
 	}
 	else {
 		username_error_text.classList.remove('hidden');
@@ -175,7 +178,7 @@ function matchfound_to_loading1() {
 		$.ajax({
 			type: 'POST',
 			url: '/match_found',
-			data: { 
+			data: {
 				username : username_box.value,
 				ID : sessionID,
 				response : "NO"}
@@ -192,7 +195,7 @@ function matchfound_to_loading2() {
 		$.ajax({
 			type: 'POST',
 			url: '/match_found',
-			data: { 
+			data: {
 				username : username_box.value,
 				ID : sessionID,
 				response : "YES"}
@@ -218,7 +221,7 @@ function askchatmodal_no_f() {
 	$.ajax({
 			type: 'POST',
 			url: '/ask_chat',
-			data: { 
+			data: {
 				username : username_box.value,
 				ID : sessionID,
 				response : "NO"}
@@ -227,7 +230,7 @@ function askchatmodal_no_f() {
 }
 
 function askchatmodal_yes_f() {
-	$('.loader_text2').fadeIn(1000);	
+	$('.loader_text2').fadeIn(1000);
 	function continueF() {
 			$('.loading_screen').fadeIn(1000, loading_screen_control3);
 		}
@@ -235,7 +238,7 @@ function askchatmodal_yes_f() {
 		$.ajax({
 			type: 'POST',
 			url: '/ask_chat',
-			data: { 
+			data: {
 				username : username_box.value,
 				ID : sessionID,
 				response : "YES"}
@@ -264,23 +267,78 @@ function loading_to_askmodal() {
 		$('.loading_screen').fadeOut(1000, continueF);
 }
 
+/***************************************************
+socket.io
+websocket connections to between server and client.
+***************************************************/
+function setUsername() {
+  // VERIFY chat page is active
+  if (chat_page.style.display === 'none') return;
+  // username element value
+  var el = document.getElementById("main-username-input").value;
+  // username
+  var username;
 
+  // Check empty input
+  if (el) {
+    // sanitize input
+    username = el.replace(/[!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~]/g, '');
 
+    // Tell server you have new user
+    socket.emit('add user', username);
+  }
+}
+/**
+ * sendMessage
+ * grabs the message from input box,
+ * sanitize input,
+ * emits 'new message' signal to server
+ */
+function sendMessage() {
+  var message = document.querySelector("#chatbox-input").val;
+  message = cleanInput(messge);
+  if (message && connected) {
+    message.val('');
 
+    // send message from username to uniqueID socket session
+    addChatMessageHTML({
+      username: username,
+      message: message,
+      uniqueID: uniqueID
+    });
+    // tell the server to send new message
+    socket.emit('new message', message);
+  }
+}
 
+/**
+ * addChatMessage
+ * Use message data to send message
+ * to another user
+ */
+function addChatMessageHTML(data) {
+  var $usernameDiv = $('<span class="chatbox-message-username"/>')
+    .text(data.username);
+  var $messageDiv = $('<span class="chatbox-message-value"')
+    .text(data.message);
+  var $messageDiv = $('<li class="chatbox-message"/>')
+    .data('username', data.username)
+    .append($usernameDiv, $messageBodyDiv);
+
+}
 
 
 
 
 /*
-			LOADING SCREEN FUNCTIONS          
-								AUTHOR: Darius			*/	
+			LOADING SCREEN FUNCTIONS
+								AUTHOR: Darius			*/
 function loading_screen_control1() {
 	setTimeout(loading_to_matchfound, 3000);
 }
 
 function loading_screen_control2() {
-	setTimeout(loading_to_askmodal, 3000);	
+	setTimeout(loading_to_askmodal, 3000);
 
 }
 
@@ -319,14 +377,14 @@ setInterval(function() {
 		else if (loader_text2.textContent == "Waiting for match's response . .") {
 			loader_text2.textContent = "Waiting for match's response . . .";
 	}}, 200);
-	
+
 
 
 
 
 /*
-			CANVAS FUNCTIONS          
-								AUTHOR: Darius			*/	
+			CANVAS FUNCTIONS
+								AUTHOR: Darius			*/
 function getPosition1(mouseEvent, sigCanvas1) {
          var x, y;
          if (mouseEvent.pageX != undefined && mouseEvent.pageY != undefined) {
@@ -336,7 +394,7 @@ function getPosition1(mouseEvent, sigCanvas1) {
             x = mouseEvent.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
             y = mouseEvent.clientY + document.body.scrollTop + document.documentElement.scrollTop;
          }
- 
+
          return { X: x - sigCanvas1.offsetLeft, Y: y - sigCanvas1.offsetTop};
 }
 
@@ -349,7 +407,7 @@ function getPosition2(mouseEvent, sigCanvas2) {
             x = mouseEvent.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
             y = mouseEvent.clientY + document.body.scrollTop + document.documentElement.scrollTop;
          }
- 
+
          return { X: x - sigCanvas2.offsetLeft, Y: y - sigCanvas2.offsetTop };
 }
 
@@ -359,9 +417,9 @@ function updateColor() {
 }
 
 function initialize1() {
-                   
+
          var is_touch_device = 'ontouchstart' in document.documentElement;
- 
+
          if (is_touch_device) {
             var drawer = {
                isDrawing: false,
@@ -383,16 +441,16 @@ function initialize1() {
                   }
                }
             };
- 
+
             function draw(event) {
- 
+
                var coors = {
                   x: event.targetTouches[0].pageX,
                   y: event.targetTouches[0].pageY
                };
- 
+
                var obj = sigCanvas1;
- 
+
                if (obj.offsetParent) {
                   do {
                      coors.x -= obj.offsetLeft;
@@ -403,20 +461,20 @@ function initialize1() {
 
                drawer[event.type](coors);
             }
- 
+
             sigCanvas1.addEventListener('touchstart', draw, false);
             sigCanvas1.addEventListener('touchmove', draw, false);
             sigCanvas1.addEventListener('touchend', draw, false);
- 
+
             sigCanvas1.addEventListener('touchmove', function (event) {
                event.preventDefault();
-            }, false); 
+            }, false);
          }
          else {
 
             $(".canvas1").mousedown(function (mouseEvent) {
                var position = getPosition1(mouseEvent, sigCanvas1);
- 
+
                context1.moveTo(position.X, position.Y);
                context1.beginPath();
 
@@ -428,14 +486,14 @@ function initialize1() {
                   finishDrawing1(mouseEvent, sigCanvas1, context1);
                });
             });
- 
+
          }
 }
 
 function initialize2() {
-                   
+
          var is_touch_device = 'ontouchstart' in document.documentElement;
- 
+
          if (is_touch_device) {
             var drawer = {
                isDrawing: false,
@@ -457,16 +515,16 @@ function initialize2() {
                   }
                }
             };
- 
+
             function draw(event) {
- 
+
                var coors = {
                   x: event.targetTouches[0].pageX,
                   y: event.targetTouches[0].pageY
                };
- 
+
                var obj = sigCanvas2;
- 
+
                if (obj.offsetParent) {
                   do {
                      coors.x -= obj.offsetLeft;
@@ -477,20 +535,20 @@ function initialize2() {
 
                drawer[event.type](coors);
             }
- 
+
             sigCanvas2.addEventListener('touchstart', draw, false);
             sigCanvas2.addEventListener('touchmove', draw, false);
             sigCanvas2.addEventListener('touchend', draw, false);
- 
+
             sigCanvas2.addEventListener('touchmove', function (event) {
                event.preventDefault();
-            }, false); 
+            }, false);
          }
          else {
 
             $(".canvas2").mousedown(function (mouseEvent) {
                var position = getPosition2(mouseEvent, sigCanvas2);
- 
+
                context2.moveTo(position.X, position.Y);
                context2.beginPath();
 
@@ -502,41 +560,41 @@ function initialize2() {
                   finishDrawing2(mouseEvent, sigCanvas2, context2);
                });
             });
- 
+
          }
 }
 
 function drawLine1(mouseEvent, sigCanvas1, context1) {
- 
+
          var position = getPosition1(mouseEvent, sigCanvas1);
- 
+
          context1.lineTo(position.X, position.Y);
          context1.stroke();
       }
 
 function finishDrawing1(mouseEvent, sigCanvas1, context1) {
          drawLine1(mouseEvent, sigCanvas1, context1);
- 
+
          context1.closePath();
- 
+
          $(sigCanvas1).unbind("mousemove")
                      .unbind("mouseup")
                      .unbind("mouseout");
 }
 
 function drawLine2(mouseEvent, sigCanvas2, context2) {
- 
+
          var position = getPosition2(mouseEvent, sigCanvas2);
- 
+
          context2.lineTo(position.X, position.Y);
          context2.stroke();
       }
 
 function finishDrawing2(mouseEvent, sigCanvas2, context2) {
          drawLine2(mouseEvent, sigCanvas2, context2);
- 
+
          context2.closePath();
- 
+
          $(sigCanvas2).unbind("mousemove")
                      .unbind("mouseup")
                      .unbind("mouseout");
@@ -545,15 +603,15 @@ function finishDrawing2(mouseEvent, sigCanvas2, context2) {
 
 
 /*
-			SLIDER FUNCTIONS          
-								AUTHOR: Darius			*/	
-$(function() {	
+			SLIDER FUNCTIONS
+								AUTHOR: Darius			*/
+$(function() {
 	$("#slider-vertical1").slider({
 		orientation: "vertical",
 		min: 0,
 		max: 360,
 		value: 0,
-		slide: function(event, ui) {		
+		slide: function(event, ui) {
 			$(".topcoat-range-input1").css("background", 'hsl(' + ui.value + ', 100%, 50%)');
 			colorToUse = 'hsl(' + ui.value + ', 100%, 50%)';
 			updateColor();
@@ -561,13 +619,13 @@ $(function() {
 	});
 });
 
-$(function() {	
+$(function() {
 	$("#slider-vertical2").slider({
 		orientation: "vertical",
 		min: 0,
 		max: 360,
 		value: 0,
-		slide: function(event, ui) {		
+		slide: function(event, ui) {
 			$(".topcoat-range-input2").css("background", 'hsl(' + ui.value + ', 100%, 50%)');
 			colorToUse = 'hsl(' + ui.value + ', 100%, 50%)';
 			updateColor();
@@ -588,7 +646,7 @@ $(function() {
 
 
 /*
-			EVENT LISTENERS          
+			EVENT LISTENERS
 								AUTHOR: DARIUS			*/
 main_connect.addEventListener('click', main_to_drawpic1);
 askchatmodal_yes.addEventListener('click', askchatmodal_yes_f);

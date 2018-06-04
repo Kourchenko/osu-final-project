@@ -17,25 +17,18 @@ const HTTP_CODE_SERVER_ERR = 500;
 const MAX_USERS = 2;
 // connected users <= MAX_USERS
 var usersInSession;
-
+const mongoose = require('mongoose');
 var http = require('http');
 var app = require('express')();
 var fs = require('fs');
 var express = require('express');
 var path = require('path');
-var bodyparser = require('body-parser');
-
-
-app.use(bodyparser.json());        
-app.use(bodyparser.urlencoded({ extended: true })); 
-
-
-
-
-
+var port = process.env.PORT || 3000;
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({ extended: true }));
 
 /*
-			GET FUNCTIONS          
+			GET FUNCTIONS
 								AUTHOR: Darius			*/
 app.get('/', function(req, res) {
 	res.sendFile(path.join(__dirname + '/../index.html'));
@@ -64,13 +57,8 @@ app.get('/logo.png', function(req, res) {
 app.get('*', function(req, res) {
 	res.sendFile(path.join(__dirname + '/../404.html'));
 });
-
-
-
-
-
 /*
-			POST FUNCTIONS         
+			POST FUNCTIONS
 								AUTHOR: Darius			*/
 app.post('/username', function(req, res) {
 	console.log('');
@@ -102,10 +90,8 @@ app.post('/ask_chat', function(req, res) {
 });
 
 
-
-
-
-
+// Listen in on local server
+// should be web server
 app.listen(8080, function() {
 	console.log('');
 	console.log('============================================');
@@ -115,39 +101,79 @@ app.listen(8080, function() {
 });
 
 
+/***************************************************
+socket.io
+websocket connections to between server and client.
+***************************************************/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
+// socket.io connects to server
 var io = require('socket.io').listen(server);
 
+/**
+ * Create new socket.io session.
+ * Listen for connection
+ */
+io.on('connection', function(socket) {
+	var addedUser = false;
 
-io.sockets.on('connection', function(socket) {
-	socket.emit('message', "You are connected");
-	addUsers();
-	socket.on('new_username', function(username) {
+	// CLIENT emits 'message';
+	// - send username and message dat
+	socket.on('message', function(data) {
+		socket.broadcast.emit('message', {
+			username: socket.username,
+			message: data;
+		});
+	};
+
+	// CLIENT ADD USER to session
+	// - connects new user, increments numUsersInSession
+	// -- NOTE: only two users in one session
+	socket.on('add user', function(username) {
+		if (addUser) return;
+
+		// we store the username in the socket session for this client
 		socket.username = username;
+		++numUsersInSession;
+		addedUser = true;
+
+		// NOTIFY other user that another user joined
+		// TODO: STOP THE LOADING WHEEL
+		socket.broadcast.emit('user joined', {
+			username: socket.username,
+			numUsersInSession: numUsersInSession,
+		});
 	});
-	// display number of users, should be unique users
-	socket.on('message', function(message) {
-		console.log("new message from: " + socket.username);
+
+	// CLIENT IS TYPING
+	socker.on('typing', function() {
+		// NOTIFY other user
+		socket.broadcast.emit('typing', {
+			username: socket.username;
+		});
 	});
-});*/
+
+	// CLIENT STOPS TYPING
+	socket.on('stop typing', function() {
+		socket.broadcast.emit('stop typing', function() {
+			username: socket.username;
+		});
+	});
+
+	// USER DISCONNECT FROM session
+	// NOTE: start search again,
+	// NOTE: -- using loading wheel to display progress
+	socket.on('disconnect', function() {
+		if (addUser) {
+			--numUsersInSession;
+		}
+		// broadcast that this client has left
+		socket.broadcast.emit('user left', function() {
+			username: socket.username,
+			numUsersInSession: numUsersInSession
+		});
+	});
+
+});
 
 //server.listen(8080);
 
