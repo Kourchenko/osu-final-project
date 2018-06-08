@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+
+	<!---------------------------------->
+	<!---------------HEAD--------------->    <!--- AUTHOR: TEAM -->
+	<!---------------------------------->
+	<head>
+		<meta charset="UTF-8">
+		<title>Picture.me - Connect through creativity.</title>
+		<script src="/socket.io/socket.io.js" defer></script>
+		<!-- Stylesheet -->
+		<link rel="stylesheet" href="/style.css" media="screen">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+		<!-- This script incorporates SVG icons from Font Awesome: http://fontawesome.com/ -->
+		<script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" defer></script>
+		<link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+		<link rel="shortcut icon" href="/images/logo.png" />
+		<script src="/chat.js" charset="utf-8" defer></script>
+
+	</head>
+
+	<body>
+	<!---------------------------------->
+	<!---------------HEADER------------->    <!--- AUTHOR: Darius -->
+	<!---------------------------------->
+		<header>
+			<nav class="navbar">
+				<center>
+					<a href='/index.html'><img src="/images/logo_white.png" style="vertical-align:middle" id="logo_white" height="40px" width="40px"></a>
+					<a href='/index.html' class="navitem">p i c t u r e . m e</a>
+				</center>
+			</nav>
+		</header>
+
+		<main id="container">
+      <div class="chatbox" style="">
+        <center>
+          <h2>Chat!</h2>
+          <div class="chatbox-chatstream">
+            <ul class="chatbox-all-messages">
+
+            </ul>
+              <!-- Templating for each message-->
+          </div>
+          <div class="chatbox-inputbox">
+            <form>
+              <input id="chatbox-input" placeholder="Draw and now connect..." onfocus="this.placeholder=''" onblur="this.placeholder='Draw and now connect...'">
+              <button id="chatbox-sendbutton">Send</button>
+            </form>
+          </div>
+        </center>
+      </div>
+    </main>
+
+    <!---------------------------------->
+    <!--------------FOOTER-------------->    <!--- AUTHOR: Darius -->
+    <!---------------------------------->
+      <div class="footer">
+        <center>
+        <a class="footer_item" target="_blank" href="/terms.html">
+          Terms
+        </a>
+        <a class="footer_item" target="_blank" href="/about.html">
+          About
+        </a>
+        <a class="footer_item" target="_blank" href="/contact.html">
+          Contact
+        </a>
+        </center>
+      </div>
+
+
+  </body>
+</html>
