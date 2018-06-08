@@ -134,13 +134,16 @@ h3 {
 	list-style-type: none;
   word-wrap: break-word;
   border-radius: 8px;
-  height: 30px;
+  height: 300px;
   padding: 20px;
 	display: grid;
+	max-height: 300px;
+	overflow-y:auto;/*Also...*/
+	overflow-x:hidden;/*And the end of the important part*/
 }
 
 .chatbox-user-message {
-	font-size: 24px;
+	font-size: 32px;
 }
 
 .chatbox-message-username {
