@@ -1,15 +1,4 @@
 /* JS */
-
-
-/** NOTE (DIEGO -> DARIUS): Consider adding comments to each function, describing briefly what it does.
- * 		- Consider renaming the functions without numbers, we won't always agree on
- * 		- a standard coding standard, but lets get close.
- * 		- asktochat_yes_f() initializes a JS ajax query?
- * 		- any of us who need to call upon those functions, for example when Aaron is
- * 		- searching the database for a match, needs to call the timer functions.
- * 		- Just the same, I'm writing my server.js functions to be simple, for
- * 		- anyone else to call when we create a chat session (createSession()).
-
 /*
 			ELEMENT CONNECTORS
 								AUTHOR: DARIUS			*/
@@ -48,7 +37,6 @@ var context2 = sigCanvas2.getContext("2d");
 
 var pic1 = document.getElementsByClassName('pic1')[0];
 var pic2 = document.getElementsByClassName('pic2')[0];
-
 
 var colorToUse = 000000;
 var sessionID = "";
@@ -134,16 +122,12 @@ function endTimer2() {
 	setTimeout(timesup_to_loading2, 1500);
 }
 
-
-
-
 /*
 			START-UP CODE
 								AUTHOR: Darius			*/
 function enableConnect_button() {
 	$('.button_connect').prop("disabled", false)
 }
-
 $(document).ready(function() {
 	$('.home_screen').fadeIn(5000, enableConnect_button)
 	initialize1();
@@ -172,7 +156,7 @@ function main_to_drawpic1() {
 		$.ajax({
 			type: 'POST',
 			url: '/username',
-			data: {
+			data: {},
 			url: '/api/username',
 			data: {
 				username : username_box.value,
@@ -215,7 +199,7 @@ function matchfound_to_loading1() {
 		$.ajax({
 			type: 'POST',
 			url: '/match_found',
-			data: {
+			data: {},
 			url: '/api/post_match_found',
 			data: {
 				username : username_box.value,
@@ -234,7 +218,7 @@ function matchfound_to_loading2() {
 		$.ajax({
 			type: 'POST',
 			url: '/match_found',
-			data: {
+			data: {},
 			url: '/api/post_match_found',
 			data: {
 				username : username_box.value,
@@ -293,7 +277,7 @@ function askchatmodal_yes_f() {
 		$.ajax({
 			type: 'POST',
 			url: '/ask_chat',
-			data: {
+			data: {},
 			url: '/api/post_ask_chat',
 			data: {
 				username : username_box.value,
@@ -324,64 +308,6 @@ function loading_to_askmodal() {
 		$('.loading_screen').fadeOut(1000, continueF);
 }
 
-/***************************************************
-socket.io
-websocket connections to between server and client.
-***************************************************/
-function setUsername() {
-  // VERIFY chat page is active
-  if (chat_page.style.display === 'none') return;
-  // username element value
-  var el = document.getElementById("main-username-input").value;
-  // username
-  var username;
-
-  // Check empty input
-  if (el) {
-    // sanitize input
-    username = el.replace(/[!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~]/g, '');
-
-    // Tell server you have new user
-    socket.emit('add user', username);
-  }
-}
-/**
- * sendMessage
- * grabs the message from input box,
- * sanitize input,
- * emits 'new message' signal to server
- */
-function sendMessage() {
-  var message = document.querySelector("#chatbox-input").val;
-  message = cleanInput(messge);
-  if (message && connected) {
-    message.val('');
-
-    // send message from username to uniqueID socket session
-    addChatMessageHTML({
-      username: username,
-      message: message,
-      uniqueID: uniqueID
-    });
-    // tell the server to send new message
-    socket.emit('new message', message);
-  }
-}
-
-/**
- * addChatMessage
- * Use message data to send message
- * to another user
- */
-function addChatMessageHTML(data) {
-  var $usernameDiv = $('<span class="chatbox-message-username"/>')
-    .text(data.username);
-  var $messageDiv = $('<span class="chatbox-message-value"')
-    .text(data.message);
-  var $messageDiv = $('<li class="chatbox-message"/>')
-    .data('username', data.username)
-    .append($usernameDiv, $messageBodyDiv);
-
 function updateClientData() {
 	$.ajax({
 			type: 'POST',
@@ -399,7 +325,6 @@ function updateClientData() {
 			}
 	});
 }
-
 
 
 
@@ -497,9 +422,13 @@ function loading_screen_control3() {
 			},
 			statusCode: {
 				200:	function(data) {
+              /******************************
+              NOTE: UPDATED window.location.href
+              need to send a unique parameter to chat
+              ******************************/
 							clearInterval(startPing);
 							console.log("CHAT SUCCESS!");
-							//SEND USER TO NEW CHAT WINDOW
+              window.location.href = "/chat/chat.html";
 						},
 				202:	function(data) {
 							$('.loader_text2').fadeOut(100);
@@ -839,15 +768,6 @@ $(function() {
 		}
 	});
 });
-
-
-
-
-
-
-
-
-
 
 
 
