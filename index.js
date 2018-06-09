@@ -1,4 +1,7 @@
 /* JS */
+
+
+
 /*
 			ELEMENT CONNECTORS
 								AUTHOR: DARIUS			*/
@@ -13,6 +16,7 @@ var chat_page = document.getElementsByClassName('chatbox')[0];
 
 
 
+var darkButton = document.getElementById('darkButton');
 var username_box = document.getElementById('main-username-input');
 var username_error_text = document.getElementsByClassName('username_error')[0];
 var timer_count1 = document.getElementById('countdown-number1');
@@ -22,7 +26,7 @@ var timer2_circle = document.getElementsByClassName('second_timer')[0];
 var loader_text1 = document.getElementsByClassName('loader_text1')[0];
 var loader_text2 = document.getElementsByClassName('loader_text2')[0];
 var loader_text3 = document.getElementsByClassName('loader_text3')[0];
-
+var container = document.getElementById('container');
 
 var main_connect = document.getElementsByClassName('button_connect')[0];
 var askchatmodal_yes = document.getElementsByClassName('askchatmodal_yes')[0];
@@ -38,8 +42,15 @@ var context2 = sigCanvas2.getContext("2d");
 var pic1 = document.getElementsByClassName('pic1')[0];
 var pic2 = document.getElementsByClassName('pic2')[0];
 
+
 var colorToUse = 000000;
+
 var sessionID = "";
+
+
+
+//button.addEventListner('click',DarkColor)
+
 
 /*
 			UNIQUE ID GENERATOR
@@ -48,17 +59,9 @@ var uniqueKey = function () {
   return '_' + Math.random().toString(36).substr(2, 12);
 };
 
-/** cleanInput
- * Sanitize input,
- * prevents injected markup
- * return sanitized string message.
- */
-function cleanInput(message) {
-  if (message) {
-    return $('<div/>').text(input).html();
-  }
-  return '';
-}
+
+
+
 /*
 			TIMER FUNCTIONS
 								AUTHOR: Darius			*/
@@ -122,12 +125,16 @@ function endTimer2() {
 	setTimeout(timesup_to_loading2, 1500);
 }
 
+
+
+
 /*
 			START-UP CODE
 								AUTHOR: Darius			*/
 function enableConnect_button() {
 	$('.button_connect').prop("disabled", false)
 }
+
 $(document).ready(function() {
 	$('.home_screen').fadeIn(5000, enableConnect_button)
 	initialize1();
@@ -147,6 +154,8 @@ $(window).on("unload", function() {
 	});
 });
 
+
+
 /*
 			FLOW FUNCTIONS
 								AUTHOR: Darius			*/
@@ -155,8 +164,6 @@ function main_to_drawpic1() {
 		$('.button_connect').prop("disabled", true);
 		$.ajax({
 			type: 'POST',
-			url: '/username',
-			data: {},
 			url: '/api/username',
 			data: {
 				username : username_box.value,
@@ -198,8 +205,6 @@ function matchfound_to_loading1() {
 		$('.match_found').fadeOut(1000, continueF);
 		$.ajax({
 			type: 'POST',
-			url: '/match_found',
-			data: {},
 			url: '/api/post_match_found',
 			data: {
 				username : username_box.value,
@@ -217,8 +222,6 @@ function matchfound_to_loading2() {
 		$('.match_found').fadeOut(1000, continueF);
 		$.ajax({
 			type: 'POST',
-			url: '/match_found',
-			data: {},
 			url: '/api/post_match_found',
 			data: {
 				username : username_box.value,
@@ -244,28 +247,7 @@ function drawpic2_to_askchatmodal() {
 }
 
 function askchatmodal_no_f() {
-	$.ajax({
-			type: 'POST',
-			url: '/ask_chat',
-			data: {
-				username : username_box.value,
-				ID : sessionID,
-				response : "NO"}
-		});
-	window.location.href = "./index.html";
-		/*function continueF() {
-			$('.loading_screen').fadeIn(1000, loading_screen_control3);
-		}
-		$('.askchatmodal').fadeOut(1000, continueF);
-		$.ajax({
-				type: 'POST',
-				url: '/api/post_ask_chat',
-				data: {
-					username : username_box.value,
-					ID : sessionID,
-					response : "NO"}
-			});*/
-		window.location.href = "./index.html";
+		window.location.href = "./";
 }
 
 function askchatmodal_yes_f() {
@@ -276,8 +258,6 @@ function askchatmodal_yes_f() {
 		$('.askchatmodal').fadeOut(1000, continueF);
 		$.ajax({
 			type: 'POST',
-			url: '/ask_chat',
-			data: {},
 			url: '/api/post_ask_chat',
 			data: {
 				username : username_box.value,
@@ -326,6 +306,27 @@ function updateClientData() {
 	});
 }
 
+function startChat() {
+  function pingServer() {
+    $.ajax({
+  		type: 'POST',
+  		url: '/api/create_chat',
+  		data: {
+  			ID: sessionID
+  		},
+      statusCode: {
+        200: function(data) {
+          var urlPath = './chat/' + data + '&=' + username_box.value;
+          window.location.href = urlPath;
+        }
+      }
+  	});
+  }
+
+  var startPing = setInterval(pingServer, 1000);
+}
+
+
 
 
 
@@ -369,14 +370,14 @@ function loading_screen_control1() {
 												},
 										404:
 												function(data) {
-														window.location.href = "./index.html";
+														window.location.href = "./";
 												}
 									}
 								});
 							setTimeout(loading_to_matchfound, 3000);
 						},
 				404:	function(data) {
-							window.location.href = "./index.html";
+							window.location.href = "./";
 						}
 			}
 		});
@@ -386,8 +387,6 @@ function loading_screen_control1() {
 }
 
 function loading_screen_control2() {
-	setTimeout(loading_to_askmodal, 3000);
-
 		$.ajax({
 			type: 'POST',
 			url: '/api/get_pic',
@@ -403,7 +402,7 @@ function loading_screen_control2() {
 							},
 					404:
 							function(data) {
-								window.location.href = "./index.html";
+								window.location.href = "./";
 							}
 				}
 		});
@@ -422,19 +421,14 @@ function loading_screen_control3() {
 			},
 			statusCode: {
 				200:	function(data) {
-              /******************************
-              NOTE: UPDATED window.location.href
-              need to send a unique parameter to chat
-              ******************************/
 							clearInterval(startPing);
-							console.log("CHAT SUCCESS!");
-              window.location.href = "/chat/chat.html";
+							startChat();
 						},
 				202:	function(data) {
 							$('.loader_text2').fadeOut(100);
 							$('.loader_text3').fadeIn(1000);
 							function continueF() {
-								window.location.href = "./index.html";
+								window.location.href = "./";
 							}
 							setTimeout(continueF, 5000);
 						}
@@ -772,9 +766,20 @@ $(function() {
 
 
 
+
+
+
+function darkColorFunc(event){
+
+container.classList.add("darkBG");
+
+
+	}
+
 /*
 			EVENT LISTENERS
 								AUTHOR: DARIUS			*/
+darkButton.addEventListener('click', darkColorFunc);
 main_connect.addEventListener('click', main_to_drawpic1);
 askchatmodal_yes.addEventListener('click', askchatmodal_yes_f);
 askchatmodal_no.addEventListener('click', askchatmodal_no_f);
