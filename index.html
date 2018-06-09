@@ -9,18 +9,22 @@
 		<title>Picture.me - Connect through creativity.</title>
 
 		<!-- Stylesheet -->
-		<link rel="stylesheet" href="style.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="/style.css" media="screen">
+
+		<script src="/index.js" charset="utf-8" defer></script>
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
 
+
 		<!-- This script incorporates SVG icons from Font Awesome: http://fontawesome.com/ -->
 		<script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" defer></script>
 
 		<link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
-		<script src="index.js" charset="utf-8" defer></script>
-		<link rel="shortcut icon" href="./logo.png" />
+
+		<link rel="shortcut icon" href="/images/logo.png" />
 
 
 	</head>
@@ -34,8 +38,14 @@
 		<header>
 			<nav class="navbar">
 				<center>
-					<a href='./index.html'><img src="./logo_white.png" style="vertical-align:middle" id="logo_white" height="40px" width="40px"></a>
-					<a href='./index.html' class="navitem">p i c t u r e . m e</a>
+					<a href='/'><img src="/images/logo_white.png" style="vertical-align:middle" id="logo_white" height="40px" width="40px"></a>
+					<a href='/' class="navitem">p i c t u r e . m e</a>
+
+
+					<button type="submit" id = "darkButton"> Dark Background </button>     <!---- Author: Usman -->
+
+
+
 				</center>
 			</nav>
 		</header>
@@ -45,7 +55,6 @@
 	<!---------------------------------->
 	<!---------------MAIN--------------->    <!--- AUTHOR: TEAM -->
 	<!---------------------------------->
-
 			<div class="home_screen">
 				<center>
 					<div class="info">
@@ -57,6 +66,7 @@
 					<div class ="username_error hidden"> Please enter a username. </div>
 
 
+
 					<div class="username">
 						<input type="text" name="username_text" id="main-username-input" placeholder="Enter a username..." onfocus="this.placeholder=''" maxlength="10" onblur="this.placeholder='Enter a username...'">
 						</div>
@@ -64,10 +74,23 @@
 				</center>
 			</div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<!---------------------------------->
 	<!---------------LOADING------------>    <!--- AUTHOR: Aaron -->
 	<!---------------------------------->
-			<div class="loading_screen hidden">
+			<div class="loading_screen">
 				<center>
 					<div class="loader"></div>
 					<div class="loader_text1">Looking for match . . .</div>
@@ -80,7 +103,7 @@
 	<!---------------------------------->
 	<!-------------DRAWPIC1------------->    <!--- AUTHOR: Darius -->
 	<!---------------------------------->
-			<div class="draw_pic1 hidden">
+			<div class="draw_pic1">
 				<center>
 					<div class="draw_pic_text">Draw a picture!</div>
 					<div id="canvasDiv">
@@ -101,7 +124,7 @@
 	<!---------------------------------->
 	<!-------------DRAWPIC2------------->    <!--- AUTHOR: Darius -->
 	<!---------------------------------->
-			<div class="draw_pic2 hidden">
+			<div class="draw_pic2">
 				<center>
 					<div class="draw_pic_text">Draw another picture!</div>
 					<div id="canvasDiv">
@@ -120,7 +143,7 @@
 	<!---------------------------------->
 	<!-------------TIME'S_UP------------>    <!--- AUTHOR: Darius -->
 	<!---------------------------------->
-			<div class="times_up hidden">
+			<div class="times_up">
 				<center>
 						<h1>Time's up!</h1>
 				</center>
@@ -130,7 +153,7 @@
 	<!---------------------------------->
 	<!-----------MATCH_FOUND------------>    <!--- AUTHOR: Darius -->
 	<!---------------------------------->
-			<div class="match_found hidden">
+			<div class= "match_found">
 				<center>
 					<div class="draw_pic_text match_text">You have a match!</div>
 						<div class="share_pic_btn"><img class="pic1" src="#" width="500px" height="500px"></div>
@@ -146,7 +169,7 @@
 	<!---------------------------------->
 	<!-----------ASKCHATMODAL----------->    <!--- AUTHOR: Aaron -->
 	<!---------------------------------->
-			<div class="askchatmodal hidden">
+			<div class="askchatmodal">
 				<center>
 				<div class="draw_pic_text ask_chat_text1">Their second creation!</div>
 					<div class="share_pic_btn"><img class="pic2" src="#" width="500px" height="500px"></div>
@@ -157,24 +180,58 @@
 					</div>
 				</center>
 			</div>
+
+
+		<!---------------------------------->
+		<!--------------CHATMODAL----------->    <!--- AUTHOR: Diego -->
+		<!---------------------------------->
+			<div class="chatbox">
+				<center> <h2>Chat page placeholder.</h2>
+				<!--
+
+				<script type="text/javascript" src="/../socket.io/socket.io.js"></script>
+					<script>
+						var socket = io.connect('http://localhost:8080');
+						var username = prompt('Enter a username:');
+
+						// Send the username with the signal 'new_username' (can be anything)
+						socket.emit('new_username', username);
+
+						socket.on('message', function(message) {
+							alert('The server has a message from: ' + message);
+						});
+					</script>
+
+				-->
+				</center>
+			</div>
 		</main>
+
+
+
+
 
 	<!---------------------------------->
 	<!--------------FOOTER-------------->    <!--- AUTHOR: Darius -->
 	<!---------------------------------->
 		<div class="footer">
 			<center>
-			<a class="footer_item" target="_blank" href="./terms.html">
+			<a class="footer_item" target="_blank" href="/terms">
 				Terms
 			</a>
-			<a class="footer_item" target="_blank" href="./about.html">
+			<a class="footer_item" target="_blank" href="/about">
 				About
 			</a>
-			<a class="footer_item" target="_blank" href="./contact.html">
+			<a class="footer_item" target="_blank" href="/stats">
+				Stats
+			</a>
+			<a class="footer_item" target="_blank" href="/contact">
 				Contact
 			</a>
 			</center>
 		</div>
 
+
 	</body>
 </html>
+
