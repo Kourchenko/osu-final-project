@@ -1,3 +1,4 @@
+
 body {
 	margin: 0;
 	background-color: #fff;
@@ -5,6 +6,7 @@ body {
 	position: relative;
 	padding-bottom: 6rem;
 	min-height: 100%;
+
 }
 
 html {
@@ -20,6 +22,19 @@ a {
 h3 {
 	display: inline-flex;
 }
+
+
+/*Back-Ground Change
+*/
+.darkBG{
+	background: #008B8B;
+}
+
+#darkButton{
+	margin-left; 20px;
+}
+
+/*             */
 
 #container {
     width: 100%;
@@ -116,91 +131,19 @@ h3 {
 	width: 100%;
 }
 
-/* Chat content CSS*/
 .chatbox {
-	border-radius: 8px;
-	border: 2px solid #455A64;
-	padding: 10px;
-	margin: 50px;
-	height: 525px;
-}
-/* Template chat stream */
-.chatbox-chatstream {
-	height: 400px;
+	display: none;
 	width: 100%;
-}
-
-.chatbox-all-messages {
-	list-style-type: none;
-  word-wrap: break-word;
-  border-radius: 8px;
-  height: 300px;
-  padding: 20px;
-	display: grid;
-	max-height: 300px;
-	overflow-y:auto;/*Also...*/
-	overflow-x:hidden;/*And the end of the important part*/
-}
-
-.chatbox-user-message {
-	font-size: 32px;
-}
-
-.chatbox-message-username {
-	font-weight: bolder;
-}
-
-.chatbox-message-value {
-	font-weight: lighter;
-}
-
-.chatbox-inputbox form {
-	display: inline-block;
-	bottom: 0;
-	width: 100%;
-}
-
-.chatbox-input form {
-	display: inline-block;
-	border: 2px solid #455A64;
-	border-radius: 8px;
-	bottom: 0;
-	width: 100%;
-}
-
-#chatbox-input {
-	padding: 0;
-	height: 50px;
-	width: 75%;
-	font-size: 20px;
-	font-weight: normal;
-	float: left;
-	border: 0;
-	border-right-width: 0px;
-	border-right-style: none;
-	border-right-color: currentcolor;
-	border-radius: 0;
-}
-
-#chatbox-input:focus,
-#chatbox-input:active {
-	border-bottom: 1px solid #aaa;
-}
-
-#chatbox-sendbutton {
-	border: 0;
-	background-color: #fff;
-	color: #455A64;
-	font-size: 24px;
-	font-weight: normal;
-	height: 50px;
-	width: 25%;
-	padding-right: 20px;
 }
 
 .info {
 	font-size: 22px;
 	font-weight: 500;
+}
+
+.image_404 {
+text-align: center;
+margin-top: 5%;
 }
 
 
@@ -475,11 +418,6 @@ svg circle {
 	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-@@media (max-width: 600px) {
-	body {
-		min-width: 600px;
-	}
-}
 .pic1 {
 	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 	border:3px solid #455A64;
